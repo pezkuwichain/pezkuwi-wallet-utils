@@ -1,0 +1,8 @@
+{
+  "runtime_id": 46,
+  "types": {
+    "AccountInfo": "AccountInfoWithRefCount",
+    "ValidatorPrefs": "ValidatorPrefsWithCommission"
+  },
+  "versioning": []
+}

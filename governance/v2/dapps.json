@@ -1,0 +1,233 @@
+[
+  {
+    "chainId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://polkadot.polkassembly.io/referendum/{referendumId}",
+        "urlV2": "https://polkadot.polkassembly.io/referenda/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      },
+      {
+        "title": "Subsquare",
+        "urlV1": "https://polkadot.subsquare.io/democracy/referendum/{referendumId}",
+        "urlV2": "https://polkadot.subsquare.io/referenda/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://kusama.polkassembly.io/referendum/{referendumId}",
+        "urlV2": "https://kusama.polkassembly.io/referenda/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      },
+      {
+        "title": "Subsquare",
+        "urlV1": "https://kusama.subsquare.io/democracy/referendum/{referendumId}",
+        "urlV2": "https://kusama.subsquare.io/referenda/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "fe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://moonbeam.polkassembly.io/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "401a1f9dca3da46f5c4091016c8a2f26dcea05865116b286f60f668207d1474b",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://moonriver.polkassembly.io/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      },
+      {
+        "title": "Subsquare",
+        "urlV1": "https://moonriver.subsquare.io/democracy/referendum/{referendumId}",
+        "urlV2": "https://moonriver.subsquare.io/referenda/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "411f057b9107718c9624d6aa4a3f23c1653898297f3d4d529d9bb6511a39dd21",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://kilt.polkassembly.io/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "a85cfb9b9fd4d622a5b28289a02347af987d8f73fa3108450e2b4a11c1ce5755",
+    "dapps": [
+      {
+        "title": "Subsquare",
+        "urlV1": "https://basilisk.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "631ccc82a078481584041656af292834e1ae6daab61d2875b4dd0c14bb9b17bc",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://robonomics.polkassembly.io/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "afdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d",
+    "dapps": [
+      {
+        "title": "Subsquare",
+        "urlV1": "https://hydration.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "b3db41421702df9a7fcac62b53ffeac85f7853cc4e689e0b93aeb3db18c09d82",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://centrifuge.polkassembly.io/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      },
+      {
+        "title": "Subsquare",
+        "urlV1": "https://centrifuge.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "1bb969d85965e4bb5a651abbedf21a54b6b31a21f66b5401cc3f1e286268d736",
+    "dapps": [
+      {
+        "title": "Subsquare",
+        "urlV1": "https://phala.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "1bf2a2ecb4a868de66ea8610f2ce7c8c43706561b6476031315f6640fe38e060",
+    "dapps": [
+      {
+        "title": "Subsquare",
+        "urlV1": "https://zeitgeist.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "aa3876c1dc8a1afcc2e9a685a49ff7704cfd36ad8c90bf2702b9d1b00cc40011",
+    "dapps": [
+      {
+        "title": "Subsquare",
+        "urlV1": "https://altair.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "262e1b2ad728475fd6fe88e62d34c200abe6fd693931ddad144059b1eb884e5b",
+    "dapps": [
+      {
+        "title": "Subsquare",
+        "urlV1": "https://bifrost.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "fc41b9bd8ef8fe53d58c7ea67c794c7ec9a73daf05e6d54b14ff6342c99ba64c",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://acala.polkassembly.io/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      },
+      {
+        "title": "Subsquare",
+        "urlV1": "https://acala.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "baf5aabe40646d11f0ee8abbdc64f4a4b7674925cba08e4a05ff9ebed6e2126b",
+    "dapps": [
+      {
+        "title": "Subsquare",
+        "urlV1": "https://karura.subsquare.io/democracy/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "9f28c6a68e0fc9646eff64935684f6eeeece527e37bbe1f213d22caa1d9d6bed",
+    "dapps": [
+      {
+        "title": "Subsquare",
+        "urlV1": "https://bifrost-kusama.subsquare.io/democracy/referendum/{referendumId}",
+        "urlV2": "https://bifrost-kusama.subsquare.io/referenda/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  },
+  {
+    "chainId": "68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f",
+    "dapps": [
+      {
+        "title": "Polkassembly",
+        "urlV1": "https://polkadot.polkassembly.io/referendum/{referendumId}",
+        "urlV2": "https://polkadot.polkassembly.io/referenda/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/Polkassembly.svg",
+        "details": "Comment and react"
+      },
+      {
+        "title": "Subsquare",
+        "urlV1": "https://polkadot.subsquare.io/democracy/referendum/{referendumId}",
+        "urlV2": "https://polkadot.subsquare.io/referenda/referendum/{referendumId}",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/dapps/dapps/color/SubSquare.svg",
+        "details": "Comment and react"
+      }
+    ]
+  }
+]
