@@ -1,26 +1,34 @@
 {
-    "aa75b8a1-f6f6-418f-b7ff-fedbb9611489": {
-        "title": "Happy New Year 2026!",
-        "details": "Thank you for being with us.\nSee our holiday post!"
+    "pezkuwi-welcome-001": {
+        "title": "Welcome to Pezkuwi Wallet",
+        "details": "The first blockchain wallet for Kurdistan.\nSecure, fast, and decentralized."
     },
-    "247eb504-1345-4281-9129-b8f46b518230": {
-        "title": "Earn up to 16% APY",
-        "details": "Put your Nova Shots rewards to work and earn up to 16% APY on your USDC"
+    "pezkuwi-staking-001": {
+        "title": "Stake Your HEZ",
+        "details": "Earn rewards by staking your HEZ tokens.\nSecure the network and earn up to 12% APY!"
     },
-    "ef94c059-ae2b-4a80-9e77-cb16060c4c30": {
-        "title": "Nova Shots is back!",
-        "details": "Play the free prediction game from 12th - 25th Jan with a $15k prize pool!"
+    "pezkuwi-hez-001": {
+        "title": "HEZ Token",
+        "details": "The native token of Pezkuwi blockchain.\nUsed for transactions, staking, and governance."
     },
-    "50271bee-81f6-4f64-88af-936a31af83f6": {
-        "title": "Get Nova Card",
-        "details": "Easily spend your DOT anywhere!\nAvailable now for EU residents."
+    "pezkuwi-pez-001": {
+        "title": "PEZ Token",
+        "details": "The utility token on Pezkuwi Asset Hub.\nTrade, swap, and use in DApps."
     },
-    "e682511d-1afb-4144-bd3e-85d661d8a887": {
-        "title": "MYTH staking is live!",
-        "details": "Zero fees, maximized rewards.\nStake your MYTH in one click!"
+    "pezkuwi-governance-001": {
+        "title": "Your Voice Matters",
+        "details": "Participate in governance decisions.\nVote on proposals and shape the future!"
     },
-    "9464681d-ad80-479a-b2f7-4ab1e9ed9e58": {
-        "title": "Earn up to 15% APY",
-        "details": "Zero fees, maximized rewards. \nStake your DOT in one click!"
+    "pezkuwi-community-001": {
+        "title": "Join Our Community",
+        "details": "Connect with fellow Pezkuwi users.\nGet support and stay updated!"
+    },
+    "pezkuwi-explorer-001": {
+        "title": "Pezkuwi Explorer",
+        "details": "Track transactions and blocks.\nExplore the Pezkuwi blockchain!"
+    },
+    "pezkuwi-newroz-001": {
+        "title": "Happy Newroz!",
+        "details": "Celebrating Kurdish New Year.\nNewroz Piroz Be!"
     }
 }

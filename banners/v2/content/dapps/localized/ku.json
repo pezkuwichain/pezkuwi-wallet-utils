@@ -1,0 +1,34 @@
+{
+    "pezkuwi-welcome-001": {
+        "title": "Bi xêr hatî Pezkuwi Wallet",
+        "details": "Cîzdanê yekem ê blockchain ji bo gelê Kurd.\nEwle, bilez û nenavendî."
+    },
+    "pezkuwi-staking-001": {
+        "title": "HEZ Stake Bike",
+        "details": "Bi staking tokenên HEZ xelatan bistîne.\nTorê ewle bike û heta 12% APY qezenc bike!"
+    },
+    "pezkuwi-hez-001": {
+        "title": "Tokena HEZ",
+        "details": "Tokena serekî ya Pezkuwi Blockchain.\nJi bo danûstandin, staking û rêvebiriyê tê bikaranîn."
+    },
+    "pezkuwi-pez-001": {
+        "title": "Tokena PEZ",
+        "details": "Tokena bikarhêner li ser Pezkuwi Asset Hub.\nBazirganî, swap û di DApp-an de bikar bîne."
+    },
+    "pezkuwi-governance-001": {
+        "title": "Dengê Te Girîng E",
+        "details": "Di biryarên rêvebiriyê de beşdar bibe.\nLi pêşniyaran deng bide û paşerojê ava bike!"
+    },
+    "pezkuwi-community-001": {
+        "title": "Tevlî Civata Me Bibe",
+        "details": "Bi bikarhênerên din ên Pezkuwi re têkilî deyne.\nPiştgirî bistîne û li nûçeyan bimîne!"
+    },
+    "pezkuwi-explorer-001": {
+        "title": "Pezkuwi Explorer",
+        "details": "Danûstandin û blokan bişopîne.\nBlockchaina Pezkuwi bikole!"
+    },
+    "pezkuwi-newroz-001": {
+        "title": "Newroz Pîroz Be!",
+        "details": "Pîrozbahiya Sala Nû ya Kurdan.\nBijî Newroz!"
+    }
+}

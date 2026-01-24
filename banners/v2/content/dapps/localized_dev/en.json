@@ -1,30 +1,34 @@
 {
-    "7dbb5708-2f74-4855-8b1d-d80484e3a1a2": {
-        "title": "Migration in progress",
-        "details": "DOT Cross-chain transfers, Staking, and Governance might be unavailable for up to 24 hours"
+    "pezkuwi-welcome-001": {
+        "title": "Welcome to Pezkuwi Wallet",
+        "details": "The first blockchain wallet for Kurdistan.\nSecure, fast, and decentralized."
     },
-    "d93d9f00-babc-4a8d-80ef-0658bcd86a3d": {
-        "title": "Migration to Asset Hub",
-        "details": "KSM Balances, Staking and Governance are now on Asset Hub"
+    "pezkuwi-staking-001": {
+        "title": "Stake Your HEZ",
+        "details": "Earn rewards by staking your HEZ tokens.\nSecure the network and earn up to 12% APY!"
     },
-    "0d2f8e1d-017d-4b07-aba6-ea2012354de0": {
-        "title": "Welcome to Browser!",
-        "details": "Staking, DEX, Bridging & Art with \nYour Polkadot & EVM Accounts"
+    "pezkuwi-hez-001": {
+        "title": "HEZ Token",
+        "details": "The native token of Pezkuwi blockchain.\nUsed for transactions, staking, and governance."
     },
-    "ef94c059-ae2b-4a80-9e77-cb16060c4c30": {
-        "title": "Nova Shots is back!",
-        "details": "Play the free prediction game from 12th - 25th Jan with a $15k prize pool!"
+    "pezkuwi-pez-001": {
+        "title": "PEZ Token",
+        "details": "The utility token on Pezkuwi Asset Hub.\nTrade, swap, and use in DApps."
     },
-    "88788788-cf90-4171-9514-9d7474d5c765": {
-        "title": "Hydration",
-        "details": "Unites swaps & lending under the \nroof of a scalable appchain."
+    "pezkuwi-governance-001": {
+        "title": "Your Voice Matters",
+        "details": "Participate in governance decisions.\nVote on proposals and shape the future!"
     },
-    "b6eb6249-9951-4f3e-9b08-a2fe9dbafe5f": {
-        "title": "Join the list!",
-        "details": "Want to be included? \nTell us about it!"
+    "pezkuwi-community-001": {
+        "title": "Join Our Community",
+        "details": "Connect with fellow Pezkuwi users.\nGet support and stay updated!"
     },
-    "9464681d-ad80-479a-b2f7-4ab1e9ed9e58": {
-        "title": "Earn up to 15% APY",
-        "details": "Zero fees, maximized rewards. \nStake your DOT in one click!"
+    "pezkuwi-explorer-001": {
+        "title": "Pezkuwi Explorer",
+        "details": "Track transactions and blocks.\nExplore the Pezkuwi blockchain!"
+    },
+    "pezkuwi-newroz-001": {
+        "title": "Happy Newroz!",
+        "details": "Celebrating Kurdish New Year.\nNewroz Piroz Be!"
     }
 }
