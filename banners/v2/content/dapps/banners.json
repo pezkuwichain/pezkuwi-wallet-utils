@@ -11,7 +11,7 @@
         "background": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/backgrounds/pezkuwi_staking_bg.png",
         "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/pezkuwi_staking.png",
         "clipsToBounds": false,
-        "action": "novawallet://nova/open/staking"
+        "action": "pezkuwiwallet://pezkuwi/open/staking"
     },
     {
         "id": "pezkuwi-hez-001",
@@ -32,7 +32,7 @@
         "background": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/backgrounds/pezkuwi_purple_bg.png",
         "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/pezkuwi_governance.png",
         "clipsToBounds": false,
-        "action": "novawallet://nova/open/governance"
+        "action": "pezkuwiwallet://pezkuwi/open/governance"
     },
     {
         "id": "pezkuwi-community-001",
