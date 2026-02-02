@@ -21,6 +21,8 @@
     "Fixed128": "u128",
     "AccountId": "GenericAccountId",
     "AccountIdOf": "AccountId",
+    "PezspRuntimeMultiAddress": "MultiAddress",
+    "PezspCoreCryptoAccountId32": "AccountId",
     "AccountVoteSplit": {
       "type": "struct",
       "type_mapping": [
