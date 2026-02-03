@@ -54,7 +54,6 @@
       }
     ],
     "types": {
-      "url": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/chains/types/pezkuwi.json",
       "overridesCommon": false
     },
     "additional": {
