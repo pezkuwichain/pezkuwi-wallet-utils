@@ -3,5 +3,6 @@
     "ExtrinsicSignature": "MultiSignature",
     "Address": "MultiAddress",
     "LookupSource": "MultiAddress"
-  }
+  },
+  "versioning": []
 }
