@@ -59,7 +59,7 @@
       "feeViaRuntimeCall": true
     },
     "types": {
-      "url": "https://raw.githubusercontent.com/nickmura/pezkuwi-wallet-utils/main/types/pezkuwi.json",
+      "url": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/types/pezkuwi.json",
       "overridesCommon": true
     }
   },
@@ -97,7 +97,7 @@
       "feeViaRuntimeCall": true
     },
     "types": {
-      "url": "https://raw.githubusercontent.com/nickmura/pezkuwi-wallet-utils/main/types/pezkuwi.json",
+      "url": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/types/pezkuwi.json",
       "overridesCommon": true
     }
   },
@@ -181,7 +181,7 @@
       "feeViaRuntimeCall": true
     },
     "types": {
-      "url": "https://raw.githubusercontent.com/nickmura/pezkuwi-wallet-utils/main/types/pezkuwi.json",
+      "url": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/types/pezkuwi.json",
       "overridesCommon": true
     }
   },
@@ -233,7 +233,7 @@
       "feeViaRuntimeCall": true
     },
     "types": {
-      "url": "https://raw.githubusercontent.com/nickmura/pezkuwi-wallet-utils/main/types/pezkuwi.json",
+      "url": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/types/pezkuwi.json",
       "overridesCommon": true
     }
   },
