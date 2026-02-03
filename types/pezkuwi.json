@@ -1,12 +1,10 @@
 {
   "types": {
-    "ExtrinsicSignature": "MultiSignature",
-    "Address": "MultiAddress",
-    "LookupSource": "MultiAddress"
-  },
-  "typesAlias": {
-    "pezsp_runtime.multiaddress.MultiAddress": "MultiAddress",
-    "pezsp_runtime.MultiSignature": "MultiSignature",
-    "pezsp_runtime.generic.era.Era": "Era"
+    "ExtrinsicSignature": "pezsp_runtime.MultiSignature",
+    "MultiSignature": "pezsp_runtime.MultiSignature",
+    "Address": "pezsp_runtime.multiaddress.MultiAddress",
+    "MultiAddress": "pezsp_runtime.multiaddress.MultiAddress",
+    "LookupSource": "pezsp_runtime.multiaddress.MultiAddress",
+    "Era": "pezsp_runtime.generic.era.Era"
   }
 }
