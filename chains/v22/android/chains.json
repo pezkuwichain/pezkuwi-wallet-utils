@@ -57,6 +57,10 @@
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
       "feeViaRuntimeCall": true
+    },
+    "types": {
+      "url": "https://raw.githubusercontent.com/nickmura/pezkuwi-wallet-utils/main/types/pezkuwi.json",
+      "overridesCommon": true
     }
   },
   {
@@ -91,6 +95,10 @@
     "additional": {
       "themeColor": "#009639",
       "feeViaRuntimeCall": true
+    },
+    "types": {
+      "url": "https://raw.githubusercontent.com/nickmura/pezkuwi-wallet-utils/main/types/pezkuwi.json",
+      "overridesCommon": true
     }
   },
   {
@@ -171,6 +179,10 @@
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
       "feeViaRuntimeCall": true
+    },
+    "types": {
+      "url": "https://raw.githubusercontent.com/nickmura/pezkuwi-wallet-utils/main/types/pezkuwi.json",
+      "overridesCommon": true
     }
   },
   {
@@ -219,6 +231,10 @@
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
       "feeViaRuntimeCall": true
+    },
+    "types": {
+      "url": "https://raw.githubusercontent.com/nickmura/pezkuwi-wallet-utils/main/types/pezkuwi.json",
+      "overridesCommon": true
     }
   },
   {
