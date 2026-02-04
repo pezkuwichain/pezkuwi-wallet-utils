@@ -1,9 +1,8 @@
-name: Sync main and master branches
+name: Sync master to main
 
 on:
   push:
     branches:
-      - main
       - master
 
 jobs:
@@ -14,21 +13,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Sync branches
+      - name: Sync master to main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "main was updated, syncing master..."
-            git checkout master
-            git reset --hard origin/main
-            git push origin master --force
-          elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
-            echo "master was updated, syncing main..."
-            git checkout main
-            git reset --hard origin/master
-            git push origin main --force
-          fi
+          git checkout main
+          git merge master --no-edit
+          git push origin main
