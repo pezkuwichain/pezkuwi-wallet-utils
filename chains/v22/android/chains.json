@@ -56,7 +56,8 @@
     "additional": {
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
-      "feeViaRuntimeCall": true
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true
     }
   },
   {
@@ -90,7 +91,8 @@
     ],
     "additional": {
       "themeColor": "#009639",
-      "feeViaRuntimeCall": true
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true
     }
   },
   {
@@ -170,7 +172,8 @@
     "additional": {
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
-      "feeViaRuntimeCall": true
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true
     }
   },
   {
@@ -218,7 +221,8 @@
     "additional": {
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
-      "feeViaRuntimeCall": true
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true
     }
   },
   {
