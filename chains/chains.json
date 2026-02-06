@@ -54,7 +54,8 @@
     "types": null,
     "additional": {
       "themeColor": "#009639",
-      "defaultBlockTimeMillis": 6000
+      "defaultBlockTimeMillis": 6000,
+      "disabledCheckMetadataHash": true
     }
   },
   {
@@ -133,7 +134,8 @@
     "types": null,
     "additional": {
       "themeColor": "#009639",
-      "defaultBlockTimeMillis": 6000
+      "defaultBlockTimeMillis": 6000,
+      "disabledCheckMetadataHash": true
     }
   },
   {
@@ -180,7 +182,8 @@
     "types": null,
     "additional": {
       "themeColor": "#009639",
-      "defaultBlockTimeMillis": 6000
+      "defaultBlockTimeMillis": 6000,
+      "disabledCheckMetadataHash": true
     }
   },
   {
