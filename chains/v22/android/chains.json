@@ -66,12 +66,11 @@
     "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/Pezkuwi.png",
     "addressPrefix": 42,
     "options": [
-      "testnet",
-      "fullSyncByDefault"
+      "testnet"
     ],
     "nodes": [
       {
-        "url": "wss://testnet-rpc.pezkuwichain.io",
+        "url": "wss://zagros-rpc.pezkuwichain.io",
         "name": "Zagros Node"
       }
     ],
