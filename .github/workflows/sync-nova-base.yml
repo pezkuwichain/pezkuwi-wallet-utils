@@ -1,0 +1,106 @@
+name: Sync from Nova Base
+
+on:
+  # Run daily at 6:00 AM UTC
+  schedule:
+    - cron: '0 6 * * *'
+
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even if no changes'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update nova-base submodule to latest
+        run: |
+          cd nova-base
+          git fetch origin master
+          git checkout origin/master
+          cd ..
+          echo "NOVA_COMMIT=$(cd nova-base && git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Check for changes in nova-base
+        id: check_changes
+        run: |
+          if git diff --quiet nova-base; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes in nova-base"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in nova-base"
+          fi
+
+      - name: Set up Python
+        if: steps.check_changes.outputs.has_changes == 'true' || inputs.force_update == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run sync script
+        if: steps.check_changes.outputs.has_changes == 'true' || inputs.force_update == 'true'
+        run: |
+          python scripts/sync_from_nova.py
+
+      - name: Check for output changes
+        if: steps.check_changes.outputs.has_changes == 'true' || inputs.force_update == 'true'
+        id: check_output
+        run: |
+          if git diff --quiet chains/ xcm/ icons/; then
+            echo "output_changed=false" >> $GITHUB_OUTPUT
+            echo "No output changes after sync"
+          else
+            echo "output_changed=true" >> $GITHUB_OUTPUT
+            echo "Output files changed"
+            git diff --stat chains/ xcm/ icons/
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_output.outputs.output_changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: sync from nova-base (${{ env.NOVA_COMMIT }})"
+          title: "🔄 Sync from Nova Base"
+          body: |
+            ## Automated Nova Base Sync
+
+            This PR syncs the latest changes from [nova-utils](https://github.com/novasamatech/nova-utils).
+
+            **Nova commit:** `${{ env.NOVA_COMMIT }}`
+
+            ### Changes included:
+            - Updated chain configurations
+            - Updated XCM transfer configs
+            - Updated icons
+
+            ---
+            *This PR was automatically created by the sync workflow.*
+          branch: sync/nova-base-${{ env.NOVA_COMMIT }}
+          delete-branch: true
+          labels: |
+            automated
+            sync
+            dependencies
+
+      - name: Auto-merge if tests pass
+        if: steps.check_output.outputs.output_changed == 'true'
+        run: |
+          echo "PR created. Review and merge to apply Nova updates."
