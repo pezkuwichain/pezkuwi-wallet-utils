@@ -9,6 +9,8 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,7 +36,25 @@ jobs:
 
           echo "Syncing $PUSHED_BRANCH → $TARGET_BRANCH"
 
-          git fetch origin $TARGET_BRANCH || git checkout -b $TARGET_BRANCH
-          git checkout $TARGET_BRANCH
-          git merge origin/$PUSHED_BRANCH --no-edit -m "Sync from $PUSHED_BRANCH"
-          git push origin $TARGET_BRANCH
+          # Fetch all branches
+          git fetch origin
+
+          # Check if target branch exists
+          if git show-ref --verify --quiet refs/remotes/origin/$TARGET_BRANCH; then
+            # Get commit hashes
+            PUSHED_COMMIT=$(git rev-parse origin/$PUSHED_BRANCH)
+            TARGET_COMMIT=$(git rev-parse origin/$TARGET_BRANCH)
+
+            if [ "$PUSHED_COMMIT" = "$TARGET_COMMIT" ]; then
+              echo "Branches are already in sync"
+              exit 0
+            fi
+
+            echo "Updating $TARGET_BRANCH to match $PUSHED_BRANCH"
+            git push origin origin/$PUSHED_BRANCH:refs/heads/$TARGET_BRANCH --force
+          else
+            echo "Creating $TARGET_BRANCH from $PUSHED_BRANCH"
+            git push origin origin/$PUSHED_BRANCH:refs/heads/$TARGET_BRANCH
+          fi
+
+          echo "Sync complete!"
