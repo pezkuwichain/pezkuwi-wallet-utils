@@ -2,13 +2,15 @@
   {
     "chainId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
     "name": "Pezkuwi",
-    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/Pezkuwi.png",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
     "addressPrefix": 42,
     "options": [
+      "crowdloans",
       "governance-v2",
       "proxy",
       "multisig",
-      "pushSupport"
+      "pushSupport",
+      "fullSyncByDefault"
     ],
     "nodeSelectionStrategy": "roundRobin",
     "nodes": [
@@ -39,36 +41,36 @@
         "symbol": "HEZ",
         "precision": 12,
         "name": "Hezkurd",
-        "priceId": null,
+        "priceId": "hezkurd",
         "staking": [
           "relaychain",
           "nomination-pools"
         ],
-        "type": "Native",
-        "icon": "https://pezkuwichain.io/tokens/HEZ.png",
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": null
       }
     ],
-    "types": null,
     "additional": {
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
-      "disabledCheckMetadataHash": true
+      "feeViaRuntimeCall": true
     }
   },
   {
-    "chainId": "b40985810ab834baaa6a2de423e299d73c675bee874c73a715309996b08828cc",
+    "chainId": "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948",
     "parentId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
     "name": "Pezkuwi Asset Hub",
-    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/PezkuwiAssetHub.png",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/PEZ.png",
     "addressPrefix": 42,
     "options": [
       "swap-hub",
       "assethub-fees",
       "proxy",
-      "multisig"
+      "multisig",
+      "fullSyncByDefault"
     ],
     "nodeSelectionStrategy": "roundRobin",
     "nodes": [
@@ -92,10 +94,10 @@
         "symbol": "HEZ",
         "precision": 12,
         "name": "Hezkurd",
-        "priceId": null,
+        "priceId": "hezkurd",
         "staking": null,
-        "type": "Native",
-        "icon": "https://pezkuwichain.io/tokens/HEZ.png",
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": null
@@ -105,10 +107,10 @@
         "symbol": "PEZ",
         "precision": 12,
         "name": "Pezkuwi",
-        "priceId": null,
+        "priceId": "pezkuwi",
         "staking": null,
-        "type": "Statemine",
-        "icon": "https://pezkuwichain.io/tokens/PEZ.png",
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/PEZ.png",
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": {
@@ -122,31 +124,77 @@
         "name": "Tether USD",
         "priceId": "tether",
         "staking": null,
-        "type": "Statemine",
-        "icon": "https://pezkuwichain.io/tokens/wUSDT.png",
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/wUSDT.png",
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": {
           "assetId": "1000"
         }
+      },
+      {
+        "assetId": 1001,
+        "symbol": "DOT",
+        "precision": 10,
+        "name": "Polkadot",
+        "priceId": "polkadot",
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/DOT.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1001"
+        }
+      },
+      {
+        "assetId": 1002,
+        "symbol": "ETH",
+        "precision": 18,
+        "name": "Ethereum",
+        "priceId": "ethereum",
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/ETH.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1002"
+        }
+      },
+      {
+        "assetId": 1003,
+        "symbol": "BTC",
+        "precision": 8,
+        "name": "Bitcoin",
+        "priceId": "bitcoin",
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/WBTC.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1003"
+        }
       }
     ],
-    "types": null,
     "additional": {
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
+      "feeViaRuntimeCall": true,
       "disabledCheckMetadataHash": true
     }
   },
   {
-    "chainId": "3d766dd2530ffb9b530d797c76732ed0b38f2a78f89f75a5c6f0e9232a0bd268",
+    "chainId": "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8",
     "parentId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
     "name": "Pezkuwi People",
-    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/PezkuwiPeople.png",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/chains/PezkuwiPeople.png",
     "addressPrefix": 42,
     "options": [
       "proxy",
-      "multisig"
+      "multisig",
+      "fullSyncByDefault"
     ],
     "nodeSelectionStrategy": "roundRobin",
     "nodes": [
@@ -170,19 +218,19 @@
         "symbol": "HEZ",
         "precision": 12,
         "name": "Hezkurd",
-        "priceId": null,
+        "priceId": "hezkurd",
         "staking": null,
-        "type": "Native",
-        "icon": "https://pezkuwichain.io/tokens/HEZ.png",
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": null
       }
     ],
-    "types": null,
     "additional": {
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
+      "feeViaRuntimeCall": true,
       "disabledCheckMetadataHash": true
     }
   },
