@@ -129,7 +129,9 @@
         "precision": 12,
         "name": "Hezkurd",
         "priceId": "hezkurd",
-        "staking": null,
+        "staking": [
+          "nomination-pools"
+        ],
         "type": "native",
         "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
         "buyProviders": {},
