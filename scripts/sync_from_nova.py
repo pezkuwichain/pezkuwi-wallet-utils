@@ -1,7 +1,17 @@
 #!/usr/bin/env python3
 """
-Sync chains and XCM configs from nova-base submodule.
-Merges Nova's Polkadot ecosystem with Pezkuwi overlay.
+Sync and merge Nova-base with Pezkuwi overlay.
+
+Architecture:
+- nova-base/     : Git submodule with Nova's Polkadot ecosystem (98+ chains)
+- pezkuwi-overlay/ : Pezkuwi ecosystem configs (3 chains + XCM)
+- Output dirs    : Merged configs ready for wallet use
+
+Merge rules:
+- Chains: Pezkuwi chains first, then Nova chains
+- XCM: Pezkuwi XCM entries merged with Nova XCM (Pezkuwi takes priority)
+- Icons: Pezkuwi icons override Nova icons
+- NOTHING GETS DELETED - only merge operations
 """
 
 import json
@@ -15,10 +25,12 @@ PEZKUWI_OVERLAY = ROOT / "pezkuwi-overlay"
 OUTPUT_CHAINS = ROOT / "chains"
 OUTPUT_XCM = ROOT / "xcm"
 
+
 def load_json(path: Path) -> list | dict:
     """Load JSON file."""
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
+
 
 def save_json(path: Path, data: list | dict):
     """Save JSON file with pretty formatting."""
@@ -27,19 +39,51 @@ def save_json(path: Path, data: list | dict):
         json.dump(data, f, indent=2, ensure_ascii=False)
         f.write('\n')
 
+
 def merge_chains(nova_chains: list, pezkuwi_chains: list) -> list:
     """
     Merge chains: Pezkuwi chains first, then Nova chains.
     Pezkuwi chains take priority (appear first in list).
     """
-    # Get Pezkuwi chain IDs to avoid duplicates
     pezkuwi_ids = {c['chainId'] for c in pezkuwi_chains}
-
-    # Filter out any Nova chains that might conflict
     nova_filtered = [c for c in nova_chains if c['chainId'] not in pezkuwi_ids]
-
-    # Pezkuwi first, then Nova
     return pezkuwi_chains + nova_filtered
+
+
+def merge_xcm(nova_xcm: dict, pezkuwi_xcm: dict) -> dict:
+    """
+    Merge XCM configs: Pezkuwi entries take priority.
+
+    Structure:
+    - assetsLocation: dict of asset locations (merge, Pezkuwi overrides)
+    - chains: list of chain configs (Pezkuwi first, then Nova)
+    - instructions: dict (keep from Nova, Pezkuwi can override)
+    """
+    merged = {}
+
+    # Merge assetsLocation (Pezkuwi overrides Nova)
+    merged['assetsLocation'] = {
+        **nova_xcm.get('assetsLocation', {}),
+        **pezkuwi_xcm.get('assetsLocation', {})
+    }
+
+    # Merge instructions if present (Pezkuwi overrides Nova)
+    if 'instructions' in nova_xcm or 'instructions' in pezkuwi_xcm:
+        merged['instructions'] = {
+            **nova_xcm.get('instructions', {}),
+            **pezkuwi_xcm.get('instructions', {})
+        }
+
+    # Merge chains: Pezkuwi first, then Nova (no duplicates)
+    pezkuwi_chain_ids = {c['chainId'] for c in pezkuwi_xcm.get('chains', [])}
+    nova_chains_filtered = [
+        c for c in nova_xcm.get('chains', [])
+        if c['chainId'] not in pezkuwi_chain_ids
+    ]
+    merged['chains'] = pezkuwi_xcm.get('chains', []) + nova_chains_filtered
+
+    return merged
+
 
 def sync_chains():
     """Sync chain configurations."""
@@ -87,24 +131,47 @@ def sync_chains():
             save_json(android_dir / "chains.json", merged)
             print(f"  {version}/android/chains.json: created")
 
+
 def sync_xcm():
-    """Sync XCM configurations."""
+    """Sync XCM configurations by MERGING Nova and Pezkuwi."""
     print("\nSyncing XCM configs...")
 
-    # Copy all XCM versions from nova-base
+    # Load Pezkuwi XCM configs
+    pezkuwi_xcm_file = PEZKUWI_OVERLAY / "xcm" / "pezkuwi-xcm.json"
+    pezkuwi_xcm_dynamic_file = PEZKUWI_OVERLAY / "xcm" / "pezkuwi-xcm-dynamic.json"
+
+    pezkuwi_xcm = load_json(pezkuwi_xcm_file) if pezkuwi_xcm_file.exists() else {}
+    pezkuwi_xcm_dynamic = load_json(pezkuwi_xcm_dynamic_file) if pezkuwi_xcm_dynamic_file.exists() else {}
+
+    print(f"  Pezkuwi XCM: {len(pezkuwi_xcm.get('chains', []))} chains, {len(pezkuwi_xcm.get('assetsLocation', {}))} assets")
+
+    # Sync each XCM version
     for version_dir in sorted(NOVA_BASE.glob("xcm/v*")):
         version = version_dir.name
         output_version_dir = OUTPUT_XCM / version
+        output_version_dir.mkdir(parents=True, exist_ok=True)
 
-        if output_version_dir.exists():
-            shutil.rmtree(output_version_dir)
-        shutil.copytree(version_dir, output_version_dir)
-        print(f"  {version}: synced")
+        # Process each JSON file in the version directory
+        for nova_file in version_dir.glob("*.json"):
+            filename = nova_file.name
+            nova_data = load_json(nova_file)
 
-    # Copy root XCM files
+            # Choose appropriate Pezkuwi overlay based on filename
+            if 'dynamic' in filename:
+                pezkuwi_data = pezkuwi_xcm_dynamic
+            else:
+                pezkuwi_data = pezkuwi_xcm
+
+            # Merge Nova + Pezkuwi
+            merged = merge_xcm(nova_data, pezkuwi_data)
+            save_json(output_version_dir / filename, merged)
+            print(f"  {version}/{filename}: merged ({len(merged.get('chains', []))} chains)")
+
+    # Copy root XCM files (these don't need Pezkuwi merge)
     for xcm_file in NOVA_BASE.glob("xcm/*.json"):
         shutil.copy(xcm_file, OUTPUT_XCM / xcm_file.name)
         print(f"  {xcm_file.name}: copied")
+
 
 def sync_icons():
     """Sync icon files from nova-base, preserving Pezkuwi icons."""
@@ -140,9 +207,10 @@ def sync_icons():
                 shutil.copy(icon_file, target)
                 print(f"  Pezkuwi icon: {rel_path}")
 
+
 def main():
     print("=" * 60)
-    print("Nova-base Sync Script")
+    print("Nova-base + Pezkuwi Overlay Sync")
     print("=" * 60)
     print(f"Nova-base: {NOVA_BASE}")
     print(f"Pezkuwi overlay: {PEZKUWI_OVERLAY}")
@@ -161,6 +229,7 @@ def main():
     print("Sync complete!")
     print("=" * 60)
     return 0
+
 
 if __name__ == "__main__":
     exit(main())
