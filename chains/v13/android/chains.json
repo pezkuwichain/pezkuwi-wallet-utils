@@ -217,7 +217,8 @@
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
       "feeViaRuntimeCall": true,
-      "disabledCheckMetadataHash": true
+      "disabledCheckMetadataHash": true,
+      "relaychainAsNative": true
     }
   },
   {
