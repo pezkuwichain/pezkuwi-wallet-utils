@@ -215,6 +215,8 @@
       "multiLocation": {}
     }
   },
+  "networkDeliveryFee": {},
+  "networkBaseWeight": {},
   "chains": [
     {
       "chainId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",

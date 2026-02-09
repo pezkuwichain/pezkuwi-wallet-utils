@@ -20,6 +20,53 @@
       "multiLocation": {}
     }
   },
+  "networkDeliveryFee": {
+    "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75": {
+      "toParachain": {
+        "type": "exponential",
+        "factorPallet": "Dmp",
+        "sizeBase": "300000000",
+        "sizeFactor": "1000000"
+      }
+    },
+    "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948": {
+      "toParent": {
+        "type": "exponential",
+        "factorPallet": "ParachainSystem",
+        "sizeBase": "300000000",
+        "sizeFactor": "100000",
+        "alwaysHoldingPays": false
+      },
+      "toParachain": {
+        "type": "exponential",
+        "factorPallet": "XcmpQueue",
+        "sizeBase": "300000000",
+        "sizeFactor": "100000",
+        "alwaysHoldingPays": false
+      }
+    },
+    "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8": {
+      "toParent": {
+        "type": "exponential",
+        "factorPallet": "ParachainSystem",
+        "sizeBase": "300000000",
+        "sizeFactor": "100000",
+        "alwaysHoldingPays": false
+      },
+      "toParachain": {
+        "type": "exponential",
+        "factorPallet": "XcmpQueue",
+        "sizeBase": "300000000",
+        "sizeFactor": "100000",
+        "alwaysHoldingPays": false
+      }
+    }
+  },
+  "networkBaseWeight": {
+    "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75": "1000000000",
+    "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948": "1000000000",
+    "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8": "1000000000"
+  },
   "chains": [
     {
       "chainId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
