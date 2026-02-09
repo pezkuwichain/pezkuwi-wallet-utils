@@ -56,8 +56,7 @@
       "themeColor": "#009639",
       "defaultBlockTimeMillis": 6000,
       "feeViaRuntimeCall": true,
-      "disabledCheckMetadataHash": true,
-      "stakingMaxElectingVoters": 22500
+      "disabledCheckMetadataHash": true
     }
   },
   {
@@ -131,7 +130,7 @@
         "name": "Hezkurd",
         "priceId": "hezkurd",
         "staking": [
-          "relaychain"
+          "nomination-pools"
         ],
         "type": "native",
         "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
@@ -221,7 +220,6 @@
       "feeViaRuntimeCall": true,
       "disabledCheckMetadataHash": true,
       "relaychainAsNative": true,
-      "stakingMaxElectingVoters": 22500,
       "timelineChain": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75"
     }
   },
