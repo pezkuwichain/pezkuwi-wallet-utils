@@ -1,7 +1,7 @@
 {
   "popular": [
     {
-      "url": "https://apps.pezkuwichain.io/"
+      "url": "https://pezkuwichain.io/"
     },
     {
       "url": "https://js.pezkuwichain.io/"
@@ -75,18 +75,25 @@
   "dapps": [
     {
       "name": "Pezkuwi",
-      "url": "https://apps.pezkuwichain.io/",
+      "url": "https://pezkuwichain.io/",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/Pezkuwi.png",
       "categories": [
         "staking",
         "bridge",
-        "dex",
         "utilities"
       ]
     },
     {
+      "name": "Pezkuwi P2P",
+      "url": "https://telegram.pezkuwichain.io/p2p",
+      "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/Pezkuwi.png",
+      "categories": [
+        "dex"
+      ]
+    },
+    {
       "name": "Pezkuwi Staking",
-      "url": "https://apps.pezkuwichain.io/#/staking",
+      "url": "https://pezkuwichain.io/",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/PezkuwiStaking.png",
       "categories": [
         "staking"
@@ -94,7 +101,7 @@
     },
     {
       "name": "Pezsnowbridge",
-      "url": "https://apps.pezkuwichain.io/#/bridge",
+      "url": "https://pezkuwichain.io/",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/Pezsnowbridge.png",
       "categories": [
         "bridge"
