@@ -40,11 +40,9 @@
         "assetId": 0,
         "symbol": "HEZ",
         "precision": 12,
-        "name": "Dicle Chain",
+        "name": "HEZkurd",
         "priceId": "hezkurd",
-        "staking": [
-          "relaychain"
-        ],
+        "staking": null,
         "type": "native",
         "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
         "buyProviders": {},
