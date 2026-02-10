@@ -42,7 +42,9 @@
         "precision": 12,
         "name": "HEZkurd",
         "priceId": "hezkurd",
-        "staking": null,
+        "staking": [
+          "relaychain"
+        ],
         "type": "native",
         "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
         "buyProviders": {},
