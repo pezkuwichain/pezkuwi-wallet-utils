@@ -1,0 +1,34 @@
+{
+    "pezkuwi-welcome-001": {
+        "title": "Pezkuwi Wallet'a Hoş Geldiniz",
+        "details": "Kürdistan'ın ilk blockchain cüzdanı.\nGüvenli, hızlı ve merkeziyetsiz."
+    },
+    "pezkuwi-staking-001": {
+        "title": "HEZ'inizi Stake Edin",
+        "details": "HEZ tokenlarınızı stake ederek ödüller kazanın.\nAğı güvence altına alın ve %12'ye kadar APY kazanın!"
+    },
+    "pezkuwi-hez-001": {
+        "title": "HEZ Token",
+        "details": "Pezkuwi blockchain'inin yerel tokeni.\nİşlemler, staking ve yönetişim için kullanılır."
+    },
+    "pezkuwi-pez-001": {
+        "title": "PEZ Token",
+        "details": "Pezkuwi Asset Hub'daki yardımcı token.\nTakas yapın, değiştirin ve DApp'lerde kullanın."
+    },
+    "pezkuwi-governance-001": {
+        "title": "Sesiniz Önemli",
+        "details": "Yönetişim kararlarına katılın.\nTekliflere oy verin ve geleceği şekillendirin!"
+    },
+    "pezkuwi-community-001": {
+        "title": "Topluluğumuza Katılın",
+        "details": "Pezkuwi kullanıcılarıyla bağlantı kurun.\nDestek alın ve güncel kalın!"
+    },
+    "pezkuwi-explorer-001": {
+        "title": "Pezkuwi Explorer",
+        "details": "İşlemleri ve blokları takip edin.\nPezkuwi blockchain'ini keşfedin!"
+    },
+    "pezkuwi-newroz-001": {
+        "title": "Newroz Kutlu Olsun!",
+        "details": "Kürt Yeni Yılı'nı kutluyoruz.\nNewroz Piroz Be!"
+    }
+}
