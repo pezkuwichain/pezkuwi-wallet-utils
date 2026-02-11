@@ -1,0 +1,835 @@
+[
+  {
+    "chainId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+    "name": "Pezkuwi",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
+    "addressPrefix": 42,
+    "options": [
+      "crowdloans",
+      "governance-v2",
+      "proxy",
+      "multisig",
+      "pushSupport",
+      "fullSyncByDefault"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "wss://rpc.pezkuwichain.io",
+        "name": "Pezkuwi Mainnet"
+      },
+      {
+        "url": "wss://mainnet.pezkuwichain.io",
+        "name": "Pezkuwi Mainnet (Alt)"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Pezkuwi Explorer",
+        "extrinsic": "https://explorer.pezkuwichain.io/extrinsic/{value}",
+        "account": "https://explorer.pezkuwichain.io/account/{value}",
+        "event": "https://explorer.pezkuwichain.io/event/{value}"
+      }
+    ],
+    "externalApi": {
+      "history": [],
+      "staking": []
+    },
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "HEZ",
+        "precision": 12,
+        "name": "HEZkurd",
+        "priceId": "hezkurd",
+        "staking": null,
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      }
+    ],
+    "additional": {
+      "themeColor": "#009639",
+      "defaultBlockTimeMillis": 6000,
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true,
+      "stakingMaxElectingVoters": 22500
+    }
+  },
+  {
+    "chainId": "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948",
+    "parentId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+    "name": "Pezkuwi Asset Hub",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/PEZ.png",
+    "addressPrefix": 42,
+    "options": [
+      "swap-hub",
+      "assethub-fees",
+      "proxy",
+      "multisig",
+      "fullSyncByDefault"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "wss://asset-hub-rpc.pezkuwichain.io",
+        "name": "Pezkuwi Asset Hub"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Pezkuwi Explorer",
+        "extrinsic": "https://explorer.pezkuwichain.io/asset-hub/extrinsic/{value}",
+        "account": "https://explorer.pezkuwichain.io/asset-hub/account/{value}",
+        "event": "https://explorer.pezkuwichain.io/asset-hub/event/{value}"
+      }
+    ],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "HEZ",
+        "precision": 12,
+        "name": "HEZkurd",
+        "priceId": "hezkurd",
+        "staking": [
+          "relaychain",
+          "nomination-pools"
+        ],
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      },
+      {
+        "assetId": 1,
+        "symbol": "PEZ",
+        "precision": 12,
+        "name": "Pezkuwi",
+        "priceId": "pezkuwi",
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/PEZ.png",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1"
+        }
+      },
+      {
+        "assetId": 1000,
+        "symbol": "USDT",
+        "precision": 6,
+        "name": "Tether USD",
+        "priceId": "tether",
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/wUSDT.png",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1000"
+        }
+      },
+      {
+        "assetId": 1001,
+        "symbol": "DOT",
+        "precision": 10,
+        "name": "Polkadot",
+        "priceId": "polkadot",
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/DOT.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1001"
+        }
+      },
+      {
+        "assetId": 1002,
+        "symbol": "ETH",
+        "precision": 18,
+        "name": "Ethereum",
+        "priceId": "ethereum",
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/ETH.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1002"
+        }
+      },
+      {
+        "assetId": 1003,
+        "symbol": "BTC",
+        "precision": 8,
+        "name": "Bitcoin",
+        "priceId": "bitcoin",
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/WBTC.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1003"
+        }
+      }
+    ],
+    "additional": {
+      "themeColor": "#009639",
+      "defaultBlockTimeMillis": 6000,
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true,
+      "relaychainAsNative": true,
+      "stakingMaxElectingVoters": 22500,
+      "timelineChain": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75"
+    }
+  },
+  {
+    "chainId": "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8",
+    "parentId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+    "name": "Pezkuwi People",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/chains/PezkuwiPeople.png",
+    "addressPrefix": 42,
+    "options": [
+      "proxy",
+      "multisig",
+      "fullSyncByDefault"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "wss://people-rpc.pezkuwichain.io",
+        "name": "Pezkuwi People Chain"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Pezkuwi Explorer",
+        "extrinsic": "https://explorer.pezkuwichain.io/people/extrinsic/{value}",
+        "account": "https://explorer.pezkuwichain.io/people/account/{value}",
+        "event": "https://explorer.pezkuwichain.io/people/event/{value}"
+      }
+    ],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "HEZ",
+        "precision": 12,
+        "name": "HEZkurd",
+        "priceId": "hezkurd",
+        "staking": null,
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/HEZ.png",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      }
+    ],
+    "additional": {
+      "themeColor": "#009639",
+      "defaultBlockTimeMillis": 6000,
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true
+    }
+  },
+  {
+    "chainId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
+    "name": "Polkadot Relay",
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "DOT",
+        "precision": 10,
+        "name": "Polkadot",
+        "priceId": "polkadot",
+        "icon": "DOT.svg"
+      }
+    ],
+    "nodes": [
+      {
+        "url": "wss://rpc-polkadot-1.novasama-tech.org",
+        "name": "Novasama node"
+      },
+      {
+        "url": "wss://rpc-polkadot-2.novasama-tech.org",
+        "name": "Novasama node"
+      },
+      {
+        "url": "wss://rpc.ibp.network/polkadot",
+        "name": "IBP1 node"
+      },
+      {
+        "url": "wss://polkadot.dotters.network",
+        "name": "IBP2 node"
+      },
+      {
+        "url": "wss://apps-rpc.polkadot.io",
+        "name": "Public node",
+        "features": [
+          "noTls12"
+        ]
+      },
+      {
+        "url": "wss://dot-rpc.stakeworld.io",
+        "name": "Stakeworld node"
+      },
+      {
+        "url": "wss://polkadot.public.curie.radiumblock.co/ws",
+        "name": "Radium node"
+      },
+      {
+        "url": "wss://1rpc.io/dot",
+        "name": "Automata 1RPC node"
+      },
+      {
+        "url": "wss://rpc-polkadot.luckyfriday.io",
+        "name": "LuckyFriday node"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Subscan",
+        "extrinsic": "https://polkadot.subscan.io/extrinsic/{hash}",
+        "account": "https://polkadot.subscan.io/account/{address}"
+      },
+      {
+        "name": "Statescan",
+        "account": "https://polkadot.statescan.io/#/accounts/{address}",
+        "extrinsic": "https://polkadot.statescan.io/#/extrinsics/{hash}",
+        "event": "https://polkadot.statescan.io/#/events/{event}"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Polkadot.svg",
+    "addressPrefix": 0,
+    "externalApi": {
+      "staking": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-polkadot-prod.novasama-tech.org"
+        }
+      ],
+      "staking-rewards": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-polkadot-prod.novasama-tech.org"
+        }
+      ],
+      "history": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-polkadot-prod.novasama-tech.org"
+        }
+      ],
+      "governance": [
+        {
+          "type": "subsquare",
+          "url": "https://polkadot-api.subsquare.io"
+        }
+      ],
+      "governance-delegations": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-governance-polkadot-prod.novasama-tech.org"
+        }
+      ],
+      "referendum-summary": [
+        {
+          "type": "novasama",
+          "url": "https://opengov-backend.novasama-tech.org/api/v1/referendum-summaries/list"
+        }
+      ]
+    },
+    "options": [
+      "proxy",
+      "fullSyncByDefault",
+      "pushSupport",
+      "multisig"
+    ],
+    "additional": {
+      "themeColor": "#E6007A",
+      "stakingWiki": "https://docs.novawallet.io/nova-wallet-wiki/staking/polkadot-dot-staking",
+      "stakingMaxElectingVoters": 22500,
+      "identityChain": "67fa177a097bfa18f77ea95ab56e9bcdfeb0e5b8a40e46298bb93e16b6fc5008",
+      "feeViaRuntimeCall": true,
+      "supportsGenericLedgerApp": true
+    }
+  },
+  {
+    "chainId": "67fa177a097bfa18f77ea95ab56e9bcdfeb0e5b8a40e46298bb93e16b6fc5008",
+    "parentId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
+    "name": "Polkadot People",
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "DOT",
+        "precision": 10,
+        "priceId": "polkadot",
+        "icon": "DOT.svg"
+      }
+    ],
+    "nodes": [
+      {
+        "url": "wss://polkadot-people-rpc.polkadot.io",
+        "name": "Parity node",
+        "features": [
+          "noTls12"
+        ]
+      },
+      {
+        "url": "wss://sys.ibp.network/people-polkadot",
+        "name": "IBP1 node"
+      },
+      {
+        "url": "wss://people-polkadot.dotters.network",
+        "name": "IBP2 node"
+      },
+      {
+        "url": "wss://rpc-people-polkadot.luckyfriday.io",
+        "name": "LuckyFriday node"
+      },
+      {
+        "url": "wss://people-polkadot.public.curie.radiumblock.co/ws",
+        "name": "Radium node"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Subscan",
+        "extrinsic": "https://people-polkadot.subscan.io/extrinsic/{hash}",
+        "account": "https://people-polkadot.subscan.io/account/{address}"
+      },
+      {
+        "name": "Statescan",
+        "account": "https://people-polkadot.statescan.io/#/accounts/{address}",
+        "extrinsic": "https://people-polkadot.statescan.io/#/extrinsics/{hash}",
+        "event": "https://people-polkadot.statescan.io/#/events/{event}"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Polkadot_People.svg",
+    "addressPrefix": 0,
+    "additional": {
+      "supportsGenericLedgerApp": true,
+      "identityChain": "67fa177a097bfa18f77ea95ab56e9bcdfeb0e5b8a40e46298bb93e16b6fc5008"
+    },
+    "options": [
+      "multisig"
+    ]
+  },
+  {
+    "chainId": "68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f",
+    "parentId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
+    "name": "Polkadot Asset Hub",
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "DOT",
+        "precision": 10,
+        "name": "Polkadot",
+        "priceId": "polkadot",
+        "icon": "DOT.svg",
+        "staking": [
+          "relaychain",
+          "nomination-pools"
+        ],
+        "buyProviders": {
+          "mercuryo": {}
+        },
+        "sellProviders": {
+          "mercuryo": {}
+        }
+      },
+      {
+        "assetId": 1,
+        "symbol": "USDT",
+        "precision": 6,
+        "priceId": "tether",
+        "type": "statemine",
+        "icon": "USDT.svg",
+        "typeExtras": {
+          "assetId": "1984",
+          "isSufficient": true
+        }
+      },
+      {
+        "assetId": 2,
+        "symbol": "USDC",
+        "precision": 6,
+        "priceId": "usd-coin",
+        "type": "statemine",
+        "icon": "USDC.svg",
+        "typeExtras": {
+          "assetId": "1337",
+          "isSufficient": true
+        }
+      },
+      {
+        "assetId": 3,
+        "symbol": "DED",
+        "precision": 10,
+        "priceId": "dot-is-ded",
+        "type": "statemine",
+        "icon": "DED.svg",
+        "typeExtras": {
+          "assetId": "30"
+        }
+      },
+      {
+        "assetId": 4,
+        "symbol": "PINK",
+        "precision": 10,
+        "type": "statemine",
+        "icon": "PINK.svg",
+        "typeExtras": {
+          "assetId": "23"
+        }
+      },
+      {
+        "assetId": 5,
+        "symbol": "DOTA",
+        "precision": 4,
+        "type": "statemine",
+        "icon": "DOTA.svg",
+        "typeExtras": {
+          "assetId": "18"
+        }
+      },
+      {
+        "assetId": 6,
+        "symbol": "STINK",
+        "precision": 10,
+        "type": "statemine",
+        "icon": "STINK.svg",
+        "typeExtras": {
+          "assetId": "42069"
+        }
+      },
+      {
+        "assetId": 7,
+        "symbol": "GABE",
+        "precision": 20,
+        "type": "statemine",
+        "icon": "GABE.svg",
+        "typeExtras": {
+          "assetId": "69420"
+        }
+      },
+      {
+        "assetId": 8,
+        "symbol": "WUD",
+        "precision": 10,
+        "priceId": "gavun-wud",
+        "type": "statemine",
+        "icon": "WUD.svg",
+        "typeExtras": {
+          "assetId": "31337"
+        }
+      },
+      {
+        "assetId": 9,
+        "symbol": "WETH-Snowbridge",
+        "precision": 18,
+        "priceId": "ethereum-wormhole",
+        "type": "statemine",
+        "icon": "WETH-Snowbridge.svg",
+        "typeExtras": {
+          "assetId": "0x02020907040300c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "palletName": "ForeignAssets",
+          "isSufficient": true
+        }
+      },
+      {
+        "assetId": 10,
+        "symbol": "WBTC-Snowbridge",
+        "precision": 8,
+        "priceId": "wrapped-bitcoin",
+        "type": "statemine",
+        "icon": "WBTC-Snowbridge.svg",
+        "typeExtras": {
+          "assetId": "0x020209070403002260fac5e5542a773aa44fbcfedf7c193bc2c599",
+          "palletName": "ForeignAssets"
+        }
+      },
+      {
+        "assetId": 11,
+        "symbol": "WIFD",
+        "precision": 10,
+        "type": "statemine",
+        "icon": "WIFD.svg",
+        "typeExtras": {
+          "assetId": "17"
+        }
+      },
+      {
+        "assetId": 12,
+        "symbol": "BORK",
+        "precision": 10,
+        "type": "statemine",
+        "icon": "BORK.svg",
+        "typeExtras": {
+          "assetId": "690"
+        }
+      },
+      {
+        "assetId": 13,
+        "symbol": "BUNS",
+        "precision": 10,
+        "type": "statemine",
+        "icon": "BUNS.svg",
+        "typeExtras": {
+          "assetId": "1234"
+        }
+      },
+      {
+        "assetId": 14,
+        "symbol": "KOL",
+        "precision": 12,
+        "type": "statemine",
+        "icon": "KOL.svg",
+        "typeExtras": {
+          "assetId": "86"
+        }
+      },
+      {
+        "assetId": 15,
+        "symbol": "MYTH",
+        "precision": 18,
+        "priceId": "mythos",
+        "type": "statemine",
+        "icon": "MYTH.svg",
+        "typeExtras": {
+          "assetId": "0x010100a534",
+          "palletName": "ForeignAssets"
+        }
+      },
+      {
+        "assetId": 16,
+        "symbol": "MYTH-Snowbridge",
+        "precision": 18,
+        "priceId": "mythos",
+        "type": "statemine",
+        "icon": "MYTH-Snowbridge.svg",
+        "typeExtras": {
+          "assetId": "0x02020907040300ba41ddf06b7ffd89d1267b5a93bfef2424eb2003",
+          "palletName": "ForeignAssets"
+        }
+      },
+      {
+        "assetId": 17,
+        "symbol": "USDC-Snowbridge",
+        "precision": 6,
+        "priceId": "usd-coin",
+        "type": "statemine",
+        "icon": "USDC-Snowbridge.svg",
+        "typeExtras": {
+          "assetId": "0x02020907040300a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "palletName": "ForeignAssets"
+        }
+      },
+      {
+        "assetId": 18,
+        "symbol": "USDT-Snowbridge",
+        "precision": 6,
+        "priceId": "tether",
+        "type": "statemine",
+        "icon": "USDT-Snowbridge.svg",
+        "typeExtras": {
+          "assetId": "0x02020907040300dac17f958d2ee523a2206206994597c13d831ec7",
+          "palletName": "ForeignAssets"
+        }
+      },
+      {
+        "assetId": 19,
+        "symbol": "DAI-Snowbridge",
+        "precision": 18,
+        "priceId": "dai",
+        "type": "statemine",
+        "icon": "DAI-Snowbridge.svg",
+        "typeExtras": {
+          "assetId": "0x020209070403006b175474e89094c44da98b954eedeac495271d0f",
+          "palletName": "ForeignAssets"
+        }
+      },
+      {
+        "assetId": 20,
+        "symbol": "BASTI",
+        "precision": 12,
+        "type": "statemine",
+        "icon": "Default.svg",
+        "typeExtras": {
+          "assetId": "22222015"
+        }
+      },
+      {
+        "assetId": 21,
+        "symbol": "DAMN",
+        "precision": 12,
+        "type": "statemine",
+        "icon": "DAMN.svg",
+        "typeExtras": {
+          "assetId": "22222012"
+        }
+      },
+      {
+        "assetId": 22,
+        "symbol": "BILLCOIN",
+        "precision": 12,
+        "type": "statemine",
+        "icon": "BILLCOIN.svg",
+        "typeExtras": {
+          "assetId": "50000075"
+        }
+      },
+      {
+        "assetId": 23,
+        "symbol": "KSM",
+        "precision": 12,
+        "priceId": "kusama",
+        "type": "statemine",
+        "icon": "KSM.svg",
+        "typeExtras": {
+          "assetId": "0x02010903",
+          "palletName": "ForeignAssets"
+        }
+      },
+      {
+        "assetId": 24,
+        "symbol": "ETH-Snowbridge",
+        "precision": 18,
+        "priceId": "ethereum",
+        "type": "statemine",
+        "icon": "WETH-Snowbridge.svg",
+        "typeExtras": {
+          "assetId": "0x0201090704",
+          "palletName": "ForeignAssets"
+        }
+      },
+      {
+        "assetId": 26,
+        "symbol": "MPC",
+        "precision": 12,
+        "priceId": "my-paqman-coin",
+        "icon": "MPC.png",
+        "type": "statemine",
+        "typeExtras": {
+          "assetId": "50000103"
+        }
+      },
+      {
+        "assetId": 27,
+        "symbol": "DON",
+        "precision": 12,
+        "priceId": "paydon",
+        "icon": "DON.png",
+        "type": "statemine",
+        "typeExtras": {
+          "assetId": "50000111"
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "url": "wss://asset-hub-polkadot-rpc.n.dwellir.com",
+        "name": "Dwellir node"
+      },
+      {
+        "url": "wss://sys.ibp.network/asset-hub-polkadot",
+        "name": "IBP1 node"
+      },
+      {
+        "url": "wss://asset-hub-polkadot.dotters.network",
+        "name": "IBP2 node"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Subscan",
+        "account": "https://assethub-polkadot.subscan.io/account/{address}",
+        "extrinsic": "https://assethub-polkadot.subscan.io/extrinsic/{hash}"
+      },
+      {
+        "name": "Statescan",
+        "account": "https://assethub-polkadot.statescan.io/#/accounts/{address}",
+        "extrinsic": "https://assethub-polkadot.statescan.io/#/extrinsics/{hash}",
+        "event": "https://assethub-polkadot.statescan.io/#/events/{event}"
+      }
+    ],
+    "externalApi": {
+      "history": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-polkadot-ah-prod.novasama-tech.org"
+        }
+      ],
+      "staking-rewards": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-polkadot-prod.novasama-tech.org"
+        },
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-polkadot-ah-prod.novasama-tech.org"
+        }
+      ],
+      "staking": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-polkadot-ah-prod.novasama-tech.org"
+        }
+      ],
+      "governance": [
+        {
+          "type": "subsquare",
+          "url": "https://polkadot-api.subsquare.io"
+        }
+      ],
+      "governance-delegations": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-governance-polkadot-ah-prod.novasama-tech.org"
+        }
+      ],
+      "referendum-summary": [
+        {
+          "type": "novasama",
+          "url": "https://opengov-backend.novasama-tech.org/api/v1/referendum-summaries/list"
+        }
+      ],
+      "crowdloans": [
+        {
+          "type": "github",
+          "url": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/crowdloan/polkadot.json"
+        }
+      ]
+    },
+    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Polkadot_Asset_Hub.svg",
+    "addressPrefix": 0,
+    "options": [
+      "swap-hub",
+      "assethub-fees",
+      "proxy",
+      "multisig",
+      "governance",
+      "fullSyncByDefault",
+      "crowdloans",
+      "pushSupport"
+    ],
+    "additional": {
+      "themeColor": "#E6007A",
+      "stakingWiki": "https://docs.novawallet.io/nova-wallet-wiki/staking/polkadot-dot-staking",
+      "stakingMaxElectingVoters": 22500,
+      "relaychainAsNative": true,
+      "feeViaRuntimeCall": true,
+      "supportsGenericLedgerApp": true,
+      "identityChain": "67fa177a097bfa18f77ea95ab56e9bcdfeb0e5b8a40e46298bb93e16b6fc5008",
+      "timelineChain": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
+      "defaultBlockTime": 2000
+    }
+  }
+]
