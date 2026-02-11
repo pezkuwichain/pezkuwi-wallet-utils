@@ -1,0 +1,30 @@
+{
+  "description": "Chains with broken/unreachable RPC endpoints - will be excluded",
+  "mode": "blacklist",
+  "reason": "DNS resolution failures or unreachable nodes",
+  "last_updated": "2026-02-11",
+  "chains": [
+    {
+      "name": "AlephZero",
+      "reason": "rpc.alephzero.raas.gelato.cloud unreachable"
+    },
+    {
+      "name": "InvArch",
+      "reason": "invarch.ibp.network, invarch.dotters.network unreachable"
+    },
+    {
+      "name": "Quartz",
+      "reason": "quartz.unique.network endpoints unreachable"
+    },
+    {
+      "name": "Passet Hub Testnet",
+      "reason": "testnet-passet-hub-eth-rpc.polkadot.io unreachable"
+    }
+  ],
+  "chain_ids": [
+    "70255b4d28de0fc4e1a193d7e175ad1ccef431598211c55538f1018651a0344e",
+    "f6c2c9174aa58c1c5b38d44a7e946c94a38cfd6e0ad9e2e9c5b14a7bc7ee6f44",
+    "cd4d732201ebe5d6b014edda071c4203e16867305332f43c2e25ae6c9a1b7e6f",
+    "3d22af97d919611e03bbcbda96f65988758865423e89b2d99547a6bb61452db3"
+  ]
+}
