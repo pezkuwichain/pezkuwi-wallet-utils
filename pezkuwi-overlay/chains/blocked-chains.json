@@ -19,12 +19,27 @@
     {
       "name": "Passet Hub Testnet",
       "reason": "testnet-passet-hub-eth-rpc.polkadot.io unreachable"
+    },
+    {
+      "name": "Darwinia Crab",
+      "reason": "crab-rpc.darwinia.network DNS failure"
+    },
+    {
+      "name": "DeepBrain",
+      "reason": "info.dbcwallet.io SSL certificate mismatch"
+    },
+    {
+      "name": "Exosama",
+      "reason": "rpc.exosama.com 403 Forbidden"
     }
   ],
   "chain_ids": [
     "70255b4d28de0fc4e1a193d7e175ad1ccef431598211c55538f1018651a0344e",
     "f6c2c9174aa58c1c5b38d44a7e946c94a38cfd6e0ad9e2e9c5b14a7bc7ee6f44",
     "cd4d732201ebe5d6b014edda071c4203e16867305332f43c2e25ae6c9a1b7e6f",
-    "3d22af97d919611e03bbcbda96f65988758865423e89b2d99547a6bb61452db3"
+    "3d22af97d919611e03bbcbda96f65988758865423e89b2d99547a6bb61452db3",
+    "86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24",
+    "03aa6b475a03f8baf7f83e448513b00eaab03aefa4ed64bd1d31160dce028add",
+    "eip155:2109"
   ]
 }

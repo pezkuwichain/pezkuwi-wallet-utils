@@ -30,6 +30,8 @@ BROKEN_CHAIN_KEYWORDS = [
     'alephzero',
     'quartz',
     'invarch',
+    'exosama',
+    'deepbrain',
 ]
 
 # These chains have broken endpoints or are not useful
@@ -42,6 +44,12 @@ EXCLUDED_CHAIN_IDS = {
     '31a7d8914fb31c249b972f18c115f1e22b4b039abbcb03c73b6774c5642f9efe',
     # Aleph Zero EVM - PAUSED
     'eip155:41455',
+    # Darwinia Crab - DNS failure
+    '86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24',
+    # DeepBrain - SSL certificate mismatch
+    '03aa6b475a03f8baf7f83e448513b00eaab03aefa4ed64bd1d31160dce028add',
+    # Exosama - 403 Forbidden
+    'eip155:2109',
 }
 
 

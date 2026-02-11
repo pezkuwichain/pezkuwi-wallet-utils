@@ -1,0 +1,41 @@
+{
+  "description": "Only these chains will be included in the final config",
+  "mode": "whitelist",
+  "chains": [
+    {
+      "id": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+      "name": "Pezkuwi",
+      "source": "pezkuwi"
+    },
+    {
+      "id": "96eb58af1bb7288115b5e4ff1590422533e749293f231974536dc6672417d06f",
+      "name": "Zagros Testnet",
+      "source": "pezkuwi"
+    },
+    {
+      "id": "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948",
+      "name": "Pezkuwi Asset Hub",
+      "source": "pezkuwi"
+    },
+    {
+      "id": "4d65bfa31a77bdde8a4fbb1b289c16a6cd3c246793ee8ba2d98a5b3e04ba59ea",
+      "name": "Pezkuwi People",
+      "source": "pezkuwi"
+    },
+    {
+      "id": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
+      "name": "Polkadot",
+      "source": "nova"
+    },
+    {
+      "id": "68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f",
+      "name": "Polkadot Asset Hub",
+      "source": "nova"
+    },
+    {
+      "id": "67fa177a097bfa18f77ea95ab56e9bcdfeb0e5b8a40e46298bb93e16b6fc5f6f",
+      "name": "Polkadot People",
+      "source": "nova"
+    }
+  ]
+}
