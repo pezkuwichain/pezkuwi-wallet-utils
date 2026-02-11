@@ -214,6 +214,10 @@ def merge_version(version: str = "v22", filter_broken: bool = True):
     root_output = OUTPUT_DIR / "chains.json"
     save_json(root_output, merged)
 
+    # Also save to android subdirectory (this is what the app fetches)
+    android_output = OUTPUT_DIR / version / "android" / "chains.json"
+    save_json(android_output, merged)
+
     return True
 
 
