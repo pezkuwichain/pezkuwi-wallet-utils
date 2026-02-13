@@ -614,7 +614,10 @@
         ],
         "priceId": "kusama",
         "buyProviders": {
-          "mercuryo": {}
+          "mercuryo": {},
+          "transak": {
+            "network": "KUSMAASSETHUB"
+          }
         },
         "sellProviders": {
           "mercuryo": {}
@@ -3316,7 +3319,10 @@
           "nomination-pools"
         ],
         "buyProviders": {
-          "mercuryo": {}
+          "mercuryo": {},
+          "transak": {
+            "network": "ASSETHUB"
+          }
         },
         "sellProviders": {
           "mercuryo": {}
