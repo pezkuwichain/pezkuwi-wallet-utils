@@ -3,7 +3,7 @@
   "mode": "whitelist",
   "chains": [
     {
-      "id": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+      "id": "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca",
       "name": "Pezkuwi",
       "source": "pezkuwi"
     },
@@ -13,12 +13,12 @@
       "source": "pezkuwi"
     },
     {
-      "id": "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948",
+      "id": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
       "name": "Pezkuwi Asset Hub",
       "source": "pezkuwi"
     },
     {
-      "id": "4d65bfa31a77bdde8a4fbb1b289c16a6cd3c246793ee8ba2d98a5b3e04ba59ea",
+      "id": "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa",
       "name": "Pezkuwi People",
       "source": "pezkuwi"
     },

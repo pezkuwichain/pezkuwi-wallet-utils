@@ -7,10 +7,7 @@
       "url": "https://js.pezkuwichain.io/"
     },
     {
-      "url": "https://pezkuwichain.io/"
-    },
-    {
-      "url": "https://explorer.pezkuwichain.io/"
+      "url": "https://pezkuwichain.io/explorer"
     },
     {
       "url": "https://app.hydration.net/"
@@ -74,13 +71,19 @@
   ],
   "dapps": [
     {
-      "name": "Pezkuwi",
+      "name": "Dijital Kurdistan",
       "url": "https://pezkuwichain.io/",
-      "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/Pezkuwi.png",
+      "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/DijitalKurdistan.png",
       "categories": [
-        "staking",
-        "bridge",
-        "utilities"
+        "staking"
+      ]
+    },
+    {
+      "name": "HEZstaking",
+      "url": "https://staking.pezkiwi.app",
+      "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/PezkuwiStaking.png",
+      "categories": [
+        "staking"
       ]
     },
     {
@@ -92,24 +95,16 @@
       ]
     },
     {
-      "name": "Pezkuwi Staking",
-      "url": "https://pezkuwichain.io/",
-      "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/PezkuwiStaking.png",
-      "categories": [
-        "staking"
-      ]
-    },
-    {
       "name": "Pezsnowbridge",
-      "url": "https://pezkuwichain.io/",
+      "url": "https://pezsnowbridge.pezkiwi.app",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/Pezsnowbridge.png",
       "categories": [
         "bridge"
       ]
     },
     {
-      "name": "Dijital Kurdistan",
-      "url": "https://pezkuwichain.io/",
+      "name": "Social-KURD",
+      "url": "https://pezkuwichain.io/social",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/DijitalKurdistan.png",
       "categories": [
         "governance",
@@ -126,7 +121,7 @@
     },
     {
       "name": "Pezkuwi Explorer",
-      "url": "https://explorer.pezkuwichain.io/",
+      "url": "https://pezkuwichain.io/explorer",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/PezkuwiExplorer.png",
       "categories": [
         "utilities"

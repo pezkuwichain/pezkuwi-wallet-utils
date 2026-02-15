@@ -1,7 +1,7 @@
 {
   "assetsLocation": {
     "HEZ": {
-      "chainId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+      "chainId": "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca",
       "multiLocation": {},
       "reserveFee": {
         "mode": {
@@ -12,16 +12,16 @@
       }
     },
     "HEZ-AssetHub": {
-      "chainId": "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948",
+      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
       "multiLocation": {}
     },
     "HEZ-People": {
-      "chainId": "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8",
+      "chainId": "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa",
       "multiLocation": {}
     }
   },
   "networkDeliveryFee": {
-    "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75": {
+    "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca": {
       "toParachain": {
         "type": "exponential",
         "factorPallet": "Dmp",
@@ -29,7 +29,7 @@
         "sizeFactor": "1000000"
       }
     },
-    "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948": {
+    "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949": {
       "toParent": {
         "type": "exponential",
         "factorPallet": "ParachainSystem",
@@ -45,7 +45,7 @@
         "alwaysHoldingPays": false
       }
     },
-    "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8": {
+    "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa": {
       "toParent": {
         "type": "exponential",
         "factorPallet": "ParachainSystem",
@@ -63,13 +63,13 @@
     }
   },
   "networkBaseWeight": {
-    "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75": "1000000000",
-    "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948": "1000000000",
-    "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8": "1000000000"
+    "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca": "1000000000",
+    "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949": "1000000000",
+    "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa": "1000000000"
   },
   "chains": [
     {
-      "chainId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+      "chainId": "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca",
       "assets": [
         {
           "assetId": 0,
@@ -80,7 +80,7 @@
           "xcmTransfers": [
             {
               "destination": {
-                "chainId": "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948",
+                "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
                 "assetId": 0,
                 "fee": {
                   "mode": {
@@ -94,7 +94,7 @@
             },
             {
               "destination": {
-                "chainId": "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8",
+                "chainId": "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa",
                 "assetId": 0,
                 "fee": {
                   "mode": {
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "chainId": "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948",
+      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
       "assets": [
         {
           "assetId": 0,
@@ -122,7 +122,7 @@
           "xcmTransfers": [
             {
               "destination": {
-                "chainId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+                "chainId": "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca",
                 "assetId": 0,
                 "fee": {
                   "mode": {
@@ -136,7 +136,7 @@
             },
             {
               "destination": {
-                "chainId": "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8",
+                "chainId": "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa",
                 "assetId": 0,
                 "fee": {
                   "mode": {
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "chainId": "58269e9c184f721e0309332d90cafc410df1519a5dc27a5fd9b3bf5fd2d129f8",
+      "chainId": "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa",
       "assets": [
         {
           "assetId": 0,
@@ -164,7 +164,7 @@
           "xcmTransfers": [
             {
               "destination": {
-                "chainId": "bb4a61ab0c4b8c12f5eab71d0c86c482e03a275ecdafee678dea712474d33d75",
+                "chainId": "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca",
                 "assetId": 0,
                 "fee": {
                   "mode": {
@@ -178,7 +178,7 @@
             },
             {
               "destination": {
-                "chainId": "00d0e1d0581c3cd5c5768652d52f4520184018b44f56a2ae1e0dc9d65c00c948",
+                "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
                 "assetId": 0,
                 "fee": {
                   "mode": {
