@@ -1,3 +1,5 @@
 {
+  "multisigsApiUrl": "https://subquery-multisigs-stg.novasama-tech.org",
+  "proxyApiUrl": "https://subquery-proxy-stg.novasama-tech.org",
   "multiStakingApiUrl": "https://subquery.pezkuwichain.io"
 }
