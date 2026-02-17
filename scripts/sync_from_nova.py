@@ -3,13 +3,14 @@
 Merge Nova (Polkadot ecosystem) + Pezkuwi overlay.
 
 Sources:
-  A: nova-base/     -> Polkadot ecosystem (98+ chains, XCM) - git submodule
-  B: pezkuwi-overlay/ -> Pezkuwi ecosystem (4 chains, XCM) - we maintain
+  A: nova-base/     -> Polkadot ecosystem (98+ chains, XCM, config) - git submodule
+  B: pezkuwi-overlay/ -> Pezkuwi ecosystem (4 chains, XCM, config) - we maintain
 
 Output:
   chains/  -> Merged chains (Pezkuwi first, then Nova)
   xcm/     -> Merged XCM (Nova base + Pezkuwi entries added to each section)
   icons/   -> Merged icons (Pezkuwi overrides Nova)
+  staking/ -> Merged global config (Nova base URLs + Pezkuwi overrides)
 
 Rules:
   - NOTHING gets deleted
@@ -26,6 +27,7 @@ NOVA_BASE = ROOT / "nova-base"
 PEZKUWI_OVERLAY = ROOT / "pezkuwi-overlay"
 OUTPUT_CHAINS = ROOT / "chains"
 OUTPUT_XCM = ROOT / "xcm"
+OUTPUT_STAKING = ROOT / "staking"
 
 
 def load_json(path: Path) -> dict | list:
@@ -197,6 +199,61 @@ def sync_icons():
                 print(f"  Pezkuwi: {rel}")
 
 
+def merge_config(nova_config: dict, pezkuwi_overlay: dict) -> dict:
+    """Deep merge: Nova base config + Pezkuwi overlay (Pezkuwi wins on conflicts)."""
+    merged = dict(nova_config)
+    for key, value in pezkuwi_overlay.items():
+        if key in merged and isinstance(merged[key], dict) and isinstance(value, dict):
+            merged[key] = {**merged[key], **value}
+        else:
+            merged[key] = value
+    return merged
+
+
+def sync_config():
+    """
+    Merge global config:
+      A: nova-base/staking/global_config.json       (Nova SubQuery URLs)
+       + nova-base/global/config.json               (Nova multisig/proxy URLs)
+      B: pezkuwi-overlay/config/global_config_overlay.json (Pezkuwi stakingApiOverrides)
+      C: staking/global_config.json                 (output - what the app fetches)
+    """
+    print("\nSyncing global config...")
+
+    overlay_file = PEZKUWI_OVERLAY / "config" / "global_config_overlay.json"
+    overlay = load_json(overlay_file) if overlay_file.exists() else {}
+
+    # Production: nova-base/staking + nova-base/global + pezkuwi overlay
+    for suffix in ("", "_dev"):
+        nova_staking = NOVA_BASE / "staking" / f"global_config{suffix}.json"
+        nova_global = NOVA_BASE / "global" / f"config{suffix}.json"
+
+        base = {}
+        if nova_global.exists():
+            base.update(load_json(nova_global))
+        if nova_staking.exists():
+            base.update(load_json(nova_staking))
+
+        merged = merge_config(base, overlay)
+        output = OUTPUT_STAKING / f"global_config{suffix}.json"
+        save_json(output, merged)
+
+        label = "production" if suffix == "" else "dev"
+        print(f"  {label}: {list(merged.keys())}")
+
+    # Copy validators from Nova (if present)
+    nova_validators = NOVA_BASE / "staking" / "nova_validators.json"
+    if nova_validators.exists():
+        shutil.copy(nova_validators, OUTPUT_STAKING / "nova_validators.json")
+
+    nova_validators_dir = NOVA_BASE / "staking" / "validators"
+    if nova_validators_dir.exists():
+        output_validators = OUTPUT_STAKING / "validators"
+        if output_validators.exists():
+            shutil.rmtree(output_validators)
+        shutil.copytree(nova_validators_dir, output_validators)
+
+
 def main():
     print("=" * 60)
     print("Nova + Pezkuwi Merge")
@@ -213,6 +270,7 @@ def main():
     sync_chains()
     sync_xcm()
     sync_icons()
+    sync_config()
 
     print("\n" + "=" * 60)
     print("Done!")
