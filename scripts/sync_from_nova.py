@@ -13,7 +13,7 @@ Output:
   staking/ -> Merged global config (Nova base URLs + Pezkuwi overrides)
 
 Rules:
-  - NOTHING gets deleted
+  - Blocked chains (broken RPC etc.) are EXCLUDED via blacklist
   - Pezkuwi entries are ADDED to Nova's base
   - Pezkuwi chains appear first in the list
 """
@@ -42,10 +42,22 @@ def save_json(path: Path, data: dict | list):
         f.write('\n')
 
 
-def merge_chains(nova_chains: list, pezkuwi_chains: list) -> list:
-    """Pezkuwi chains first, then Nova chains (no duplicates)."""
+def load_blacklist() -> set:
+    """Load blocked chain IDs from blacklist."""
+    blacklist_file = PEZKUWI_OVERLAY / "chains" / "blocked-chains.json"
+    if blacklist_file.exists():
+        data = load_json(blacklist_file)
+        return set(data.get("chain_ids", []))
+    return set()
+
+
+def merge_chains(nova_chains: list, pezkuwi_chains: list, blocked_ids: set) -> list:
+    """Pezkuwi chains first, then Nova chains. Blocked chains excluded."""
     pezkuwi_ids = {c['chainId'] for c in pezkuwi_chains}
-    nova_filtered = [c for c in nova_chains if c['chainId'] not in pezkuwi_ids]
+    nova_filtered = [
+        c for c in nova_chains
+        if c['chainId'] not in pezkuwi_ids and c['chainId'] not in blocked_ids
+    ]
     return pezkuwi_chains + nova_filtered
 
 
@@ -93,6 +105,9 @@ def merge_xcm(nova_xcm: dict, pezkuwi_xcm: dict) -> dict:
 def sync_chains():
     print("Syncing chains...")
 
+    blocked_ids = load_blacklist()
+    print(f"  Blacklist: {len(blocked_ids)} chains excluded")
+
     pezkuwi_chains_file = PEZKUWI_OVERLAY / "chains" / "pezkuwi-chains.json"
     pezkuwi_chains = load_json(pezkuwi_chains_file) if pezkuwi_chains_file.exists() else []
     print(f"  Pezkuwi: {len(pezkuwi_chains)} chains")
@@ -105,21 +120,21 @@ def sync_chains():
         nova_file = version_dir / "chains.json"
         if nova_file.exists():
             nova_chains = load_json(nova_file)
-            merged = merge_chains(nova_chains, pezkuwi_chains)
+            merged = merge_chains(nova_chains, pezkuwi_chains, blocked_ids)
             save_json(output_dir / "chains.json", merged)
-            print(f"  {version}/chains.json: {len(pezkuwi_chains)} + {len(nova_chains)} = {len(merged)}")
+            print(f"  {version}/chains.json: {len(pezkuwi_chains)} + {len(nova_chains)} - {len(blocked_ids)} blocked = {len(merged)}")
 
         # chains_dev.json
         nova_dev = version_dir / "chains_dev.json"
         if nova_dev.exists():
             nova_chains = load_json(nova_dev)
-            merged = merge_chains(nova_chains, pezkuwi_chains)
+            merged = merge_chains(nova_chains, pezkuwi_chains, blocked_ids)
             save_json(output_dir / "chains_dev.json", merged)
 
         # android/chains.json
         android_dir = output_dir / "android"
         if nova_file.exists():
-            save_json(android_dir / "chains.json", merge_chains(load_json(nova_file), pezkuwi_chains))
+            save_json(android_dir / "chains.json", merge_chains(load_json(nova_file), pezkuwi_chains, blocked_ids))
 
         # preConfigured (copy from Nova)
         nova_preconfig = version_dir / "preConfigured"

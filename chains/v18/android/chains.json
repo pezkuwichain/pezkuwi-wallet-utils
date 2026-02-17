@@ -5871,71 +5871,6 @@
     }
   },
   {
-    "chainId": "70255b4d28de0fc4e1a193d7e175ad1ccef431598211c55538f1018651a0344e",
-    "name": "Aleph Zero",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "AZERO",
-        "priceId": "aleph-zero",
-        "staking": [
-          "aleph-zero",
-          "nomination-pools"
-        ],
-        "precision": 12,
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/white/Aleph_zero.svg",
-        "buyProviders": {
-          "transak": {
-            "network": "ALEPHZERO"
-          },
-          "banxa": {
-            "coinType": "AZERO",
-            "blockchain": "AZERO"
-          }
-        }
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://ws.azero.dev",
-        "name": "Aleph Zero node"
-      }
-    ],
-    "explorers": [
-      {
-        "name": "Subscan",
-        "extrinsic": "https://alephzero.subscan.io/extrinsic/{hash}",
-        "account": "https://alephzero.subscan.io/account/{address}"
-      }
-    ],
-    "externalApi": {
-      "history": [
-        {
-          "type": "subquery",
-          "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-aleph-zero"
-        }
-      ],
-      "staking": [
-        {
-          "type": "subquery",
-          "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-aleph-zero"
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/AlephZero.svg",
-    "addressPrefix": 42,
-    "additional": {
-      "themeColor": "#10B6B1",
-      "stakingWiki": "https://docs.novawallet.io/nova-wallet-wiki/staking/aleph-zero-azero-staking",
-      "defaultBlockTime": 1000,
-      "feeViaRuntimeCall": true
-    },
-    "options": [
-      "fullSyncByDefault",
-      "pushSupport"
-    ]
-  },
-  {
     "chainId": "daab8df776eb52ec604a5df5d388bb62a050a0aaec4556a64265b9d42755552d",
     "parentId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
     "name": "Composable Finance",
@@ -7365,50 +7300,6 @@
     "addressPrefix": 42
   },
   {
-    "chainId": "eip155:2109",
-    "name": "Exosama",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "SAMA",
-        "priceId": "exosama-network",
-        "type": "evmNative",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/MOONSAMA.svg",
-        "precision": 18
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://rpc.exosama.com",
-        "name": "Exosama node"
-      }
-    ],
-    "explorers": [
-      {
-        "name": "Exosama explorer",
-        "extrinsic": "https://explorer.exosama.com/tx/{hash}",
-        "account": "https://explorer.exosama.com/address/{address}"
-      }
-    ],
-    "externalApi": {
-      "history": [
-        {
-          "type": "etherscan",
-          "url": "https://explorer.exosama.com/api",
-          "parameters": {
-            "assetType": "evm"
-          }
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Exosama.svg",
-    "addressPrefix": 2109,
-    "options": [
-      "ethereumBased",
-      "noSubstrateRuntime"
-    ]
-  },
-  {
     "chainId": "2f0555cc76fc2840a25a6ea3b9637146806f1f44b090c175ffde2a7e5ab36c03",
     "name": "Bittensor",
     "assets": [
@@ -7629,64 +7520,6 @@
     },
     "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Darwinia.svg",
     "addressPrefix": 18,
-    "options": [
-      "ethereumBased"
-    ]
-  },
-  {
-    "chainId": "86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24",
-    "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
-    "name": "Crab",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "CRAB",
-        "precision": 18,
-        "priceId": "darwinia-network-native-token",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/white/Crab.svg"
-      },
-      {
-        "assetId": 1,
-        "symbol": "CKTON",
-        "precision": 18,
-        "type": "statemine",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/CKTON.svg",
-        "typeExtras": {
-          "assetId": "1026"
-        }
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://crab-rpc.darwinia.network/",
-        "name": "Darwinia node"
-      },
-      {
-        "url": "wss://darwiniacrab-rpc.dwellir.com",
-        "name": "Dwellir node"
-      },
-      {
-        "url": "wss://crab-rpc.darwiniacommunitydao.xyz",
-        "name": "Community node"
-      }
-    ],
-    "explorers": [
-      {
-        "name": "Subscan",
-        "extrinsic": "https://crab.subscan.io/extrinsic/{hash}",
-        "account": "https://crab.subscan.io/account/{address}"
-      }
-    ],
-    "externalApi": {
-      "history": [
-        {
-          "type": "subquery",
-          "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-darwinia"
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Crab.svg",
-    "addressPrefix": 42,
     "options": [
       "ethereumBased"
     ]

@@ -4703,54 +4703,6 @@
     "addressPrefix": 51
   },
   {
-    "chainId": "70255b4d28de0fc4e1a193d7e175ad1ccef431598211c55538f1018651a0344e",
-    "name": "Aleph Zero",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "AZERO",
-        "priceId": "aleph-zero",
-        "staking": "aleph-zero",
-        "precision": 12,
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/white/Aleph_zero.svg"
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://ws.azero.dev",
-        "name": "Aleph Zero node"
-      }
-    ],
-    "explorers": [
-      {
-        "name": "Subscan",
-        "extrinsic": "https://alephzero.subscan.io/extrinsic/{hash}",
-        "account": "https://alephzero.subscan.io/account/{address}",
-        "event": null
-      }
-    ],
-    "types": {
-      "url": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/chains/v2/types/aleph_zero.json",
-      "overridesCommon": true
-    },
-    "externalApi": {
-      "history": [
-        {
-          "type": "subquery",
-          "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-aleph-zero"
-        }
-      ],
-      "staking": [
-        {
-          "type": "subquery",
-          "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-aleph-zero"
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/AlephZero.svg",
-    "addressPrefix": 42
-  },
-  {
     "chainId": "daab8df776eb52ec604a5df5d388bb62a050a0aaec4556a64265b9d42755552d",
     "parentId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
     "name": "Composable Finance",
