@@ -109,19 +109,19 @@
       "staking-rewards": [
         {
           "type": "subquery",
-          "url": "https://subquery.pezkuwichain.io"
+          "url": "https://subquery.pezkuwichain.io/assethub"
         }
       ],
       "staking": [
         {
           "type": "subquery",
-          "url": "https://subquery.pezkuwichain.io"
+          "url": "https://subquery.pezkuwichain.io/assethub"
         }
       ],
       "history": [
         {
           "type": "subquery",
-          "url": "https://subquery.pezkuwichain.io"
+          "url": "https://subquery.pezkuwichain.io/assethub"
         }
       ]
     },
