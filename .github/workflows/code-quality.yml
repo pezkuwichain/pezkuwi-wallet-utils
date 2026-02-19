@@ -1,0 +1,145 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python-lint:
+    name: Python Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Run ruff linter
+        run: ruff check scripts/
+        continue-on-error: true
+
+      - name: Run ruff formatter check
+        run: ruff format --check scripts/
+        continue-on-error: true
+
+  json-validation:
+    name: JSON Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Validate JSON files
+        run: |
+          ERRORS=0
+          echo "Validating chain config JSON files..."
+
+          for f in chains/v22/android/chains.json chains/v22/chains.json chains/v22/chains_dev.json pezkuwi-overlay/chains/pezkuwi-chains.json; do
+            if [ -f "$f" ]; then
+              if python3 -m json.tool "$f" > /dev/null 2>&1; then
+                echo "  $f: valid"
+              else
+                echo "::error file=$f::Invalid JSON: $f"
+                ERRORS=$((ERRORS + 1))
+              fi
+            fi
+          done
+
+          exit $ERRORS
+
+  chain-integrity:
+    name: Chain Config Integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Verify Pezkuwi chains are present
+        run: |
+          CHAINS_FILE="chains/v22/android/chains.json"
+          if [ ! -f "$CHAINS_FILE" ]; then
+            echo "::error::$CHAINS_FILE not found"
+            exit 1
+          fi
+
+          ERRORS=0
+
+          # Pezkuwi Relay
+          if ! python3 -c "import json; chains=json.load(open('$CHAINS_FILE')); assert any(c['chainId'].startswith('1aa94987') for c in chains), 'Missing Pezkuwi Relay'"; then
+            echo "::error::Pezkuwi Relay chain missing from $CHAINS_FILE"
+            ERRORS=$((ERRORS + 1))
+          else
+            echo "Pezkuwi Relay: present"
+          fi
+
+          # Pezkuwi Asset Hub
+          if ! python3 -c "import json; chains=json.load(open('$CHAINS_FILE')); assert any(c['chainId'].startswith('e7c15092') for c in chains), 'Missing Asset Hub'"; then
+            echo "::error::Pezkuwi Asset Hub missing from $CHAINS_FILE"
+            ERRORS=$((ERRORS + 1))
+          else
+            echo "Pezkuwi Asset Hub: present"
+          fi
+
+          # Pezkuwi People
+          if ! python3 -c "import json; chains=json.load(open('$CHAINS_FILE')); assert any(c['chainId'].startswith('69a8d025') for c in chains), 'Missing People Chain'"; then
+            echo "::error::Pezkuwi People chain missing from $CHAINS_FILE"
+            ERRORS=$((ERRORS + 1))
+          else
+            echo "Pezkuwi People: present"
+          fi
+
+          # Verify Pezkuwi chains are first in array
+          FIRST_CHAIN=$(python3 -c "import json; print(json.load(open('$CHAINS_FILE'))[0]['chainId'][:8])")
+          if [ "$FIRST_CHAIN" != "1aa94987" ]; then
+            echo "::warning::Pezkuwi Relay is not the first chain (found: $FIRST_CHAIN)"
+          else
+            echo "Pezkuwi Relay is first chain: OK"
+          fi
+
+          exit $ERRORS
+
+  sync-script-test:
+    name: Sync Script Dry Run
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run sync script
+        run: python3 scripts/sync_from_nova.py
+
+      - name: Verify output was generated
+        run: |
+          if [ ! -f "chains/v22/android/chains.json" ]; then
+            echo "::error::Sync script failed to generate chains/v22/android/chains.json"
+            exit 1
+          fi
+          COUNT=$(python3 -c "import json; print(len(json.load(open('chains/v22/android/chains.json'))))")
+          echo "Generated $COUNT chains"
+          if [ "$COUNT" -lt 4 ]; then
+            echo "::error::Expected at least 4 chains, got $COUNT"
+            exit 1
+          fi
