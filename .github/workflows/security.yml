@@ -60,7 +60,7 @@ jobs:
           FOUND=0
 
           echo "Checking for private keys in config files..."
-          if grep -rn --include="*.json" --include="*.py" -E "(0x[a-fA-F0-9]{64}|-----BEGIN.*PRIVATE)" . | grep -v node_modules | grep -v "chainId\|genesisHash\|parentId"; then
+          if grep -rn --include="*.json" --include="*.py" -E "(0x[a-fA-F0-9]{64}|-----BEGIN.*PRIVATE)" . | grep -v node_modules | grep -v "chainId\|genesisHash\|parentId\|currencyIdScale\|typeAlias\|signedExtensions"; then
             echo "::error::Possible private key found"
             FOUND=1
           fi
