@@ -80,7 +80,7 @@
     },
     {
       "name": "HEZstaking",
-      "url": "https://staking.pezkiwi.app",
+      "url": "https://app.pezkuwichain.io",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/PezkuwiStaking.png",
       "categories": [
         "staking"
