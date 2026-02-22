@@ -88,7 +88,7 @@
     },
     {
       "name": "Pezkuwi P2P",
-      "url": "https://telegram.pezkuwichain.io/p2p",
+      "url": "https://app.pezkuwichain.io/p2p",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/Pezkuwi.png",
       "categories": [
         "dex"
