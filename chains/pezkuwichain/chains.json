@@ -40,10 +40,7 @@
         "precision": 12,
         "name": "Hezkurd",
         "priceId": null,
-        "staking": [
-          "relaychain",
-          "nomination-pools"
-        ],
+        "staking": null,
         "type": "Native",
         "icon": "https://pezkuwichain.io/tokens/HEZ.png",
         "buyProviders": {},
@@ -84,7 +81,14 @@
         "event": "https://explorer.pezkuwichain.io/asset-hub/event/{value}"
       }
     ],
-    "externalApi": {},
+    "externalApi": {
+      "staking": [
+        {
+          "type": "subquery",
+          "url": "https://subquery.pezkuwichain.io/assethub"
+        }
+      ]
+    },
     "assets": [
       {
         "assetId": 0,
@@ -92,7 +96,10 @@
         "precision": 12,
         "name": "Hezkurd",
         "priceId": null,
-        "staking": null,
+        "staking": [
+          "relaychain",
+          "nomination-pools"
+        ],
         "type": "Native",
         "icon": "https://pezkuwichain.io/tokens/HEZ.png",
         "buyProviders": {},
