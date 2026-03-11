@@ -1,6 +1,6 @@
 {
-    "chainId": "e600ea6d0dfa0987874bc539b4c471b9f7e5a3277e80989e47a6cc69bb944511",
-    "name": "Xcavate (TESTNET)",
+    "chainId": "d17bc7f93d054d8aba31f24d5bb0ac462247c594e31beed479b1c04d2d0ba48f",
+    "name": "Xcavate",
     "assets": [
         {
             "assetId": 0,
@@ -11,8 +11,8 @@
     ],
     "nodes": [
         {
-            "url": "wss://xcavate-paseo.api.onfinality.io/public-ws",
-            "name": "Xcavate_OnFinality"
+            "url": "wss://rpc1-polkadot.xcavate.io",
+            "name": "Xcavate"
         }
     ],
     "addressPrefix": 0

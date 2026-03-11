@@ -40,6 +40,10 @@
         "name": "Robonomics Polkadot"
     },
     {
+        "chainId": "d17bc7f93d054d8aba31f24d5bb0ac462247c594e31beed479b1c04d2d0ba48f",
+        "name": "Xcavate"
+    },
+    {
         "chainId": "b2985e778bb748c70e450dcc084cc7da79fe742cc23d3b040abd7028187de69c",
         "name": "Xode"
     },
@@ -96,6 +100,10 @@
         "name": "VTB Mainnet"
     },
     {
+        "chainId": "ee1f44f62e68312c4852f37585941e9b64b5ceae539e4aa112ce9d3cf7bbe9fd",
+        "name": "Westend Bulletin (TESTNET)"
+    },
+    {
         "chainId": "67f9723393ef76214df0118c34bbbd3dbebc8ed46a10973a8c969d48fe7598c9",
         "name": "Westend Asset Hub (TESTNET)"
     },
@@ -120,12 +128,20 @@
         "name": "Ajuna Paseo (TESTNET)"
     },
     {
+        "chainId": "f5840f147cae70c939aefd2ed1b0145a879ca49eeb1a1b13d5bf38a720087a90",
+        "name": "AvN Paseo (TESTNET)"
+    },
+    {
         "chainId": "ec39b15e5a1945ff19b8e8c0f76990b5758ce19faa4578e8ed57eda33e844452",
         "name": "Bifrost Paseo (TESTNET)"
     },
     {
-        "chainId": "203c6838fc78ea3660a2f298a58d859519c72a5efdc0f194abd6f0d5ce1838e0",
-        "name": "Frequency Paseo (TESTNET)"
+        "chainId": "744960c32e3a3df5440e1ecd4d34096f1ce2230d7016a5ada8a765d5a622b4ea",
+        "name": "Paseo Bulletin (TESTNET)"
+    },
+    {
+        "chainId": "40d175caba06c99521d5cd1bea3d1495b14d28b59eef1d5ffc2688cbb7e3dd76",
+        "name": "Heima-paseo (TESTNET)"
     },
     {
         "chainId": "5388faf792c5232566d21493929b32c1f20a9c2b03e95615eefec2aa26d64b73",
@@ -178,10 +194,6 @@
     {
         "chainId": "c806038cc1d06766f23074ade7c5511326be41646deabc259970ff280c82a464",
         "name": "Paseo Coretime (TESTNET)"
-    },
-    {
-        "chainId": "fd974cf9eaf028f5e44b9fdd1949ab039c6cf9cc54449b0b60d71b042e79aeb6",
-        "name": "passet-hub (TESTNET)"
     },
     {
         "chainId": "e6c30d6e148f250b887105237bcaa5cb9f16dd203bf7b5b9d4f1da7387cb86ec",
