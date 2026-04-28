@@ -2561,7 +2561,7 @@
   {
     "chainId": "411f057b9107718c9624d6aa4a3f23c1653898297f3d4d529d9bb6511a39dd21",
     "parentId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
-    "name": "KILT",
+    "name": "KILT (PAUSED)",
     "assets": [
       {
         "assetId": 0,
@@ -4074,6 +4074,10 @@
       }
     ],
     "nodes": [
+      {
+        "url": "wss://rpc-assethub.novasama-tech.org",
+        "name": "Novasama node"
+      },
       {
         "url": "wss://asset-hub-polkadot-rpc.n.dwellir.com",
         "name": "Dwellir node"
@@ -5608,6 +5612,34 @@
           "existentialDeposit": "153256704981",
           "transfersEnabled": true
         }
+      },
+      {
+        "assetId": 72,
+        "symbol": "USDT-Snowbridge",
+        "precision": 6,
+        "priceId": "tether",
+        "type": "orml",
+        "icon": "USDT-Snowbridge.svg",
+        "typeExtras": {
+          "currencyIdScale": "0x3f450f00",
+          "currencyIdType": "u32",
+          "existentialDeposit": "10000",
+          "transfersEnabled": true
+        }
+      },
+      {
+        "assetId": 73,
+        "symbol": "USDC-Snowbridge",
+        "precision": 6,
+        "priceId": "usd-coin",
+        "type": "orml",
+        "icon": "USDC-Snowbridge.svg",
+        "typeExtras": {
+          "currencyIdScale": "0x3e450f00",
+          "currencyIdType": "u32",
+          "existentialDeposit": "10000",
+          "transfersEnabled": true
+        }
       }
     ],
     "nodes": [
@@ -5645,7 +5677,7 @@
       "governance": [
         {
           "type": "subsquare",
-          "url": "https://hydradx.subsquare.io/api"
+          "url": "https://hydration-api.subsquare.io"
         }
       ]
     },
@@ -8211,8 +8243,9 @@
     ],
     "explorers": [
       {
-        "name": "SCAN",
-        "account": "https://bittensor.com/scan/address/{address}"
+        "name": "TaoApp",
+        "account": "https://tao.app/account/{address}",
+        "extrinsic": "https://tao.app/tx/{hash}"
       }
     ],
     "externalApi": {
@@ -10089,8 +10122,8 @@
     ],
     "nodes": [
       {
-        "url": "wss://polkadot-mythos-rpc.polkadot.io",
-        "name": "Parity node",
+        "url": "wss://mythos-rpc.dmarket.com",
+        "name": "DMarket node",
         "features": [
           "noTls12"
         ]
@@ -10472,16 +10505,12 @@
     ],
     "nodes": [
       {
-        "url": "wss://people-westend-rpc.dwellir.com",
+        "url": "wss://people-westend-rpc.n.dwellir.com",
         "name": "Dwellir node"
       },
       {
-        "url": "wss://sys.ibp.network/people-westend",
-        "name": "IBP1 node"
-      },
-      {
-        "url": "wss://people-westend.dotters.network",
-        "name": "IBP2 node"
+        "url": "wss://westend-people-rpc.polkadot.io",
+        "name": "Parity node"
       }
     ],
     "explorers": [
