@@ -608,7 +608,10 @@
         ],
         "priceId": "kusama",
         "buyProviders": {
-          "mercuryo": {}
+          "mercuryo": {},
+          "transak": {
+            "network": "KUSMAASSETHUB"
+          }
         },
         "sellProviders": {
           "mercuryo": {}
@@ -2710,7 +2713,7 @@
   {
     "chainId": "411f057b9107718c9624d6aa4a3f23c1653898297f3d4d529d9bb6511a39dd21",
     "parentId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
-    "name": "KILT",
+    "name": "KILT (PAUSED)",
     "assets": [
       {
         "assetId": 0,
@@ -3310,7 +3313,10 @@
           "nomination-pools"
         ],
         "buyProviders": {
-          "mercuryo": {}
+          "mercuryo": {},
+          "transak": {
+            "network": "ASSETHUB"
+          }
         },
         "sellProviders": {
           "mercuryo": {}
@@ -3605,6 +3611,10 @@
       }
     ],
     "nodes": [
+      {
+        "url": "wss://rpc-assethub.novasama-tech.org",
+        "name": "Novasama node"
+      },
       {
         "url": "wss://asset-hub-polkadot-rpc.n.dwellir.com",
         "name": "Dwellir node"
@@ -5292,6 +5302,34 @@
           "existentialDeposit": "153256704981",
           "transfersEnabled": true
         }
+      },
+      {
+        "assetId": 72,
+        "symbol": "USDT-Snowbridge",
+        "precision": 6,
+        "priceId": "tether",
+        "type": "orml",
+        "icon": "USDT-Snowbridge.svg",
+        "typeExtras": {
+          "currencyIdScale": "0x3f450f00",
+          "currencyIdType": "u32",
+          "existentialDeposit": "10000",
+          "transfersEnabled": true
+        }
+      },
+      {
+        "assetId": 73,
+        "symbol": "USDC-Snowbridge",
+        "precision": 6,
+        "priceId": "usd-coin",
+        "type": "orml",
+        "icon": "USDC-Snowbridge.svg",
+        "typeExtras": {
+          "currencyIdScale": "0x3e450f00",
+          "currencyIdType": "u32",
+          "existentialDeposit": "10000",
+          "transfersEnabled": true
+        }
       }
     ],
     "nodes": [
@@ -5329,7 +5367,7 @@
       "governance": [
         {
           "type": "subsquare",
-          "url": "https://hydradx.subsquare.io/api"
+          "url": "https://hydration-api.subsquare.io"
         }
       ]
     },
@@ -7157,8 +7195,9 @@
     ],
     "explorers": [
       {
-        "name": "SCAN",
-        "account": "https://bittensor.com/scan/address/{address}"
+        "name": "TaoApp",
+        "account": "https://tao.app/account/{address}",
+        "extrinsic": "https://tao.app/tx/{hash}"
       }
     ],
     "externalApi": {
@@ -7608,7 +7647,11 @@
       ]
     },
     "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Polkadot_Collectives.svg",
-    "addressPrefix": 0
+    "addressPrefix": 0,
+    "additional": {
+      "identityChain": "67fa177a097bfa18f77ea95ab56e9bcdfeb0e5b8a40e46298bb93e16b6fc5008",
+      "supportsGenericLedgerApp": true
+    }
   },
   {
     "chainId": "b3dd5ad6a82872b30aabaede8f41dfd4ff6c32ff82f8757d034a45be63cf104c",
@@ -8091,8 +8134,8 @@
     ],
     "nodes": [
       {
-        "url": "wss://polkadot-mythos-rpc.polkadot.io",
-        "name": "Parity node",
+        "url": "wss://mythos-rpc.dmarket.com",
+        "name": "DMarket node",
         "features": [
           "noTls12"
         ]
