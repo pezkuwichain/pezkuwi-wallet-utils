@@ -275,6 +275,71 @@
     }
   },
   {
+    "chainId": "tron:0x2b6653dc",
+    "name": "Tron",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/chains/gradient/Tron.svg",
+    "addressPrefix": 0,
+    "options": [
+      "tronBased",
+      "noSubstrateRuntime"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "https://api.trongrid.io",
+        "name": "TronGrid"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Tronscan",
+        "extrinsic": "https://tronscan.org/#/transaction/{value}",
+        "account": "https://tronscan.org/#/address/{value}"
+      }
+    ],
+    "externalApi": {
+      "history": [
+        {
+          "type": "trongrid",
+          "url": "https://api.trongrid.io"
+        }
+      ]
+    },
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "TRX",
+        "precision": 6,
+        "name": "Tron",
+        "priceId": "tron",
+        "staking": null,
+        "type": "tronNative",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/TRX.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      },
+      {
+        "assetId": 1,
+        "symbol": "USDT",
+        "precision": 6,
+        "name": "Tether USD",
+        "priceId": "tether",
+        "staking": null,
+        "type": "trc20",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/USDT.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "contractAddress": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+        }
+      }
+    ],
+    "additional": {
+      "themeColor": "#EB0029"
+    }
+  },
+  {
     "chainId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
     "name": "Polkadot",
     "assets": [
