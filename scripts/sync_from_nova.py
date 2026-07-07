@@ -28,6 +28,7 @@ PEZKUWI_OVERLAY = ROOT / "pezkuwi-overlay"
 OUTPUT_CHAINS = ROOT / "chains"
 OUTPUT_XCM = ROOT / "xcm"
 OUTPUT_STAKING = ROOT / "staking"
+OUTPUT_TESTS = ROOT / "tests"
 
 
 def load_json(path: Path) -> dict | list:
@@ -269,6 +270,23 @@ def sync_config():
         shutil.copytree(nova_validators_dir, output_validators)
 
 
+def sync_tests():
+    """
+    Publish test fixtures the mobile apps fetch directly over HTTP (e.g. Android's
+    BalancesIntegrationTest reads tests/chains_for_testBalance.json from
+    raw.githubusercontent.com). Only that fixture is published, not the rest of
+    nova-base/tests/ (upstream's own pytest suite for validating its chains.json
+    output, which isn't run or otherwise used from this repo).
+    """
+    print("\nSyncing tests...")
+
+    nova_fixture = NOVA_BASE / "tests" / "chains_for_testBalance.json"
+    if nova_fixture.exists():
+        OUTPUT_TESTS.mkdir(parents=True, exist_ok=True)
+        shutil.copy(nova_fixture, OUTPUT_TESTS / "chains_for_testBalance.json")
+        print(f"  chains_for_testBalance.json: copied from Nova")
+
+
 def main():
     print("=" * 60)
     print("Nova + Pezkuwi Merge")
@@ -286,6 +304,7 @@ def main():
     sync_xcm()
     sync_icons()
     sync_config()
+    sync_tests()
 
     print("\n" + "=" * 60)
     print("Done!")
