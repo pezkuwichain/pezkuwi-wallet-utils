@@ -277,7 +277,7 @@
   {
     "chainId": "tron:0x2b6653dc",
     "name": "Tron",
-    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/chains/gradient/Tron.svg",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/gradient/Tron.svg",
     "addressPrefix": 0,
     "options": [
       "tronBased",
@@ -314,7 +314,7 @@
         "priceId": "tron",
         "staking": null,
         "type": "tronNative",
-        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/TRX.svg",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/tokens/colored/TRX.svg",
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": null
