@@ -77,8 +77,8 @@ Apache 2.0
 
 - Website: https://pezkuwichain.io
 - Documentation: https://docs.pezkuwichain.io
-- Telegram: https://t.me/pezkuwichain
-- Twitter: https://twitter.com/pezkuwichain
+- Telegram: https://t.me/kurdishmedya
+- Twitter: https://x.com/bizinikiwi
 
 ---
 
