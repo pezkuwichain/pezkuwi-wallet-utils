@@ -108,6 +108,7 @@ def sync_chains():
 
     blocked_ids = load_blacklist()
     print(f"  Blacklist: {len(blocked_ids)} chains excluded")
+    matched_blocked_ids = set()
 
     pezkuwi_chains_file = PEZKUWI_OVERLAY / "chains" / "pezkuwi-chains.json"
     pezkuwi_chains = load_json(pezkuwi_chains_file) if pezkuwi_chains_file.exists() else []
@@ -121,6 +122,7 @@ def sync_chains():
         nova_file = version_dir / "chains.json"
         if nova_file.exists():
             nova_chains = load_json(nova_file)
+            matched_blocked_ids |= blocked_ids & {c['chainId'] for c in nova_chains}
             merged = merge_chains(nova_chains, pezkuwi_chains, blocked_ids)
             save_json(output_dir / "chains.json", merged)
             print(f"  {version}/chains.json: {len(pezkuwi_chains)} + {len(nova_chains)} - {len(blocked_ids)} blocked = {len(merged)}")
@@ -144,6 +146,13 @@ def sync_chains():
             if output_preconfig.exists():
                 shutil.rmtree(output_preconfig)
             shutil.copytree(nova_preconfig, output_preconfig)
+
+    stale_blocked_ids = blocked_ids - matched_blocked_ids
+    if stale_blocked_ids:
+        print(f"  WARNING: {len(stale_blocked_ids)} blacklist chain_id(s) matched nothing in Nova's current chains "
+              f"- likely stale (upstream changed the chain's id) and NOT actually blocking anything:")
+        for stale_id in stale_blocked_ids:
+            print(f"    - {stale_id}")
 
 
 def sync_xcm():
