@@ -286,14 +286,32 @@ def sync_tests():
     raw.githubusercontent.com). Only that fixture is published, not the rest of
     nova-base/tests/ (upstream's own pytest suite for validating its chains.json
     output, which isn't run or otherwise used from this repo).
+
+    Entries are filtered down to chains actually present in our merged output
+    (must run after sync_chains()) - the raw Nova fixture also references chains
+    that are blacklisted, testnets that were retired, or otherwise no longer
+    configured, which would just make every test for that chain fail with
+    "chain not found" instead of actually testing anything.
     """
     print("\nSyncing tests...")
 
     nova_fixture = NOVA_BASE / "tests" / "chains_for_testBalance.json"
-    if nova_fixture.exists():
-        OUTPUT_TESTS.mkdir(parents=True, exist_ok=True)
-        shutil.copy(nova_fixture, OUTPUT_TESTS / "chains_for_testBalance.json")
-        print(f"  chains_for_testBalance.json: copied from Nova")
+    if not nova_fixture.exists():
+        return
+
+    latest_version = max(
+        (d for d in OUTPUT_CHAINS.glob("v*") if d.is_dir()),
+        key=lambda d: int(d.name[1:])
+    )
+    current_chains = load_json(latest_version / "android" / "chains.json")
+    current_chain_ids = {c['chainId'] for c in current_chains}
+
+    fixture = load_json(nova_fixture)
+    filtered = [entry for entry in fixture if entry['chainId'] in current_chain_ids]
+    dropped = len(fixture) - len(filtered)
+
+    save_json(OUTPUT_TESTS / "chains_for_testBalance.json", filtered)
+    print(f"  chains_for_testBalance.json: {len(fixture)} - {dropped} not in {latest_version.name} = {len(filtered)}")
 
 
 def main():
