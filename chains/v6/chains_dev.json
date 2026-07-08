@@ -2749,69 +2749,6 @@
     ]
   },
   {
-    "chainId": "cd4d732201ebe5d6b014edda071c4203e16867305332301dc8d092044b28e554",
-    "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
-    "name": "QUARTZ",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "QTZ",
-        "priceId": "quartz",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/white/Quartz.svg",
-        "precision": 18
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://quartz.unique.network",
-        "name": "Unique node"
-      },
-      {
-        "url": "wss://eu-ws-quartz.unique.network",
-        "name": "Unique Europe node"
-      },
-      {
-        "url": "wss://us-ws-quartz.unique.network",
-        "name": "Unique US node"
-      },
-      {
-        "url": "wss://asia-ws-quartz.unique.network",
-        "name": "Unique Asia node"
-      }
-    ],
-    "types": {
-      "url": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/chains/v2/types/quartz.json",
-      "overridesCommon": true
-    },
-    "explorers": [
-      {
-        "name": "Subscan",
-        "extrinsic": "https://quartz.subscan.io/extrinsic/{hash}",
-        "account": "https://quartz.subscan.io/account/{address}",
-        "event": null
-      },
-      {
-        "name": "Sub.ID",
-        "account": "https://sub.id/{address}"
-      },
-      {
-        "name": "Polkaholic",
-        "account": "https://polkaholic.io/account/{address}",
-        "extrinsic": "https://polkaholic.io/tx/{hash}"
-      }
-    ],
-    "externalApi": {
-      "history": [
-        {
-          "type": "subquery",
-          "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-quartz"
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Quartz.svg",
-    "addressPrefix": 255
-  },
-  {
     "chainId": "f22b7850cdd5a7657bbfd90ac86441275bbc57ace3d2698a740c7b0ec4de5ec3",
     "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
     "name": "Bit.Country Pioneer",
@@ -4279,54 +4216,6 @@
     "addressPrefix": 42
   },
   {
-    "chainId": "4a12be580bb959937a1c7a61d5cf24428ed67fa571974b4007645d1886e7c89f",
-    "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
-    "name": "Subsocial",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "SUB",
-        "precision": 10,
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/white/Subsocial.svg"
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://para.f3joule.space",
-        "name": "Subsocial node"
-      },
-      {
-        "url": "wss://para.subsocial.network",
-        "name": "Dappforce node"
-      }
-    ],
-    "explorers": [
-      {
-        "name": "Sub.ID",
-        "account": "https://sub.id/{address}"
-      },
-      {
-        "name": "Polkaholic",
-        "account": "https://polkaholic.io/account/{address}",
-        "extrinsic": "https://polkaholic.io/tx/{hash}"
-      }
-    ],
-    "types": {
-      "url": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/chains/v2/types/subsocial.json",
-      "overridesCommon": true
-    },
-    "externalApi": {
-      "history": [
-        {
-          "type": "subquery",
-          "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-subsocial"
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Subsocial_Parachain.svg",
-    "addressPrefix": 28
-  },
-  {
     "chainId": "d4c0c08ca49dc7c680c3dac71a7c0703e5b222f4b6c03fe4c5219bb8f22c18dc",
     "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
     "name": "Crust Shadow",
@@ -5077,6 +4966,52 @@
     "options": [
       "governance-v1"
     ]
+  },
+  {
+    "chainId": "70255b4d28de0fc4e1a193d7e175ad1ccef431598211c55538f1018651a0344e",
+    "name": "Aleph Zero",
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "AZERO",
+        "staking": "aleph-zero",
+        "priceId": "aleph-zero",
+        "precision": 12,
+        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/white/Aleph_zero.svg"
+      }
+    ],
+    "nodes": [
+      {
+        "url": "wss://ws.azero.dev",
+        "name": "Aleph Zero node"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Subscan",
+        "extrinsic": "https://alephzero.subscan.io/extrinsic/{hash}",
+        "account": "https://alephzero.subscan.io/account/{address}",
+        "event": null
+      }
+    ],
+    "types": {
+      "url": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/chains/v2/types/aleph_zero.json",
+      "overridesCommon": true
+    },
+    "externalApi": {
+      "history": [
+        {
+          "type": "subquery",
+          "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-aleph-zero"
+        }
+      ],
+      "staking": {
+        "type": "subquery",
+        "url": "https://api.subquery.network/sq/nova-wallet/nova-wallet-aleph-zero"
+      }
+    },
+    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/AlephZero.svg",
+    "addressPrefix": 42
   },
   {
     "chainId": "daab8df776eb52ec604a5df5d388bb62a050a0aaec4556a64265b9d42755552d",

@@ -28,6 +28,7 @@ PEZKUWI_OVERLAY = ROOT / "pezkuwi-overlay"
 OUTPUT_CHAINS = ROOT / "chains"
 OUTPUT_XCM = ROOT / "xcm"
 OUTPUT_STAKING = ROOT / "staking"
+OUTPUT_TESTS = ROOT / "tests"
 
 
 def load_json(path: Path) -> dict | list:
@@ -107,6 +108,7 @@ def sync_chains():
 
     blocked_ids = load_blacklist()
     print(f"  Blacklist: {len(blocked_ids)} chains excluded")
+    matched_blocked_ids = set()
 
     pezkuwi_chains_file = PEZKUWI_OVERLAY / "chains" / "pezkuwi-chains.json"
     pezkuwi_chains = load_json(pezkuwi_chains_file) if pezkuwi_chains_file.exists() else []
@@ -120,6 +122,7 @@ def sync_chains():
         nova_file = version_dir / "chains.json"
         if nova_file.exists():
             nova_chains = load_json(nova_file)
+            matched_blocked_ids |= blocked_ids & {c['chainId'] for c in nova_chains}
             merged = merge_chains(nova_chains, pezkuwi_chains, blocked_ids)
             save_json(output_dir / "chains.json", merged)
             print(f"  {version}/chains.json: {len(pezkuwi_chains)} + {len(nova_chains)} - {len(blocked_ids)} blocked = {len(merged)}")
@@ -143,6 +146,13 @@ def sync_chains():
             if output_preconfig.exists():
                 shutil.rmtree(output_preconfig)
             shutil.copytree(nova_preconfig, output_preconfig)
+
+    stale_blocked_ids = blocked_ids - matched_blocked_ids
+    if stale_blocked_ids:
+        print(f"  WARNING: {len(stale_blocked_ids)} blacklist chain_id(s) matched nothing in Nova's current chains "
+              f"- likely stale (upstream changed the chain's id) and NOT actually blocking anything:")
+        for stale_id in stale_blocked_ids:
+            print(f"    - {stale_id}")
 
 
 def sync_xcm():
@@ -269,6 +279,23 @@ def sync_config():
         shutil.copytree(nova_validators_dir, output_validators)
 
 
+def sync_tests():
+    """
+    Publish test fixtures the mobile apps fetch directly over HTTP (e.g. Android's
+    BalancesIntegrationTest reads tests/chains_for_testBalance.json from
+    raw.githubusercontent.com). Only that fixture is published, not the rest of
+    nova-base/tests/ (upstream's own pytest suite for validating its chains.json
+    output, which isn't run or otherwise used from this repo).
+    """
+    print("\nSyncing tests...")
+
+    nova_fixture = NOVA_BASE / "tests" / "chains_for_testBalance.json"
+    if nova_fixture.exists():
+        OUTPUT_TESTS.mkdir(parents=True, exist_ok=True)
+        shutil.copy(nova_fixture, OUTPUT_TESTS / "chains_for_testBalance.json")
+        print(f"  chains_for_testBalance.json: copied from Nova")
+
+
 def main():
     print("=" * 60)
     print("Nova + Pezkuwi Merge")
@@ -286,6 +313,7 @@ def main():
     sync_xcm()
     sync_icons()
     sync_config()
+    sync_tests()
 
     print("\n" + "=" * 60)
     print("Done!")

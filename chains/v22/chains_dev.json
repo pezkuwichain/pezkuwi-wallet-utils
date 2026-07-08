@@ -2714,40 +2714,6 @@
     }
   },
   {
-    "chainId": "cd4d732201ebe5d6b014edda071c4203e16867305332301dc8d092044b28e554",
-    "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
-    "name": "QUARTZ",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "QTZ",
-        "priceId": "quartz",
-        "icon": "QTZ.svg",
-        "precision": 18
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://quartz.unique.network",
-        "name": "Unique node"
-      },
-      {
-        "url": "wss://eu-ws-quartz.unique.network",
-        "name": "Unique Europe node"
-      },
-      {
-        "url": "wss://us-ws-quartz.unique.network",
-        "name": "Unique US node"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Quartz.svg",
-    "addressPrefix": 255,
-    "additional": {
-      "feeViaRuntimeCall": true,
-      "supportsGenericLedgerApp": true
-    }
-  },
-  {
     "chainId": "fc41b9bd8ef8fe53d58c7ea67c794c7ec9a73daf05e6d54b14ff6342c99ba64c",
     "parentId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
     "name": "Acala",
@@ -4496,40 +4462,6 @@
     }
   },
   {
-    "chainId": "4a12be580bb959937a1c7a61d5cf24428ed67fa571974b4007645d1886e7c89f",
-    "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
-    "name": "Subsocial (PAUSED)",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "SUB",
-        "precision": 10,
-        "priceId": "subsocial",
-        "icon": "SUB.svg"
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://para.f3joule.space",
-        "name": "Subsocial node"
-      },
-      {
-        "url": "wss://para.subsocial.network",
-        "name": "Dappforce node"
-      }
-    ],
-    "externalApi": {
-      "history": [
-        {
-          "type": "subquery",
-          "url": "https://subquery-history-subsocial-prod.novasama-tech.org"
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Subsocial_Parachain.svg",
-    "addressPrefix": 28
-  },
-  {
     "chainId": "d4c0c08ca49dc7c680c3dac71a7c0703e5b222f4b6c03fe4c5219bb8f22c18dc",
     "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
     "name": "Crust Shadow",
@@ -6098,6 +6030,75 @@
     "additional": {
       "supportsGenericLedgerApp": true
     }
+  },
+  {
+    "chainId": "70255b4d28de0fc4e1a193d7e175ad1ccef431598211c55538f1018651a0344e",
+    "name": "Aleph Zero",
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "AZERO",
+        "staking": [
+          "aleph-zero",
+          "nomination-pools"
+        ],
+        "priceId": "aleph-zero",
+        "precision": 12,
+        "icon": "AZERO.svg",
+        "buyProviders": {
+          "banxa": {
+            "coinType": "AZERO",
+            "blockchain": "AZERO"
+          }
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "url": "wss://ws.azero.dev",
+        "name": "Aleph Zero node"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Subscan",
+        "extrinsic": "https://alephzero.subscan.io/extrinsic/{hash}",
+        "account": "https://alephzero.subscan.io/account/{address}"
+      }
+    ],
+    "externalApi": {
+      "history": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-aleph-zero-prod.novasama-tech.org"
+        }
+      ],
+      "staking": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-aleph-zero-prod.novasama-tech.org"
+        }
+      ],
+      "staking-rewards": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-aleph-zero-prod.novasama-tech.org"
+        }
+      ]
+    },
+    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/AlephZero.svg",
+    "addressPrefix": 42,
+    "additional": {
+      "themeColor": "#10B6B1",
+      "stakingWiki": "https://docs.novawallet.io/nova-wallet-wiki/staking/aleph-zero-azero-staking",
+      "defaultBlockTime": 1000,
+      "feeViaRuntimeCall": true
+    },
+    "options": [
+      "fullSyncByDefault",
+      "pushSupport",
+      "multisig"
+    ]
   },
   {
     "chainId": "daab8df776eb52ec604a5df5d388bb62a050a0aaec4556a64265b9d42755552d",
@@ -8339,44 +8340,48 @@
     ]
   },
   {
-    "chainId": "6c5894837ad89b6d92b114a2fb3eafa8fe3d26a54848e3447015442cd6ef4e66",
-    "name": "3DPass",
+    "chainId": "eip155:2109",
+    "name": "Exosama",
     "assets": [
       {
         "assetId": 0,
-        "symbol": "P3D",
-        "precision": 12,
-        "priceId": "3dpass",
-        "icon": "P3D.svg"
+        "symbol": "SAMA",
+        "priceId": "exosama-network",
+        "type": "evmNative",
+        "icon": "SAMA.svg",
+        "precision": 18
       }
     ],
     "nodes": [
       {
-        "url": "wss://rpc.3dpass.org",
-        "name": "3DPass node"
-      },
-      {
-        "url": "wss://rpc.p3d.top",
-        "name": "Lzmz node"
+        "url": "wss://rpc.exosama.com",
+        "name": "Exosama node"
       }
     ],
     "explorers": [
       {
-        "name": "3DPass explorer",
-        "extrinsic": "https://explorer.3dpass.org/extrinsic/{hash}",
-        "account": "https://explorer.3dpass.org/account/{address}"
+        "name": "Exosama explorer",
+        "extrinsic": "https://explorer.exosama.com/tx/{hash}",
+        "account": "https://explorer.exosama.com/address/{address}"
       }
     ],
     "externalApi": {
       "history": [
         {
-          "type": "subquery",
-          "url": "https://subquery-history-3dpass-prod.novasama-tech.org"
+          "type": "etherscan",
+          "url": "https://explorer.exosama.com/api",
+          "parameters": {
+            "assetType": "evm"
+          }
         }
       ]
     },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/3DPass.svg",
-    "addressPrefix": 71
+    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Exosama.svg",
+    "addressPrefix": 2109,
+    "options": [
+      "ethereumBased",
+      "noSubstrateRuntime"
+    ]
   },
   {
     "chainId": "e358eb1d11b31255a286c12e44fe6780b7edb171d657905a97e39f71d9c6c3ee",
@@ -8470,6 +8475,57 @@
     ],
     "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Darwinia.svg",
     "addressPrefix": 18,
+    "options": [
+      "ethereumBased"
+    ]
+  },
+  {
+    "chainId": "86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24",
+    "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
+    "name": "Crab",
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "CRAB",
+        "precision": 18,
+        "priceId": "darwinia-network-native-token",
+        "icon": "CRAB.svg"
+      },
+      {
+        "assetId": 1,
+        "symbol": "CKTON",
+        "precision": 18,
+        "type": "statemine",
+        "icon": "CKTON.svg",
+        "typeExtras": {
+          "assetId": "1026",
+          "isSufficient": true
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "url": "wss://crab-rpc.darwinia.network/",
+        "name": "Darwinia node"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Subscan",
+        "extrinsic": "https://crab.subscan.io/extrinsic/{hash}",
+        "account": "https://crab.subscan.io/account/{address}"
+      }
+    ],
+    "externalApi": {
+      "history": [
+        {
+          "type": "subquery",
+          "url": "https://subquery-history-crab-prod.novasama-tech.org"
+        }
+      ]
+    },
+    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Crab.svg",
+    "addressPrefix": 42,
     "options": [
       "ethereumBased"
     ]
@@ -9842,42 +9898,6 @@
     }
   },
   {
-    "chainId": "31a7d8914fb31c249b972f18c115f1e22b4b039abbcb03c73b6774c5642f9efe",
-    "parentId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
-    "name": "InvArch (PAUSED)",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "VARCH",
-        "precision": 12,
-        "icon": "VARCH.svg"
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://invarch.ibp.network",
-        "name": "IBP1 node"
-      },
-      {
-        "url": "wss://invarch.dotters.network",
-        "name": "IBP2 node"
-      }
-    ],
-    "explorers": [
-      {
-        "name": "Statescan",
-        "account": "https://invarch.statescan.io/#/accounts/{address}",
-        "event": "https://invarch.statescan.io/#/events/{event}",
-        "extrinsic": "https://invarch.statescan.io/#/extrinsics/{hash}"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/InvArch.svg",
-    "addressPrefix": 117,
-    "additional": {
-      "supportsGenericLedgerApp": true
-    }
-  },
-  {
     "chainId": "8b404e7ed8789d813982b9cb4c8b664c05b3fbf433309f603af014ec9ce56a8c",
     "name": "Crust",
     "assets": [
@@ -10063,40 +10083,6 @@
     "additional": {
       "disabledCheckMetadataHash": true
     }
-  },
-  {
-    "chainId": "1d73b9f5dc392744e0dee00a6d6254fcfa2305386cceba60315894fa4807053a",
-    "parentId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
-    "name": "Curio",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "CGT",
-        "precision": 18,
-        "priceId": "curio-governance",
-        "icon": "CGT.svg"
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://archive.parachain.curioinvest.com",
-        "name": "Curio 1 node"
-      },
-      {
-        "url": "wss://parachain.curioinvest.com/",
-        "name": "Curio 2 node"
-      }
-    ],
-    "externalApi": {
-      "history": [
-        {
-          "type": "subquery",
-          "url": "https://subquery-history-curio-prod.novasama-tech.org"
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Curio.svg",
-    "addressPrefix": 777
   },
   {
     "chainId": "d3d2f3a3495dc597434a99d7d449ebad6616db45e4e4f178f31cc6fa14378b70",
@@ -10570,55 +10556,6 @@
     ]
   },
   {
-    "chainId": "eip155:41455",
-    "name": "Aleph Zero EVM (PAUSED)",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "AZERO",
-        "priceId": "aleph-zero",
-        "type": "evmNative",
-        "icon": "AZERO.svg",
-        "precision": 18
-      }
-    ],
-    "nodeSelectionStrategy": "uniform",
-    "nodes": [
-      {
-        "url": "https://alephzero.drpc.org",
-        "name": "Aleph Zero EVM rpc node"
-      },
-      {
-        "url": "wss://alephzero.drpc.org",
-        "name": "Aleph Zero EVM wss node"
-      }
-    ],
-    "externalApi": {
-      "history": [
-        {
-          "type": "etherscan",
-          "url": "https://evm-explorer.alephzero.org/api",
-          "parameters": {
-            "assetType": "evm"
-          }
-        }
-      ]
-    },
-    "explorers": [
-      {
-        "name": "Aleph Zero EVM Explorer",
-        "extrinsic": "https://evm-explorer.alephzero.org/tx/{hash}",
-        "account": "https://evm-explorer.alephzero.org/address/{address}"
-      }
-    ],
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/AlephZero.svg",
-    "addressPrefix": 41455,
-    "options": [
-      "ethereumBased",
-      "noSubstrateRuntime"
-    ]
-  },
-  {
     "chainId": "eip155:8453",
     "name": "Base",
     "assets": [
@@ -10827,6 +10764,38 @@
     ],
     "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Humanode.svg",
     "addressPrefix": 5234
+  },
+  {
+    "chainId": "03aa6b475a03f8baf7f83e448513b00eaab03aefa4ed64bd1d31160dce028add",
+    "name": "DeepBrain",
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "DBC",
+        "precision": 15,
+        "priceId": "deepbrain-chain",
+        "icon": "DBC.svg",
+        "staking": [
+          "relaychain",
+          "nomination-pools"
+        ]
+      }
+    ],
+    "nodes": [
+      {
+        "url": "wss://info.dbcwallet.io",
+        "name": "DBC node"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Subscan",
+        "extrinsic": "https://dbc.subscan.io/extrinsic/{hash}",
+        "account": "https://dbc.subscan.io/account/{address}"
+      }
+    ],
+    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/DeepBrain.svg",
+    "addressPrefix": 42
   },
   {
     "chainId": "d2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c",

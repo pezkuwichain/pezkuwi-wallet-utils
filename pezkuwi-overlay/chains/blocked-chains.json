@@ -2,11 +2,11 @@
   "description": "Chains with broken/unreachable RPC endpoints - will be excluded",
   "mode": "blacklist",
   "reason": "DNS resolution failures or unreachable nodes",
-  "last_updated": "2026-02-11",
+  "last_updated": "2026-07-08",
   "chains": [
     {
-      "name": "AlephZero",
-      "reason": "rpc.alephzero.raas.gelato.cloud unreachable"
+      "name": "Aleph Zero EVM",
+      "reason": "rpc.alephzero.raas.gelato.cloud / ws.alephzero.raas.gelato.cloud unreachable"
     },
     {
       "name": "InvArch",
@@ -14,32 +14,27 @@
     },
     {
       "name": "Quartz",
-      "reason": "quartz.unique.network endpoints unreachable"
+      "reason": "quartz.unique.network, eu-ws-quartz.unique.network, us-ws-quartz.unique.network unreachable"
     },
     {
-      "name": "Passet Hub Testnet",
-      "reason": "testnet-passet-hub-eth-rpc.polkadot.io unreachable"
+      "name": "3DPass",
+      "reason": "rpc.3dpass.org returns 502, rpc.p3d.top unreachable - confirmed live 2026-07-08"
     },
     {
-      "name": "Darwinia Crab",
-      "reason": "crab-rpc.darwinia.network DNS failure"
+      "name": "Curio",
+      "reason": "archive.parachain.curioinvest.com and parachain.curioinvest.com unreachable - confirmed live 2026-07-08"
     },
     {
-      "name": "DeepBrain",
-      "reason": "info.dbcwallet.io SSL certificate mismatch"
-    },
-    {
-      "name": "Exosama",
-      "reason": "rpc.exosama.com 403 Forbidden"
+      "name": "Subsocial",
+      "reason": "para.subsocial.network SSL handshake failure, para.f3joule.space unreachable - confirmed live 2026-07-08"
     }
   ],
   "chain_ids": [
-    "70255b4d28de0fc4e1a193d7e175ad1ccef431598211c55538f1018651a0344e",
-    "f6c2c9174aa58c1c5b38d44a7e946c94a38cfd6e0ad9e2e9c5b14a7bc7ee6f44",
-    "cd4d732201ebe5d6b014edda071c4203e16867305332f43c2e25ae6c9a1b7e6f",
-    "3d22af97d919611e03bbcbda96f65988758865423e89b2d99547a6bb61452db3",
-    "86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24",
-    "03aa6b475a03f8baf7f83e448513b00eaab03aefa4ed64bd1d31160dce028add",
-    "eip155:2109"
+    "eip155:41455",
+    "31a7d8914fb31c249b972f18c115f1e22b4b039abbcb03c73b6774c5642f9efe",
+    "cd4d732201ebe5d6b014edda071c4203e16867305332301dc8d092044b28e554",
+    "6c5894837ad89b6d92b114a2fb3eafa8fe3d26a54848e3447015442cd6ef4e66",
+    "1d73b9f5dc392744e0dee00a6d6254fcfa2305386cceba60315894fa4807053a",
+    "4a12be580bb959937a1c7a61d5cf24428ed67fa571974b4007645d1886e7c89f"
   ]
 }
