@@ -292,6 +292,12 @@ def sync_tests():
     that are blacklisted, testnets that were retired, or otherwise no longer
     configured, which would just make every test for that chain fail with
     "chain not found" instead of actually testing anything.
+
+    Account overrides (pezkuwi-overlay/tests/account_overrides.json) swap in a
+    replacement account for a chain whose upstream-fixture account has since
+    been reaped/emptied - each override must be verified live before being
+    added, not guessed. See that file for details on the accounts currently
+    in use.
     """
     print("\nSyncing tests...")
 
@@ -309,6 +315,17 @@ def sync_tests():
     fixture = load_json(nova_fixture)
     filtered = [entry for entry in fixture if entry['chainId'] in current_chain_ids]
     dropped = len(fixture) - len(filtered)
+
+    overrides_file = PEZKUWI_OVERLAY / "tests" / "account_overrides.json"
+    if overrides_file.exists():
+        overrides = {o['chainId']: o['account'] for o in load_json(overrides_file)['overrides']}
+        overridden = 0
+        for entry in filtered:
+            if entry['chainId'] in overrides:
+                entry['account'] = overrides[entry['chainId']]
+                overridden += 1
+        if overridden:
+            print(f"  Applied {overridden} account override(s)")
 
     save_json(OUTPUT_TESTS / "chains_for_testBalance.json", filtered)
     print(f"  chains_for_testBalance.json: {len(fixture)} - {dropped} not in {latest_version.name} = {len(filtered)}")
