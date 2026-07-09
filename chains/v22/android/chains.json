@@ -3070,7 +3070,10 @@
           "nomination-pools"
         ],
         "buyProviders": {
-          "mercuryo": {}
+          "mercuryo": {},
+          "transak": {
+            "network": "ASSETHUB"
+          }
         },
         "sellProviders": {
           "mercuryo": {}
@@ -3365,6 +3368,10 @@
       }
     ],
     "nodes": [
+      {
+        "url": "wss://rpc-assethub.novasama-tech.org",
+        "name": "Novasama node"
+      },
       {
         "url": "wss://asset-hub-polkadot-rpc.n.dwellir.com",
         "name": "Dwellir node"
@@ -4802,6 +4809,34 @@
           "existentialDeposit": "153256704981",
           "transfersEnabled": true
         }
+      },
+      {
+        "assetId": 72,
+        "symbol": "USDT-Snowbridge",
+        "precision": 6,
+        "priceId": "tether",
+        "type": "orml",
+        "icon": "USDT-Snowbridge.svg",
+        "typeExtras": {
+          "currencyIdScale": "0x3f450f00",
+          "currencyIdType": "u32",
+          "existentialDeposit": "10000",
+          "transfersEnabled": true
+        }
+      },
+      {
+        "assetId": 73,
+        "symbol": "USDC-Snowbridge",
+        "precision": 6,
+        "priceId": "usd-coin",
+        "type": "orml",
+        "icon": "USDC-Snowbridge.svg",
+        "typeExtras": {
+          "currencyIdScale": "0x3e450f00",
+          "currencyIdType": "u32",
+          "existentialDeposit": "10000",
+          "transfersEnabled": true
+        }
       }
     ],
     "nodes": [
@@ -4810,23 +4845,31 @@
         "name": "Novasama node"
       },
       {
-        "url": "wss://rpc.hydradx.cloud",
-        "name": "Galactic Council node"
+        "url": "wss://hydration-rpc.n.dwellir.com",
+        "name": "Dwellir node"
       },
       {
-        "url": "wss://hydration.ibp.network",
-        "name": "IBP1 node"
+        "url": "wss://hydration-rpc.neckwork.net",
+        "name": "Neckwork node"
       },
       {
-        "url": "wss://hydration.dotters.network",
-        "name": "IBP2 node"
+        "url": "wss://node-sparrow-1.sparrow.shadow-senate.com",
+        "name": "Sparrow node"
+      },
+      {
+        "url": "wss://hdx.tarn.hydration.cloud",
+        "name": "Tarn node"
+      },
+      {
+        "url": "wss://hydration.rotko.net",
+        "name": "Rotko node"
       }
     ],
     "explorers": [
       {
         "name": "Subscan",
-        "extrinsic": "https://hydradx.subscan.io/extrinsic/{hash}",
-        "account": "https://hydradx.subscan.io/account/{address}"
+        "extrinsic": "https://hydration.subscan.io/extrinsic/{hash}",
+        "account": "https://hydration.subscan.io/account/{address}"
       }
     ],
     "externalApi": {
@@ -4839,7 +4882,7 @@
       "governance": [
         {
           "type": "subsquare",
-          "url": "https://hydradx.subsquare.io/api"
+          "url": "https://hydration-api.subsquare.io"
         }
       ]
     },
@@ -6299,8 +6342,9 @@
     ],
     "explorers": [
       {
-        "name": "SCAN",
-        "account": "https://bittensor.com/scan/address/{address}"
+        "name": "TaoApp",
+        "account": "https://tao.app/account/{address}",
+        "extrinsic": "https://tao.app/tx/{hash}"
       }
     ],
     "externalApi": {
@@ -6710,7 +6754,11 @@
       ]
     },
     "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Polkadot_Collectives.svg",
-    "addressPrefix": 0
+    "addressPrefix": 0,
+    "additional": {
+      "identityChain": "67fa177a097bfa18f77ea95ab56e9bcdfeb0e5b8a40e46298bb93e16b6fc5008",
+      "supportsGenericLedgerApp": true
+    }
   },
   {
     "chainId": "3af4ff48ec76d2efc8476730f423ac07e25ad48f5f4c9dc39c778b164d808615",
