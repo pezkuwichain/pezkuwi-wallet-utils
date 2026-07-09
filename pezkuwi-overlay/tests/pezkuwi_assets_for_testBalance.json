@@ -1,0 +1,55 @@
+{
+  "description": "Per-asset fixture for exercising the REAL BalancesUpdateSystem -> AssetCache/AssetDao pipeline (not a raw low-level RPC query like chains_for_testBalance.json/BalancesIntegrationTest uses). Each entry asserts an `assets` DB row eventually gets written for that (chainId, assetId) pair for the mainnet Founder account - this is what actually caught the 2026-07-09 HEZ-on-Asset-Hub silent sync failure, which chains_for_testBalance.json's raw-query test could NOT have caught since it bypasses BalancesUpdateSystem entirely. The assertion is 'a row exists', not 'balance is non-zero' - a written zero-balance row is still valid proof the sync pipeline completed for that asset.",
+  "last_updated": "2026-07-09",
+  "account": "5CyuFfbF95rzBxru7c9yEsX4XmQXUxpLUcbj9RLg9K1cGiiF",
+  "assets": [
+    {
+      "chainId": "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca",
+      "chainName": "Pezkuwi",
+      "assetId": 0,
+      "symbol": "HEZ"
+    },
+    {
+      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
+      "chainName": "Pezkuwi Asset Hub",
+      "assetId": 0,
+      "symbol": "HEZ"
+    },
+    {
+      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
+      "chainName": "Pezkuwi Asset Hub",
+      "assetId": 1,
+      "symbol": "PEZ"
+    },
+    {
+      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
+      "chainName": "Pezkuwi Asset Hub",
+      "assetId": 1000,
+      "symbol": "USDT"
+    },
+    {
+      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
+      "chainName": "Pezkuwi Asset Hub",
+      "assetId": 1001,
+      "symbol": "DOT"
+    },
+    {
+      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
+      "chainName": "Pezkuwi Asset Hub",
+      "assetId": 1002,
+      "symbol": "ETH"
+    },
+    {
+      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
+      "chainName": "Pezkuwi Asset Hub",
+      "assetId": 1003,
+      "symbol": "BTC"
+    },
+    {
+      "chainId": "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa",
+      "chainName": "Pezkuwi People",
+      "assetId": 0,
+      "symbol": "HEZ"
+    }
+  ]
+}
