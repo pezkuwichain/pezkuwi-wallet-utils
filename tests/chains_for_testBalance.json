@@ -278,5 +278,20 @@
     "chainId": "4b5f95eefedf0d0fb514339edc24d2d411310520f687b4146145bcedb99885b9",
     "name": "Acurast",
     "account": "0xd04eae1278b997d8801a69f705efe2320826980edd2ea08bdcef98d6fff8bd3f"
+  },
+  {
+    "chainId": "1aa94987791a5544e9667ec249d2cef1b8fdd6083c85b93fc37892d54a1156ca",
+    "name": "Pezkuwi",
+    "account": "0x28925ed8b4c0c95402b31563251fd318414351114b1c7797ee788666d27d6305"
+  },
+  {
+    "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
+    "name": "Pezkuwi Asset Hub",
+    "account": "0x28925ed8b4c0c95402b31563251fd318414351114b1c7797ee788666d27d6305"
+  },
+  {
+    "chainId": "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa",
+    "name": "Pezkuwi People",
+    "account": "0x28925ed8b4c0c95402b31563251fd318414351114b1c7797ee788666d27d6305"
   }
 ]
