@@ -298,6 +298,12 @@ def sync_tests():
     been reaped/emptied - each override must be verified live before being
     added, not guessed. See that file for details on the accounts currently
     in use.
+
+    Pezkuwi's own chains (pezkuwi-overlay/tests/pezkuwi_chains_for_testBalance.json)
+    are ADDED on top - Nova's fixture has no entries for them at all (Nova doesn't
+    know Pezkuwi/Tron exist), so there's nothing to filter/override for these,
+    they're a pure addition. Same rule applies: each account must be verified
+    live (non-zero, non-frozen free balance) before being added, not guessed.
     """
     print("\nSyncing tests...")
 
@@ -327,8 +333,21 @@ def sync_tests():
         if overridden:
             print(f"  Applied {overridden} account override(s)")
 
+    pezkuwi_tests_file = PEZKUWI_OVERLAY / "tests" / "pezkuwi_chains_for_testBalance.json"
+    added = 0
+    if pezkuwi_tests_file.exists():
+        pezkuwi_entries = load_json(pezkuwi_tests_file)["chains"]
+        for entry in pezkuwi_entries:
+            filtered.append({
+                "chainId": entry["chainId"],
+                "name": entry["name"],
+                "account": entry["account"]
+            })
+        added = len(pezkuwi_entries)
+        print(f"  Added {added} Pezkuwi chain(s)")
+
     save_json(OUTPUT_TESTS / "chains_for_testBalance.json", filtered)
-    print(f"  chains_for_testBalance.json: {len(fixture)} - {dropped} not in {latest_version.name} = {len(filtered)}")
+    print(f"  chains_for_testBalance.json: {len(fixture)} - {dropped} not in {latest_version.name} + {added} Pezkuwi = {len(filtered)}")
 
 
 def main():
