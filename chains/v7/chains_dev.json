@@ -165,51 +165,6 @@
         "typeExtras": {
           "assetId": "1000"
         }
-      },
-      {
-        "assetId": 1001,
-        "symbol": "DOT",
-        "precision": 10,
-        "name": "Polkadot",
-        "priceId": "polkadot",
-        "staking": null,
-        "type": "statemine",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/DOT.svg",
-        "buyProviders": {},
-        "sellProviders": {},
-        "typeExtras": {
-          "assetId": "1001"
-        }
-      },
-      {
-        "assetId": 1002,
-        "symbol": "ETH",
-        "precision": 18,
-        "name": "Ethereum",
-        "priceId": "ethereum",
-        "staking": null,
-        "type": "statemine",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/ETH.svg",
-        "buyProviders": {},
-        "sellProviders": {},
-        "typeExtras": {
-          "assetId": "1002"
-        }
-      },
-      {
-        "assetId": 1003,
-        "symbol": "BTC",
-        "precision": 8,
-        "name": "Bitcoin",
-        "priceId": "bitcoin",
-        "staking": null,
-        "type": "statemine",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/WBTC.svg",
-        "buyProviders": {},
-        "sellProviders": {},
-        "typeExtras": {
-          "assetId": "1003"
-        }
       }
     ],
     "additional": {
