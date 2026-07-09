@@ -349,6 +349,15 @@ def sync_tests():
     save_json(OUTPUT_TESTS / "chains_for_testBalance.json", filtered)
     print(f"  chains_for_testBalance.json: {len(fixture)} - {dropped} not in {latest_version.name} + {added} Pezkuwi = {len(filtered)}")
 
+    # Per-asset fixture (pezkuwi_assets_for_testBalance.json) - unlike chains_for_testBalance.json above,
+    # this drives a test that goes through the REAL BalancesUpdateSystem/AssetCache pipeline rather than a
+    # raw RPC query, and covers individual assets (HEZ/PEZ/USDT/DOT/ETH/BTC) rather than just one native
+    # balance per chain. It's Pezkuwi's own curated list, published as-is - no Nova fixture to filter against.
+    pezkuwi_assets_file = PEZKUWI_OVERLAY / "tests" / "pezkuwi_assets_for_testBalance.json"
+    if pezkuwi_assets_file.exists():
+        save_json(OUTPUT_TESTS / "pezkuwi_assets_for_testBalance.json", load_json(pezkuwi_assets_file))
+        print(f"  pezkuwi_assets_for_testBalance.json: {len(load_json(pezkuwi_assets_file)['assets'])} asset(s)")
+
 
 def main():
     print("=" * 60)
