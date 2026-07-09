@@ -28,24 +28,6 @@
       "symbol": "USDT"
     },
     {
-      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
-      "chainName": "Pezkuwi Asset Hub",
-      "assetId": 1001,
-      "symbol": "DOT"
-    },
-    {
-      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
-      "chainName": "Pezkuwi Asset Hub",
-      "assetId": 1002,
-      "symbol": "ETH"
-    },
-    {
-      "chainId": "e7c15092dcbe3f320260ddbbc685bfceed9125a3b3d8436db2766201dec3b949",
-      "chainName": "Pezkuwi Asset Hub",
-      "assetId": 1003,
-      "symbol": "BTC"
-    },
-    {
       "chainId": "69a8d025ab7b63363935d7d9397e0f652826c94271c1bc55c4fdfe72cccf1cfa",
       "chainName": "Pezkuwi People",
       "assetId": 0,
