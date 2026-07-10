@@ -32,6 +32,13 @@
       "chainName": "Pezkuwi People",
       "assetId": 0,
       "symbol": "HEZ"
+    },
+    {
+      "chainId": "68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f",
+      "chainName": "Polkadot Asset Hub",
+      "assetId": 1,
+      "symbol": "USDT",
+      "note": "Non-Pezkuwi chain, deliberately included: 'USDT on Polkadot AH not showing' was one of the 3 originally reported symptoms this whole investigation started from. The fix (reverting FullSyncPaymentUpdater's ordering bug) isn't Pezkuwi-specific, so this verifies it actually closes that report too, not just the Pezkuwi chains."
     }
   ]
 }
