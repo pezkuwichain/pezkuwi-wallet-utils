@@ -25,6 +25,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: master
           submodules: recursive
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -94,6 +95,7 @@ jobs:
             ---
             *This PR was automatically created by the sync workflow.*
           branch: sync/nova-base-${{ env.NOVA_COMMIT }}
+          base: master
           delete-branch: true
           labels: |
             automated
