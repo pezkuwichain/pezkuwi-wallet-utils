@@ -2,7 +2,12 @@ name: Auto Merge
 
 on:
   workflow_run:
-    workflows: ["Code Quality"]
+    # Both required workflows must be listed - this used to list only "Code Quality", so whenever "Security"
+    # (which includes CodeQL, usually the slower one) finished AFTER Code Quality, nothing ever re-triggered
+    # the merge attempt and the PR sat open until someone noticed and merged it manually. Listing both means
+    # whichever finishes LAST fires this workflow, and the check-verification step below (not just "trust the
+    # one workflow that happened to trigger us") confirms every required check is actually green before merging.
+    workflows: ["Code Quality", "Security"]
     types: [completed]
 
 jobs:
@@ -38,6 +43,15 @@ jobs:
 
           if [ -z "$PR_NUMBER" ]; then
             echo "No open PR from master to main found, skipping"
+            exit 0
+          fi
+
+          # Don't trust that the workflow which triggered us means every required check is done - the other
+          # workflow (Code Quality vs Security) might still be running. Verify every required check is
+          # actually green before attempting to merge; if not, exit quietly and let whichever check finishes
+          # last re-trigger this workflow.
+          if ! gh pr checks "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --required --watch=false; then
+            echo "Not all required checks are green yet for PR #$PR_NUMBER - skipping, will retry when the remaining workflow completes"
             exit 0
           fi
 
