@@ -2,11 +2,11 @@
   "description": "Chains with broken/unreachable RPC endpoints - will be excluded",
   "mode": "blacklist",
   "reason": "DNS resolution failures or unreachable nodes",
-  "last_updated": "2026-07-08",
+  "last_updated": "2026-02-11",
   "chains": [
     {
-      "name": "Aleph Zero EVM",
-      "reason": "rpc.alephzero.raas.gelato.cloud / ws.alephzero.raas.gelato.cloud unreachable"
+      "name": "AlephZero",
+      "reason": "rpc.alephzero.raas.gelato.cloud unreachable"
     },
     {
       "name": "InvArch",
@@ -14,167 +14,32 @@
     },
     {
       "name": "Quartz",
-      "reason": "quartz.unique.network, eu-ws-quartz.unique.network, us-ws-quartz.unique.network unreachable"
+      "reason": "quartz.unique.network endpoints unreachable"
     },
     {
-      "name": "3DPass",
-      "reason": "rpc.3dpass.org returns 502, rpc.p3d.top unreachable - confirmed live 2026-07-08"
+      "name": "Passet Hub Testnet",
+      "reason": "testnet-passet-hub-eth-rpc.polkadot.io unreachable"
     },
     {
-      "name": "Curio",
-      "reason": "archive.parachain.curioinvest.com and parachain.curioinvest.com unreachable - confirmed live 2026-07-08"
+      "name": "Darwinia Crab",
+      "reason": "crab-rpc.darwinia.network DNS failure"
     },
     {
-      "name": "Subsocial",
-      "reason": "para.subsocial.network SSL handshake failure, para.f3joule.space unreachable - confirmed live 2026-07-08"
+      "name": "DeepBrain",
+      "reason": "info.dbcwallet.io SSL certificate mismatch"
     },
     {
-      "name": "Kusama Asset Hub",
-      "reason": "asset-hub-kusama.dotters.network, sys.ibp.network/statemine unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Edgeware",
-      "reason": "edgeware-rpc3.jelliedowl.net unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "KILT",
-      "reason": "kilt.ibp.network, kilt.dotters.network, spiritnet.kilt.io unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Picasso",
-      "reason": "rpc.composablenodes.tech unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Zeitgeist",
-      "reason": "zeitgeist.api.onfinality.io unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Crust Shadow",
-      "reason": "rpc-shadow.crust.network, rpc2-shadow.crust.network, rpc-sha-subscan.crustnetwork.xyz unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Integritee Parachain",
-      "reason": "kusama.api.integritee.network unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Nodle Parachain",
-      "reason": "nodle-parachain.api.onfinality.io unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Phala",
-      "reason": "phala-rpc.n.dwellir.com, api.phala.network, phala.public.curie.radiumblock.co unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Mangata X",
-      "reason": "kusama-rpc.mangata.online, kusama-archive.mangata.online unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Amplitude",
-      "reason": "rpc-amplitude.pendulumchain.tech unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "DAO IPCI",
-      "reason": "ipci.rpc.robonomics.network unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Myriad",
-      "reason": "gateway.mainnet.octopus.network unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Hashed Network",
-      "reason": "c1.hashed.network unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Joystream",
-      "reason": "rpc.joystream.org unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Dock",
-      "reason": "mainnet-node.dock.io unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Mythos",
-      "reason": "polkadot-mythos-rpc.polkadot.io unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Hyperbridge Nexus",
-      "reason": "nexus.dotters.network, nexus.ibp.network, hyperbridge-nexus-rpc.blockops.network unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Base",
-      "reason": "base-rpc.publicnode.com unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "peaq",
-      "reason": "peaq-rpc.publicnode.com unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Laos",
-      "reason": "rpc.laos.laosfoundation.io unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Xode",
-      "reason": "rpc-kr.xode.net unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Tangle",
-      "reason": "rpc.tangle.tools unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Argochain",
-      "reason": "rpc.devolvedai.com unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Tanssi",
-      "reason": "services.tanssi-mainnet.network unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Polkadot Hub TestNet",
-      "reason": "passet-hub-paseo.ibp.network unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "krest",
-      "reason": "krest.api.onfinality.io unreachable - confirmed live 2026-07-08"
-    },
-    {
-      "name": "Crab",
-      "reason": "crab-rpc.darwinia.network unreachable - was correctly blacklisted before (as \"Darwinia Crab\") but got dropped by mistake during the 2026-07-08 blacklist ID cleanup, based on a wrong assumption that the chain no longer existed upstream. It does (name is just \"Crab\", not \"Darwinia Crab\" - a name-matching miss, not a chain-ID change). Re-confirmed unreachable live 2026-07-08, and directly confirmed by a real user hitting a stuck \"Connecting\" state on this exact chain."
+      "name": "Exosama",
+      "reason": "rpc.exosama.com 403 Forbidden"
     }
   ],
   "chain_ids": [
-    "eip155:41455",
-    "31a7d8914fb31c249b972f18c115f1e22b4b039abbcb03c73b6774c5642f9efe",
-    "cd4d732201ebe5d6b014edda071c4203e16867305332301dc8d092044b28e554",
-    "6c5894837ad89b6d92b114a2fb3eafa8fe3d26a54848e3447015442cd6ef4e66",
-    "1d73b9f5dc392744e0dee00a6d6254fcfa2305386cceba60315894fa4807053a",
-    "4a12be580bb959937a1c7a61d5cf24428ed67fa571974b4007645d1886e7c89f",
-    "48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a",
-    "742a2ca70c2fda6cee4f8df98d64c4c670a052d9568058982dad9d5a7a135c5b",
-    "411f057b9107718c9624d6aa4a3f23c1653898297f3d4d529d9bb6511a39dd21",
-    "6811a339673c9daa897944dcdac99c6e2939cc88245ed21951a0a3c9a2be75bc",
-    "1bf2a2ecb4a868de66ea8610f2ce7c8c43706561b6476031315f6640fe38e060",
-    "d4c0c08ca49dc7c680c3dac71a7c0703e5b222f4b6c03fe4c5219bb8f22c18dc",
-    "cdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da",
-    "97da7ede98d7bad4e36b4d734b6055425a3be036da2a332ea5a7037656427a21",
-    "1bb969d85965e4bb5a651abbedf21a54b6b31a21f66b5401cc3f1e286268d736",
-    "d611f22d291c5b7b69f1e105cca03352984c344c4421977efaa4cbdd1834e2aa",
-    "cceae7f3b9947cdb67369c026ef78efa5f34a08fe5808d373c04421ecf4f1aaf",
-    "6f0f071506de39058fe9a95bbca983ac0e9c5da3443909574e95d52eb078d348",
-    "74ed91fbc18497f011290f9119a2217908649170337b6414a2d44923ade07063",
-    "dce5477cfca571c2cb652f38bbb70429004be3cf9649dd2b4ad9455b2251fe43",
-    "6b5e488e0fa8f9821110d5c13f4c468abcd43ce5e297e62b34c53c3346465956",
-    "6bfe24dca2a3be10f22212678ac13a6446ec764103c0f3471c71609eac384aae",
-    "f6ee56e9c5277df5b4ce6ae9983ee88f3cbed27d31beeb98f9f84f997a1ab0b9",
-    "61ea8a51fd4a058ee8c0e86df0a89cc85b8b67a0a66432893d09719050c9f540",
-    "eip155:8453",
-    "d2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c",
-    "e8aecc950e82f1a375cf650fa72d07e0ad9bef7118f49b92283b63e88b1de88b",
-    "28cc1df52619f4edd9f0389a7e910a636276075ecc429600f1dd434e281a04e9",
-    "44f68476df71ebf765b630bf08dc1e0fedb2bf614a1aa0563b3f74f20e47b3e0",
-    "dffb39a66d80b9adb6bdbd7564a9215a1606596062578bf536480de6cc780c2d",
-    "dd6d086f75ec041b66e20c4186d327b23c8af244c534a2418de6574e8c041a60",
-    "eip155:420420422",
-    "b3dd5ad6a82872b30aabaede8f41dfd4ff6c32ff82f8757d034a45be63cf104c",
-    "86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24"
+    "70255b4d28de0fc4e1a193d7e175ad1ccef431598211c55538f1018651a0344e",
+    "f6c2c9174aa58c1c5b38d44a7e946c94a38cfd6e0ad9e2e9c5b14a7bc7ee6f44",
+    "cd4d732201ebe5d6b014edda071c4203e16867305332f43c2e25ae6c9a1b7e6f",
+    "3d22af97d919611e03bbcbda96f65988758865423e89b2d99547a6bb61452db3",
+    "86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24",
+    "03aa6b475a03f8baf7f83e448513b00eaab03aefa4ed64bd1d31160dce028add",
+    "eip155:2109"
   ]
 }

@@ -28,7 +28,6 @@ PEZKUWI_OVERLAY = ROOT / "pezkuwi-overlay"
 OUTPUT_CHAINS = ROOT / "chains"
 OUTPUT_XCM = ROOT / "xcm"
 OUTPUT_STAKING = ROOT / "staking"
-OUTPUT_TESTS = ROOT / "tests"
 
 
 def load_json(path: Path) -> dict | list:
@@ -108,7 +107,6 @@ def sync_chains():
 
     blocked_ids = load_blacklist()
     print(f"  Blacklist: {len(blocked_ids)} chains excluded")
-    matched_blocked_ids = set()
 
     pezkuwi_chains_file = PEZKUWI_OVERLAY / "chains" / "pezkuwi-chains.json"
     pezkuwi_chains = load_json(pezkuwi_chains_file) if pezkuwi_chains_file.exists() else []
@@ -122,7 +120,6 @@ def sync_chains():
         nova_file = version_dir / "chains.json"
         if nova_file.exists():
             nova_chains = load_json(nova_file)
-            matched_blocked_ids |= blocked_ids & {c['chainId'] for c in nova_chains}
             merged = merge_chains(nova_chains, pezkuwi_chains, blocked_ids)
             save_json(output_dir / "chains.json", merged)
             print(f"  {version}/chains.json: {len(pezkuwi_chains)} + {len(nova_chains)} - {len(blocked_ids)} blocked = {len(merged)}")
@@ -146,13 +143,6 @@ def sync_chains():
             if output_preconfig.exists():
                 shutil.rmtree(output_preconfig)
             shutil.copytree(nova_preconfig, output_preconfig)
-
-    stale_blocked_ids = blocked_ids - matched_blocked_ids
-    if stale_blocked_ids:
-        print(f"  WARNING: {len(stale_blocked_ids)} blacklist chain_id(s) matched nothing in Nova's current chains "
-              f"- likely stale (upstream changed the chain's id) and NOT actually blocking anything:")
-        for stale_id in stale_blocked_ids:
-            print(f"    - {stale_id}")
 
 
 def sync_xcm():
@@ -279,86 +269,6 @@ def sync_config():
         shutil.copytree(nova_validators_dir, output_validators)
 
 
-def sync_tests():
-    """
-    Publish test fixtures the mobile apps fetch directly over HTTP (e.g. Android's
-    BalancesIntegrationTest reads tests/chains_for_testBalance.json from
-    raw.githubusercontent.com). Only that fixture is published, not the rest of
-    nova-base/tests/ (upstream's own pytest suite for validating its chains.json
-    output, which isn't run or otherwise used from this repo).
-
-    Entries are filtered down to chains actually present in our merged output
-    (must run after sync_chains()) - the raw Nova fixture also references chains
-    that are blacklisted, testnets that were retired, or otherwise no longer
-    configured, which would just make every test for that chain fail with
-    "chain not found" instead of actually testing anything.
-
-    Account overrides (pezkuwi-overlay/tests/account_overrides.json) swap in a
-    replacement account for a chain whose upstream-fixture account has since
-    been reaped/emptied - each override must be verified live before being
-    added, not guessed. See that file for details on the accounts currently
-    in use.
-
-    Pezkuwi's own chains (pezkuwi-overlay/tests/pezkuwi_chains_for_testBalance.json)
-    are ADDED on top - Nova's fixture has no entries for them at all (Nova doesn't
-    know Pezkuwi/Tron exist), so there's nothing to filter/override for these,
-    they're a pure addition. Same rule applies: each account must be verified
-    live (non-zero, non-frozen free balance) before being added, not guessed.
-    """
-    print("\nSyncing tests...")
-
-    nova_fixture = NOVA_BASE / "tests" / "chains_for_testBalance.json"
-    if not nova_fixture.exists():
-        return
-
-    latest_version = max(
-        (d for d in OUTPUT_CHAINS.glob("v*") if d.is_dir()),
-        key=lambda d: int(d.name[1:])
-    )
-    current_chains = load_json(latest_version / "android" / "chains.json")
-    current_chain_ids = {c['chainId'] for c in current_chains}
-
-    fixture = load_json(nova_fixture)
-    filtered = [entry for entry in fixture if entry['chainId'] in current_chain_ids]
-    dropped = len(fixture) - len(filtered)
-
-    overrides_file = PEZKUWI_OVERLAY / "tests" / "account_overrides.json"
-    if overrides_file.exists():
-        overrides = {o['chainId']: o['account'] for o in load_json(overrides_file)['overrides']}
-        overridden = 0
-        for entry in filtered:
-            if entry['chainId'] in overrides:
-                entry['account'] = overrides[entry['chainId']]
-                overridden += 1
-        if overridden:
-            print(f"  Applied {overridden} account override(s)")
-
-    pezkuwi_tests_file = PEZKUWI_OVERLAY / "tests" / "pezkuwi_chains_for_testBalance.json"
-    added = 0
-    if pezkuwi_tests_file.exists():
-        pezkuwi_entries = load_json(pezkuwi_tests_file)["chains"]
-        for entry in pezkuwi_entries:
-            filtered.append({
-                "chainId": entry["chainId"],
-                "name": entry["name"],
-                "account": entry["account"]
-            })
-        added = len(pezkuwi_entries)
-        print(f"  Added {added} Pezkuwi chain(s)")
-
-    save_json(OUTPUT_TESTS / "chains_for_testBalance.json", filtered)
-    print(f"  chains_for_testBalance.json: {len(fixture)} - {dropped} not in {latest_version.name} + {added} Pezkuwi = {len(filtered)}")
-
-    # Per-asset fixture (pezkuwi_assets_for_testBalance.json) - unlike chains_for_testBalance.json above,
-    # this drives a test that goes through the REAL BalancesUpdateSystem/AssetCache pipeline rather than a
-    # raw RPC query, and covers individual assets (HEZ/PEZ/USDT/DOT/ETH/BTC) rather than just one native
-    # balance per chain. It's Pezkuwi's own curated list, published as-is - no Nova fixture to filter against.
-    pezkuwi_assets_file = PEZKUWI_OVERLAY / "tests" / "pezkuwi_assets_for_testBalance.json"
-    if pezkuwi_assets_file.exists():
-        save_json(OUTPUT_TESTS / "pezkuwi_assets_for_testBalance.json", load_json(pezkuwi_assets_file))
-        print(f"  pezkuwi_assets_for_testBalance.json: {len(load_json(pezkuwi_assets_file)['assets'])} asset(s)")
-
-
 def main():
     print("=" * 60)
     print("Nova + Pezkuwi Merge")
@@ -376,7 +286,6 @@ def main():
     sync_xcm()
     sync_icons()
     sync_config()
-    sync_tests()
 
     print("\n" + "=" * 60)
     print("Done!")

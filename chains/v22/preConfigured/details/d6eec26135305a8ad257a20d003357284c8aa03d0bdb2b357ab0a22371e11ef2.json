@@ -15,12 +15,20 @@
             "name": "Dwellir"
         },
         {
-            "url": "wss://sys.turboflakes.io/asset-hub-paseo",
-            "name": "TurboFlakes"
+            "url": "wss://sys.ibp.network/asset-hub-paseo",
+            "name": "IBP1"
         },
         {
-            "url": "wss://api2.zondax.ch/pas/assethub/node/rpc",
-            "name": "Zondax"
+            "url": "wss://asset-hub-paseo.dotters.network",
+            "name": "IBP2"
+        },
+        {
+            "url": "wss://pas-rpc.stakeworld.io/assethub",
+            "name": "StakeWorld"
+        },
+        {
+            "url": "wss://sys.turboflakes.io/asset-hub-paseo",
+            "name": "TurboFlakes"
         }
     ],
     "addressPrefix": 0
