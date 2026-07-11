@@ -11,16 +11,12 @@
     ],
     "nodes": [
         {
-            "url": "wss://rakson-ceb-rpc.xode.net",
-            "name": "RakSonCebu"
-        },
-        {
-            "url": "wss://rakson-rpc.xode.net",
-            "name": "RakSonKorea"
-        },
-        {
             "url": "wss://polkadot-rpcnode.xode.net",
             "name": "XodeCommunity"
+        },
+        {
+            "url": "wss://xode-polkadot-rpc-01.zeeve.net/y0yxg038wn1fncc/rpc",
+            "name": "Zeeve"
         }
     ],
     "addressPrefix": 280
