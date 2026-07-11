@@ -87,8 +87,8 @@
       ]
     },
     {
-      "name": "Pezkuwi P2P",
-      "url": "https://app.pezkuwichain.io/p2p",
+      "name": "Pezkuwi Exchange",
+      "url": "https://pex.network",
       "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/dapps/dapps/Pezkuwi.png",
       "categories": [
         "dex"
