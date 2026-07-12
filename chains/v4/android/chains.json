@@ -295,6 +295,49 @@
     }
   },
   {
+    "chainId": "bip122:000000000019d6689c085ae165831e93",
+    "name": "Bitcoin",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/gradient/Bitcoin.svg",
+    "addressPrefix": 0,
+    "options": [
+      "bitcoinBased",
+      "noSubstrateRuntime"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "https://mempool.space/api",
+        "name": "mempool.space"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "mempool.space",
+        "extrinsic": "https://mempool.space/tx/{value}",
+        "account": "https://mempool.space/address/{value}"
+      }
+    ],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "BTC",
+        "precision": 8,
+        "name": "Bitcoin",
+        "priceId": "bitcoin",
+        "staking": null,
+        "type": "bitcoinNative",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/tokens/colored/BTC.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      }
+    ],
+    "additional": {
+      "themeColor": "#F7931A"
+    }
+  },
+  {
     "chainId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
     "name": "Polkadot",
     "assets": [
