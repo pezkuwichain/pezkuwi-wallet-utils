@@ -5154,10 +5154,15 @@
         }
       }
     ],
+    "nodeSelectionStrategy": "roundRobin",
     "nodes": [
       {
         "url": "wss://ws.azero.dev",
         "name": "Aleph Zero node"
+      },
+      {
+        "url": "wss://aleph-zero.api.onfinality.io/public-ws",
+        "name": "OnFinality"
       }
     ],
     "explorers": [
