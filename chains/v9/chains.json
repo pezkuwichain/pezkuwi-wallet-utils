@@ -338,6 +338,49 @@
     }
   },
   {
+    "chainId": "solana:mainnet",
+    "name": "Solana",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/chains/gradient/Solana.svg",
+    "addressPrefix": 0,
+    "options": [
+      "solanaBased",
+      "noSubstrateRuntime"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "https://api.mainnet-beta.solana.com",
+        "name": "Solana"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Solana Explorer",
+        "extrinsic": "https://explorer.solana.com/tx/{value}",
+        "account": "https://explorer.solana.com/address/{value}"
+      }
+    ],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "SOL",
+        "precision": 9,
+        "name": "Solana",
+        "priceId": "solana",
+        "staking": null,
+        "type": "solanaNative",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/tokens/colored/SOL.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      }
+    ],
+    "additional": {
+      "themeColor": "#9945FF"
+    }
+  },
+  {
     "chainId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
     "name": "Polkadot",
     "assets": [
