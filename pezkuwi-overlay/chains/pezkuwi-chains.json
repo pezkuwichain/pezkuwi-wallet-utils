@@ -165,51 +165,6 @@
         "typeExtras": {
           "assetId": "1000"
         }
-      },
-      {
-        "assetId": 1001,
-        "symbol": "DOT",
-        "precision": 10,
-        "name": "Polkadot",
-        "priceId": "polkadot",
-        "staking": null,
-        "type": "statemine",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/DOT.svg",
-        "buyProviders": {},
-        "sellProviders": {},
-        "typeExtras": {
-          "assetId": "1001"
-        }
-      },
-      {
-        "assetId": 1002,
-        "symbol": "ETH",
-        "precision": 18,
-        "name": "Ethereum",
-        "priceId": "ethereum",
-        "staking": null,
-        "type": "statemine",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/ETH.svg",
-        "buyProviders": {},
-        "sellProviders": {},
-        "typeExtras": {
-          "assetId": "1002"
-        }
-      },
-      {
-        "assetId": 1003,
-        "symbol": "BTC",
-        "precision": 8,
-        "name": "Bitcoin",
-        "priceId": "bitcoin",
-        "staking": null,
-        "type": "statemine",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/WBTC.svg",
-        "buyProviders": {},
-        "sellProviders": {},
-        "typeExtras": {
-          "assetId": "1003"
-        }
       }
     ],
     "additional": {
@@ -272,6 +227,157 @@
       "defaultBlockTimeMillis": 6000,
       "feeViaRuntimeCall": true,
       "disabledCheckMetadataHash": true
+    }
+  },
+  {
+    "chainId": "tron:0x2b6653dc",
+    "name": "Tron",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/gradient/Tron.svg",
+    "addressPrefix": 0,
+    "options": [
+      "tronBased",
+      "noSubstrateRuntime"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "https://api.trongrid.io",
+        "name": "TronGrid"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Tronscan",
+        "extrinsic": "https://tronscan.org/#/transaction/{value}",
+        "account": "https://tronscan.org/#/address/{value}"
+      }
+    ],
+    "externalApi": {
+      "history": [
+        {
+          "type": "trongrid",
+          "url": "https://api.trongrid.io"
+        }
+      ]
+    },
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "TRX",
+        "precision": 6,
+        "name": "Tron",
+        "priceId": "tron",
+        "staking": null,
+        "type": "tronNative",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/tokens/colored/TRX.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      },
+      {
+        "assetId": 1,
+        "symbol": "USDT",
+        "precision": 6,
+        "name": "Tether USD",
+        "priceId": "tether",
+        "staking": null,
+        "type": "trc20",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/tokens/colored/USDT.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "contractAddress": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+        }
+      }
+    ],
+    "additional": {
+      "themeColor": "#EB0029"
+    }
+  },
+  {
+    "chainId": "bip122:000000000019d6689c085ae165831e93",
+    "name": "Bitcoin",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/chains/gradient/Bitcoin.svg",
+    "addressPrefix": 0,
+    "options": [
+      "bitcoinBased",
+      "noSubstrateRuntime"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "https://mempool.space/api",
+        "name": "mempool.space"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "mempool.space",
+        "extrinsic": "https://mempool.space/tx/{value}",
+        "account": "https://mempool.space/address/{value}"
+      }
+    ],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "BTC",
+        "precision": 8,
+        "name": "Bitcoin",
+        "priceId": "bitcoin",
+        "staking": null,
+        "type": "bitcoinNative",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/tokens/colored/BTC.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      }
+    ],
+    "additional": {
+      "themeColor": "#F7931A"
+    }
+  },
+  {
+    "chainId": "solana:mainnet",
+    "name": "Solana",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/chains/gradient/Solana.svg",
+    "addressPrefix": 0,
+    "options": [
+      "solanaBased",
+      "noSubstrateRuntime"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "https://api.mainnet-beta.solana.com",
+        "name": "Solana"
+      }
+    ],
+    "explorers": [
+      {
+        "name": "Solana Explorer",
+        "extrinsic": "https://explorer.solana.com/tx/{value}",
+        "account": "https://explorer.solana.com/address/{value}"
+      }
+    ],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "SOL",
+        "precision": 9,
+        "name": "Solana",
+        "priceId": "solana",
+        "staking": null,
+        "type": "solanaNative",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/tokens/colored/SOL.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      }
+    ],
+    "additional": {
+      "themeColor": "#9945FF"
     }
   }
 ]
