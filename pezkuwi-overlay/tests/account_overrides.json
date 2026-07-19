@@ -1,0 +1,18 @@
+{
+  "description": "Per-chain overrides for tests/chains_for_testBalance.json test accounts. Used when the upstream Nova fixture's account has zero/reaped balance on that chain - verified live against the chain before being added here, not guessed.",
+  "last_updated": "2026-07-08",
+  "overrides": [
+    {
+      "chainId": "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
+      "name": "Polkadot",
+      "account": "0x6d6f646c70792f74727372790000000000000000000000000000000000000000",
+      "reason": "Original account had zero balance (reaped). Replaced with the Treasury pallet account (py/trsry) - protocol-owned, permanently funded by fees/inflation, not a personal account. Verified live via @polkadot/api against wss://rpc.polkadot.io on 2026-07-08: free balance 22527885189670."
+    },
+    {
+      "chainId": "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
+      "name": "Kusama",
+      "account": "0x6d6f646c70792f74727372790000000000000000000000000000000000000000",
+      "reason": "Original account had zero balance (reaped). Replaced with the Treasury pallet account (py/trsry) - protocol-owned, permanently funded by fees/inflation, not a personal account. Verified live via @polkadot/api against wss://kusama-rpc.polkadot.io on 2026-07-08: free balance 25368610181623."
+    }
+  ]
+}
