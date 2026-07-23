@@ -1,7 +1,7 @@
 {
     "pezkuwi-welcome-001": {
         "title": "Bi xêr hatî Pezkuwi Wallet",
-        "details": "Cîzdanê yekem ê blockchain ji bo gelê Kurd.\nEwle, bilez û nenavendî."
+        "details": "Cîzdanê yekem ê blockchain ji bo Neteweyên Bêdewlet.\nEwle, bilez û nenavendî."
     },
     "pezkuwi-staking-001": {
         "title": "HEZ Stake Bike",
@@ -23,12 +23,12 @@
         "title": "Tevlî Civata Me Bibe",
         "details": "Bi bikarhênerên din ên Pezkuwi re têkilî deyne.\nPiştgirî bistîne û li nûçeyan bimîne!"
     },
-    "pezkuwi-explorer-001": {
-        "title": "Pezkuwi Explorer",
-        "details": "Danûstandin û blokan bişopîne.\nBlockchaina Pezkuwi bikole!"
+    "pezkuwi-hiring-001": {
+        "title": "Em Kar Digirin — 10,000 Rol",
+        "details": "Pezkuwi Dewletên Dîjîtal ji bo 10,000 rolên bi mûçe kar digirin.\nDe em neteweyeke dîjîtal a bêdewlet ava bikin."
     },
-    "pezkuwi-newroz-001": {
-        "title": "Newroz Pîroz Be!",
-        "details": "Pîrozbahiya Sala Nû ya Kurdan.\nBijî Newroz!"
+    "pezkuwi-book-001": {
+        "title": "Neteweya Ewr",
+        "details": "Niha li ser Amazonê ye.\nGelekî bêdewlet çawa neteweyeke dîjîtal ava dike."
     }
 }

@@ -39,19 +39,19 @@
         "background": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/backgrounds/pezkuwi_red_bg.png",
         "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/pezkuwi_community.png",
         "clipsToBounds": false,
-        "action": "https://t.me/pezkuwichain"
+        "action": "https://t.me/+DUWJ8wtt5qI4Njgy"
     },
     {
-        "id": "pezkuwi-explorer-001",
-        "background": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/backgrounds/pezkuwi_dark_bg.png",
-        "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/pezkuwi_explorer.png",
+        "id": "pezkuwi-hiring-001",
+        "background": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/backgrounds/pezkuwi_purple_bg.png",
+        "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/pezkuwi_hiring.png",
         "clipsToBounds": false,
-        "action": "https://explorer.pezkuwichain.io"
+        "action": "https://welati.pex.network"
     },
     {
-        "id": "pezkuwi-newroz-001",
-        "background": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/backgrounds/newroz_bg.png",
-        "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/newroz_sun.png",
+        "id": "pezkuwi-book-001",
+        "background": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/backgrounds/pezkuwi_dark_bg.png",
+        "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/cloud_nations_book.png",
         "clipsToBounds": false,
         "action": null
     }
