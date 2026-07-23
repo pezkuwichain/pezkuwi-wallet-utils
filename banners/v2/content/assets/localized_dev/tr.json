@@ -1,7 +1,7 @@
 {
     "pezkuwi-welcome-001": {
         "title": "Pezkuwi Wallet'a Hoş Geldiniz",
-        "details": "Kürdistan'ın ilk blockchain cüzdanı.\nGüvenli, hızlı ve merkeziyetsiz."
+        "details": "Devletsiz Ulusların ilk blockchain cüzdanı.\nGüvenli, hızlı ve merkeziyetsiz."
     },
     "pezkuwi-staking-001": {
         "title": "HEZ'inizi Stake Edin",
@@ -23,12 +23,12 @@
         "title": "Topluluğumuza Katılın",
         "details": "Pezkuwi kullanıcılarıyla bağlantı kurun.\nDestek alın ve güncel kalın!"
     },
-    "pezkuwi-explorer-001": {
-        "title": "Pezkuwi Explorer",
-        "details": "İşlemleri ve blokları takip edin.\nPezkuwi blockchain'ini keşfedin!"
+    "pezkuwi-hiring-001": {
+        "title": "İşe Alım — 10.000 Rol",
+        "details": "Pezkuwi Dijital Devletleri 10.000 ücretli rol için işe alıyor.\nDevletsiz dijital ulusu birlikte inşa edelim."
     },
-    "pezkuwi-newroz-001": {
-        "title": "Newroz Kutlu Olsun!",
-        "details": "Kürt Yeni Yılı'nı kutluyoruz.\nNewroz Piroz Be!"
+    "pezkuwi-book-001": {
+        "title": "Bulut Ulusu",
+        "details": "Artık Amazon'da.\nDevletsiz bir halk dijital ulusunu nasıl kurar."
     }
 }
