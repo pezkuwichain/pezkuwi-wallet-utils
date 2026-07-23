@@ -1,7 +1,7 @@
 {
     "pezkuwi-welcome-001": {
         "title": "Welcome to Pezkuwi Wallet",
-        "details": "The first blockchain wallet for Kurdistan.\nSecure, fast, and decentralized."
+        "details": "The first blockchain wallet for Stateless Nations.\nSecure, fast, and decentralized."
     },
     "pezkuwi-staking-001": {
         "title": "Stake Your HEZ",
@@ -23,12 +23,12 @@
         "title": "Join Our Community",
         "details": "Connect with fellow Pezkuwi users.\nGet support and stay updated!"
     },
-    "pezkuwi-explorer-001": {
-        "title": "Pezkuwi Explorer",
-        "details": "Track transactions and blocks.\nExplore the Pezkuwi blockchain!"
+    "pezkuwi-hiring-001": {
+        "title": "We're Hiring — 10,000 Roles",
+        "details": "Pezkuwi Digital States is hiring for 10,000 paid roles.\nHelp build a stateless digital nation."
     },
-    "pezkuwi-newroz-001": {
-        "title": "Happy Newroz!",
-        "details": "Celebrating Kurdish New Year.\nNewroz Piroz Be!"
+    "pezkuwi-book-001": {
+        "title": "Cloud Nation",
+        "details": "Now available on Amazon.\nHow a stateless people build a digital nation."
     }
 }
