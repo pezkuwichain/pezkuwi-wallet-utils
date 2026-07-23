@@ -28,11 +28,11 @@
         "action": null
     },
     {
-        "id": "pezkuwi-governance-001",
+        "id": "pezkuwi-builders-001",
         "background": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/backgrounds/pezkuwi_purple_bg.png",
-        "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/pezkuwi_governance.png",
+        "image": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/banners/v2/resources/images/gremiraza_builders.png",
         "clipsToBounds": false,
-        "action": "pezkuwiwallet://pezkuwi/open/governance"
+        "action": "https://t.me/+LvoC1nX11PowNzFi"
     },
     {
         "id": "pezkuwi-community-001",
