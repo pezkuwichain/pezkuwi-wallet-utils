@@ -148,8 +148,7 @@
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": {
-          "assetId": "1",
-          "isSufficient": true
+          "assetId": "1"
         }
       },
       {
@@ -164,8 +163,7 @@
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": {
-          "assetId": "1000",
-          "isSufficient": true
+          "assetId": "1000"
         }
       }
     ],
