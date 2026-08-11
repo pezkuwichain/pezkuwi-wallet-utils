@@ -100,7 +100,26 @@ jobs:
             sync
             dependencies
 
-      - name: Auto-merge if tests pass
+      # Each daily run opens a new sync PR. Nothing closed the previous one, so they
+      # accumulated: 31 branches spanning 2026-02-10 to 2026-08-08 were cleared out by
+      # hand on 2026-08-11, every one of them superseded by the next day's run.
+      #
+      # A sync is a snapshot of upstream. The newest one contains everything the older
+      # ones did, so an older open sync PR is never the right thing to merge — it is
+      # noise that hides whether anything is genuinely waiting for review.
+      - name: Close superseded sync PRs
         if: steps.check_output.outputs.output_changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEEP: sync/nova-base-${{ env.NOVA_COMMIT }}
         run: |
-          echo "PR created. Review and merge to apply Nova updates."
+          gh pr list --repo "$GITHUB_REPOSITORY" --state open --label sync \
+            --json number,headRefName --jq '.[] | @base64' | while read -r row; do
+            decoded=$(echo "$row" | base64 -d)
+            NUM=$(echo "$decoded" | python3 -c 'import json,sys; print(json.load(sys.stdin)["number"])')
+            HEAD=$(echo "$decoded" | python3 -c 'import json,sys; print(json.load(sys.stdin)["headRefName"])')
+            [ "$HEAD" = "$KEEP" ] && continue
+            echo "Closing #$NUM ($HEAD) — superseded by $KEEP"
+            gh pr close "$NUM" --repo "$GITHUB_REPOSITORY" --delete-branch \
+              --comment "Superseded by \`$KEEP\`. A sync is a snapshot of upstream, so the newer one contains everything this did."
+          done
