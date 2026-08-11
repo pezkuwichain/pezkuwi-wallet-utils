@@ -1,0 +1,14 @@
+# Who has to approve before anything reaches the live branch.
+#
+# main is where work lands and where Code Quality decides; promote-to-live then moves
+# master to whatever passed, and every app reads master directly. So an approval here is
+# the last human judgement before a change is being served to wallets in the field.
+#
+# One approval is enough, but it has to come from one of these two. Requiring two
+# approvals would have meant requiring two of two, which stalls whenever one of them is
+# the author.
+#
+# Read-access collaborators cannot approve, so adding a reviewer here also means giving
+# them write access.
+
+*       @SatoshiQaziMuhammed @QaziMuhammedKochgiri
