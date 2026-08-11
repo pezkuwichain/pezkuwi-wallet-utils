@@ -69,6 +69,17 @@ jobs:
         with:
           submodules: true
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Refuses the regressions this repo has already had: assets declared that do not
+      # exist on chain, sufficiency left undeclared, assets served from a working
+      # branch, and a published fixture drifting from its source.
+      - name: Pezkuwi integrity
+        run: python3 scripts/check_pezkuwi_integrity.py
+
       - name: Verify Pezkuwi chains are present
         run: |
           CHAINS_FILE="chains/v22/android/chains.json"
