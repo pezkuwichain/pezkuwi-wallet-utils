@@ -1,0 +1,65 @@
+name: Promote main → master
+
+# master is the live branch: every app reads its config straight from
+# raw.githubusercontent.com/.../master/... . Nothing should reach it that has not
+# passed Code Quality first.
+#
+# The flow used to run the other way. auto-pr.yml fired on a push to *master* and
+# opened a master → main PR, so content was already live before a single check ran —
+# the gate sat downstream of the thing it was meant to gate. A check that reports
+# "the live config is broken" is not a gate.
+#
+# It also made master unwritable by the front door: five checks were required there and
+# no workflow triggered on a PR into master, so the only way to change the live branch
+# was to bypass its own protection. A rule that can only be bypassed teaches people to
+# bypass it.
+#
+# Now: work lands on main, Code Quality decides, and only then is master moved to match.
+
+on:
+  workflow_run:
+    workflows: ["Code Quality"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    # Only a green run, only on main, and only for a real push — a pull_request run
+    # tests a merge commit that does not exist on main yet.
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the exact commit that passed
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+
+      - name: Refuse to promote a commit that is not on main
+        run: |
+          git fetch origin main
+          if ! git merge-base --is-ancestor "${{ github.event.workflow_run.head_sha }}" origin/main; then
+            echo "::error::${{ github.event.workflow_run.head_sha }} is not an ancestor of main — refusing"
+            exit 1
+          fi
+          echo "Commit is on main."
+
+      - name: Promote
+        run: |
+          SHA="${{ github.event.workflow_run.head_sha }}"
+
+          # --force-with-lease, not --force: if master has moved since this job read it,
+          # the push is refused rather than silently discarding whatever moved it.
+          git push --force-with-lease origin "$SHA":refs/heads/master
+
+          echo "master is now $SHA"
+          echo "### Promoted to live" >> "$GITHUB_STEP_SUMMARY"
+          echo "\`master\` → \`$SHA\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Apps read this branch directly; the change is live as soon as their config refreshes." >> "$GITHUB_STEP_SUMMARY"
