@@ -1356,10 +1356,6 @@
     ],
     "nodes": [
       {
-        "url": "wss://moonriver.api.onfinality.io/ws?apikey=41935d3d-3d6c-4a90-a0e1-33c065401d05",
-        "name": "OnFinality node"
-      },
-      {
         "url": "wss://moonriver.api.onfinality.io/public-ws",
         "name": "OnFinality node"
       },
@@ -3262,10 +3258,6 @@
     "nodeSelectionStrategy": "uniform",
     "nodes": [
       {
-        "url": "wss://mainnet.infura.io/ws/v3/1e69544301064ef19edb194a14fb75f3",
-        "name": "Infura node 3"
-      },
-      {
         "url": "wss://mainnet.infura.io/ws/v3/{INFURA_API_KEY}",
         "name": "Infura test node"
       }
@@ -3292,52 +3284,6 @@
     "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Ethereum.svg",
     "addressPrefix": 1,
     "options": [
-      "ethereumBased",
-      "noSubstrateRuntime"
-    ]
-  },
-  {
-    "chainId": "eip155:5",
-    "name": "Ethereum - Goerli",
-    "assets": [
-      {
-        "assetId": 0,
-        "symbol": "ETH",
-        "priceId": "ethereum",
-        "type": "evmNative",
-        "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/tokens/white/ETH.svg",
-        "precision": 18
-      }
-    ],
-    "nodes": [
-      {
-        "url": "wss://goerli.infura.io/ws/v3/25bd0a6e359240529b237e5dd8b19e1f",
-        "name": "Infura test node"
-      }
-    ],
-    "explorers": [
-      {
-        "name": "Etherscan",
-        "extrinsic": "https://goerli.etherscan.io/tx/{hash}",
-        "account": "https://goerli.etherscan.io/address/{address}",
-        "event": null
-      }
-    ],
-    "externalApi": {
-      "history": [
-        {
-          "type": "etherscan",
-          "url": "https://api-goerli.etherscan.io/api",
-          "parameters": {
-            "assetType": "evm"
-          }
-        }
-      ]
-    },
-    "icon": "https://raw.githubusercontent.com/novasamatech/nova-utils/master/icons/chains/gradient/Ethereum_Goerli.svg",
-    "addressPrefix": 5,
-    "options": [
-      "testnet",
       "ethereumBased",
       "noSubstrateRuntime"
     ]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refuse the four regressions this repo has already had.
+"""Refuse the five regressions this repo has already had.
 
 Each check below exists because the thing it forbids happened, was fixed, and in two
 cases came back. They are cheap; the failures they catch are not.
@@ -88,6 +88,8 @@ grep = subprocess.run(
     capture_output=True,
     text=True,
 )
+if grep.returncode not in (0, 1):
+    errors.append(f"grep for working-branch asset URLs failed: {grep.stderr.strip()}")
 if grep.stdout.strip():
     files = grep.stdout.strip().splitlines()
     errors.append(
@@ -107,6 +109,43 @@ for fixture in ("pezkuwi_assets_for_testBalance.json",):
             f"tests/{fixture} has drifted from pezkuwi-overlay/tests/{fixture}"
         )
 
+# ── 5. No third-party API key in a URL ───────────────────────────────────────
+#
+# Nova's configs shipped Nova's own provider keys (Infura project ids, OnFinality
+# apikeys) inside node URLs, and every sync copied them into ours. Our builds fill
+# {INFURA_API_KEY}-style placeholders from our own secrets; a keyed URL is someone
+# else's quota and dies when they rotate it. The predicate is the one the sync
+# uses, and every string in every JSON file is checked, so a file that does not
+# parse is a failure, not a pass.
+sys.path.insert(0, str(ROOT / "scripts"))
+from sync_from_nova import is_keyed  # noqa: E402
+
+keyed_files = []
+json_files = sorted(p for p in (ROOT / "chains").rglob("*.json"))
+if not json_files:
+    errors.append("chains/ has no JSON files; the key check would have checked nothing")
+for path in json_files:
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        errors.append(f"{path.relative_to(ROOT)} could not be read for the key check: {exc}")
+        continue
+    stack = [doc]
+    while stack:
+        node = stack.pop()
+        if isinstance(node, dict):
+            stack.extend(node.values())
+        elif isinstance(node, list):
+            stack.extend(node)
+        elif isinstance(node, str) and is_keyed(node):
+            keyed_files.append(path)
+            break
+if keyed_files:
+    errors.append(
+        f"{len(keyed_files)} file(s) under chains/ embed a provider key in a URL; "
+        f"use a {{PLACEHOLDER}}, e.g. {keyed_files[0].relative_to(ROOT)}"
+    )
+
 if errors:
     for e in errors:
         print(f"::error::{e}")
@@ -114,4 +153,5 @@ if errors:
     sys.exit(1)
 
 print("Pezkuwi integrity: on-chain assets only, sufficiency declared, "
-      "assets served from master, fixture in step with its source.")
+      "assets served from master, fixture in step with its source, "
+      "no third-party key in a node URL.")

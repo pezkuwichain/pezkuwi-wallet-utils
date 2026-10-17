@@ -15,7 +15,11 @@ Options:
 
 import json
 import argparse
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+from sync_from_nova import strip_keyed_endpoints  # noqa: E402
 
 # Base paths
 SCRIPT_DIR = Path(__file__).parent
@@ -150,6 +154,9 @@ def merge_chains(nova_chains: list, pezkuwi_chains: list, filter_broken: bool = 
 
         nova_filtered.append(chain)
         stats['nova_included'] += 1
+
+    nova_filtered = strip_keyed_endpoints(nova_filtered)
+    stats['nova_included'] = len(nova_filtered)
 
     # Pezkuwi first, then Nova
     merged = pezkuwi_chains + nova_filtered

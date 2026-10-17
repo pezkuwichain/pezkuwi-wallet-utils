@@ -19,6 +19,7 @@ Rules:
 """
 
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -51,6 +52,67 @@ def load_blacklist() -> set:
     return set()
 
 
+# Nova's configs carry Nova's own provider keys written into node URLs (Infura
+# project ids, OnFinality apikeys). They are not ours to use: our builds fill
+# placeholders like `{INFURA_API_KEY}` from our own secrets, and a keyed URL
+# breaks for every user the day Nova rotates it. check_pezkuwi_integrity.py
+# imports this same predicate, so the filter and the gate cannot disagree.
+KEYED_ENDPOINT = re.compile(
+    r"infura\.io/(?:[^?#\s]*/)?v3/[0-9a-z]{32}"
+    r"|[?&](?:api[_-]?key|apikey|access[_-]?token|token|key)=(?!\{)[^&#\s]+",
+    re.IGNORECASE,
+)
+
+
+def is_keyed(url: str) -> bool:
+    """True if the URL embeds a literal credential rather than a {PLACEHOLDER}."""
+    return bool(KEYED_ENDPOINT.search(url))
+
+
+def strip_chain(chain: dict) -> dict | None:
+    """The chain without keyed nodes; None if no node is left."""
+    nodes = chain.get('nodes')
+    if not isinstance(nodes, list):
+        return chain
+    kept = [n for n in nodes if not (isinstance(n, dict) and is_keyed(str(n.get('url', ''))))]
+    if not kept:
+        return None
+    return chain if len(kept) == len(nodes) else {**chain, 'nodes': kept}
+
+
+def strip_keyed_endpoints(chains: list) -> list:
+    """Drop nodes whose URL embeds a third-party key, and any chain left with no node."""
+    return [c for c in (strip_chain(c) for c in chains) if c is not None]
+
+
+def rewrite_in_place(path: Path, data):
+    """Rewrite a JSON file keeping its own indent and trailing newline, so a
+    filtered copy of Nova's file differs from it only where the data does."""
+    raw = path.read_text(encoding='utf-8')
+    second = raw.split('\n', 2)[1] if raw.count('\n') >= 1 else ''
+    indent = (len(second) - len(second.lstrip(' '))) or 2
+    out = json.dumps(data, indent=indent, ensure_ascii=False)
+    path.write_text(out + ('\n' if raw.endswith('\n') else ''), encoding='utf-8')
+
+
+def strip_preconfigured(preconfig: Path):
+    """Apply strip_chain to every details file; a chain left with no node is
+    removed together with its entry in the matching index."""
+    for details, index in (("details", "chains.json"), ("detailsDev", "chains_dev.json")):
+        dropped = set()
+        for f in sorted((preconfig / details).glob("*.json")):
+            chain = load_json(f)
+            stripped = strip_chain(chain)
+            if stripped is None:
+                dropped.add(chain.get('chainId'))
+                f.unlink()
+            elif stripped is not chain:
+                rewrite_in_place(f, stripped)
+        index_file = preconfig / index
+        if dropped and index_file.exists():
+            rewrite_in_place(index_file, [c for c in load_json(index_file) if c.get('chainId') not in dropped])
+
+
 def merge_chains(nova_chains: list, pezkuwi_chains: list, blocked_ids: set) -> list:
     """Pezkuwi chains first, then Nova chains. Blocked chains excluded."""
     pezkuwi_ids = {c['chainId'] for c in pezkuwi_chains}
@@ -58,7 +120,7 @@ def merge_chains(nova_chains: list, pezkuwi_chains: list, blocked_ids: set) -> l
         c for c in nova_chains
         if c['chainId'] not in pezkuwi_ids and c['chainId'] not in blocked_ids
     ]
-    return pezkuwi_chains + nova_filtered
+    return pezkuwi_chains + strip_keyed_endpoints(nova_filtered)
 
 
 def merge_xcm(nova_xcm: dict, pezkuwi_xcm: dict) -> dict:
@@ -143,6 +205,7 @@ def sync_chains():
             if output_preconfig.exists():
                 shutil.rmtree(output_preconfig)
             shutil.copytree(nova_preconfig, output_preconfig)
+            strip_preconfigured(output_preconfig)
 
 
 def sync_xcm():
