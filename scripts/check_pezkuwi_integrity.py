@@ -88,6 +88,8 @@ grep = subprocess.run(
     capture_output=True,
     text=True,
 )
+if grep.returncode not in (0, 1):
+    errors.append(f"grep for working-branch asset URLs failed: {grep.stderr.strip()}")
 if grep.stdout.strip():
     files = grep.stdout.strip().splitlines()
     errors.append(
@@ -107,21 +109,41 @@ for fixture in ("pezkuwi_assets_for_testBalance.json",):
             f"tests/{fixture} has drifted from pezkuwi-overlay/tests/{fixture}"
         )
 
-# ── 5. No third-party API key in a node URL ──────────────────────────────────
+# ── 5. No third-party API key in a URL ───────────────────────────────────────
 #
-# Nova's configs shipped Nova's own Infura project keys inside node URLs, and
-# every sync copied them into ours. Our builds fill {INFURA_API_KEY} from our
-# own secret; a keyed URL is someone else's quota and dies when they rotate it.
-grep = subprocess.run(
-    ["grep", "-rlE", r"infura\.io/.*/v3/[0-9a-f]{32}", str(ROOT / "chains")],
-    capture_output=True,
-    text=True,
-)
-if grep.stdout.strip():
-    files = grep.stdout.strip().splitlines()
+# Nova's configs shipped Nova's own provider keys (Infura project ids, OnFinality
+# apikeys) inside node URLs, and every sync copied them into ours. Our builds fill
+# {INFURA_API_KEY}-style placeholders from our own secrets; a keyed URL is someone
+# else's quota and dies when they rotate it. The predicate is the one the sync
+# uses, and every string in every JSON file is checked, so a file that does not
+# parse is a failure, not a pass.
+sys.path.insert(0, str(ROOT / "scripts"))
+from sync_from_nova import is_keyed  # noqa: E402
+
+keyed_files = []
+json_files = sorted(p for p in (ROOT / "chains").rglob("*.json"))
+if not json_files:
+    errors.append("chains/ has no JSON files; the key check would have checked nothing")
+for path in json_files:
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        errors.append(f"{path.relative_to(ROOT)} could not be read for the key check: {exc}")
+        continue
+    stack = [doc]
+    while stack:
+        node = stack.pop()
+        if isinstance(node, dict):
+            stack.extend(node.values())
+        elif isinstance(node, list):
+            stack.extend(node)
+        elif isinstance(node, str) and is_keyed(node):
+            keyed_files.append(path)
+            break
+if keyed_files:
     errors.append(
-        f"{len(files)} file(s) under chains/ embed an Infura key in a node URL; "
-        f"use {{INFURA_API_KEY}}, e.g. {Path(files[0]).relative_to(ROOT)}"
+        f"{len(keyed_files)} file(s) under chains/ embed a provider key in a URL; "
+        f"use a {{PLACEHOLDER}}, e.g. {keyed_files[0].relative_to(ROOT)}"
     )
 
 if errors:
