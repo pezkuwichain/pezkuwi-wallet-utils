@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refuse the four regressions this repo has already had.
+"""Refuse the five regressions this repo has already had.
 
 Each check below exists because the thing it forbids happened, was fixed, and in two
 cases came back. They are cheap; the failures they catch are not.
@@ -107,6 +107,23 @@ for fixture in ("pezkuwi_assets_for_testBalance.json",):
             f"tests/{fixture} has drifted from pezkuwi-overlay/tests/{fixture}"
         )
 
+# ── 5. No third-party API key in a node URL ──────────────────────────────────
+#
+# Nova's configs shipped Nova's own Infura project keys inside node URLs, and
+# every sync copied them into ours. Our builds fill {INFURA_API_KEY} from our
+# own secret; a keyed URL is someone else's quota and dies when they rotate it.
+grep = subprocess.run(
+    ["grep", "-rlE", r"infura\.io/.*/v3/[0-9a-f]{32}", str(ROOT / "chains")],
+    capture_output=True,
+    text=True,
+)
+if grep.stdout.strip():
+    files = grep.stdout.strip().splitlines()
+    errors.append(
+        f"{len(files)} file(s) under chains/ embed an Infura key in a node URL; "
+        f"use {{INFURA_API_KEY}}, e.g. {Path(files[0]).relative_to(ROOT)}"
+    )
+
 if errors:
     for e in errors:
         print(f"::error::{e}")
@@ -114,4 +131,5 @@ if errors:
     sys.exit(1)
 
 print("Pezkuwi integrity: on-chain assets only, sufficiency declared, "
-      "assets served from master, fixture in step with its source.")
+      "assets served from master, fixture in step with its source, "
+      "no third-party key in a node URL.")

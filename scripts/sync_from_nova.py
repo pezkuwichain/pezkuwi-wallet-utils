@@ -19,6 +19,7 @@ Rules:
 """
 
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -51,6 +52,27 @@ def load_blacklist() -> set:
     return set()
 
 
+# Nova's configs carry Nova's own Infura project keys written into node URLs.
+# They are not ours to use: our builds fill `{INFURA_API_KEY}` from our own
+# secret, and a keyed URL breaks for every user the day Nova rotates it.
+KEYED_ENDPOINT = re.compile(r"infura\.io/.*/v3/[0-9a-f]{32}")
+
+
+def strip_keyed_endpoints(chains: list) -> list:
+    """Drop nodes whose URL embeds a third-party API key, and any chain left with no node."""
+    out = []
+    for chain in chains:
+        nodes = chain.get('nodes')
+        if nodes is not None:
+            kept = [n for n in nodes if not KEYED_ENDPOINT.search(n.get('url', ''))]
+            if not kept:
+                continue
+            if len(kept) != len(nodes):
+                chain = {**chain, 'nodes': kept}
+        out.append(chain)
+    return out
+
+
 def merge_chains(nova_chains: list, pezkuwi_chains: list, blocked_ids: set) -> list:
     """Pezkuwi chains first, then Nova chains. Blocked chains excluded."""
     pezkuwi_ids = {c['chainId'] for c in pezkuwi_chains}
@@ -58,7 +80,7 @@ def merge_chains(nova_chains: list, pezkuwi_chains: list, blocked_ids: set) -> l
         c for c in nova_chains
         if c['chainId'] not in pezkuwi_ids and c['chainId'] not in blocked_ids
     ]
-    return pezkuwi_chains + nova_filtered
+    return pezkuwi_chains + strip_keyed_endpoints(nova_filtered)
 
 
 def merge_xcm(nova_xcm: dict, pezkuwi_xcm: dict) -> dict:
