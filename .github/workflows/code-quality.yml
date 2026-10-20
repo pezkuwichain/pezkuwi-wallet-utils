@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main]
 
+
+# Read-only token: Code Quality never writes through GITHUB_TOKEN.
+permissions:
+  contents: read
+
 jobs:
   python-lint:
     name: Python Lint
