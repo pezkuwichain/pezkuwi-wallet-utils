@@ -232,6 +232,167 @@
     }
   },
   {
+    "chainId": "1b0b4727bbb5e44ed587d1056b4ad537ffb330034509a58866a088d77e792cd5",
+    "name": "Zagros (TESTNET)",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/HEZ.svg",
+    "addressPrefix": 42,
+    "options": [
+      "testnet",
+      "proxy",
+      "multisig"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "wss://zagros-rpc.pezkuwichain.io",
+        "name": "Zagros"
+      }
+    ],
+    "explorers": [],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "HEZ",
+        "precision": 12,
+        "name": "HEZkurd (Zagros)",
+        "priceId": null,
+        "staking": null,
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/HEZ.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      }
+    ],
+    "additional": {
+      "themeColor": "#009639",
+      "defaultBlockTimeMillis": 6000,
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true,
+      "identityChain": "c72b38f36affaeb2661018b201c2be02e8c09fc699640525d39200a10fd77878"
+    }
+  },
+  {
+    "chainId": "063f739077881df9f291548de301b2e11d6a45cc545c24e7bf18d8a40f0ce182",
+    "parentId": "1b0b4727bbb5e44ed587d1056b4ad537ffb330034509a58866a088d77e792cd5",
+    "name": "Zagros Asset Hub (TESTNET)",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/PEZ.svg",
+    "addressPrefix": 42,
+    "options": [
+      "testnet",
+      "assethub-fees",
+      "proxy",
+      "multisig"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "wss://zagros-asset-hub-rpc.pezkuwichain.io",
+        "name": "Zagros Asset Hub"
+      }
+    ],
+    "explorers": [],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "HEZ",
+        "precision": 12,
+        "name": "HEZkurd (Zagros)",
+        "priceId": null,
+        "staking": null,
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/HEZ.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      },
+      {
+        "assetId": 1,
+        "symbol": "PEZ",
+        "precision": 12,
+        "name": "Pezkuwi (Zagros)",
+        "priceId": null,
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/PEZ.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1",
+          "isSufficient": true
+        }
+      },
+      {
+        "assetId": 1000,
+        "symbol": "USDT",
+        "precision": 6,
+        "name": "Tether USD (Zagros)",
+        "priceId": null,
+        "staking": null,
+        "type": "statemine",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/wUSDT.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": {
+          "assetId": "1000",
+          "isSufficient": true
+        }
+      }
+    ],
+    "additional": {
+      "themeColor": "#009639",
+      "defaultBlockTimeMillis": 6000,
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true,
+      "relaychainAsNative": true,
+      "identityChain": "c72b38f36affaeb2661018b201c2be02e8c09fc699640525d39200a10fd77878"
+    }
+  },
+  {
+    "chainId": "c72b38f36affaeb2661018b201c2be02e8c09fc699640525d39200a10fd77878",
+    "parentId": "1b0b4727bbb5e44ed587d1056b4ad537ffb330034509a58866a088d77e792cd5",
+    "name": "Zagros People (TESTNET)",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/chains/PezkuwiPeople.png",
+    "addressPrefix": 42,
+    "options": [
+      "testnet",
+      "proxy",
+      "multisig"
+    ],
+    "nodeSelectionStrategy": "roundRobin",
+    "nodes": [
+      {
+        "url": "wss://zagros-people-rpc.pezkuwichain.io",
+        "name": "Zagros People"
+      }
+    ],
+    "explorers": [],
+    "externalApi": {},
+    "assets": [
+      {
+        "assetId": 0,
+        "symbol": "HEZ",
+        "precision": 12,
+        "name": "HEZkurd (Zagros)",
+        "priceId": null,
+        "staking": null,
+        "type": "native",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/main/icons/tokens/colored/HEZ.svg",
+        "buyProviders": {},
+        "sellProviders": {},
+        "typeExtras": null
+      }
+    ],
+    "additional": {
+      "themeColor": "#009639",
+      "defaultBlockTimeMillis": 6000,
+      "feeViaRuntimeCall": true,
+      "disabledCheckMetadataHash": true
+    }
+  },
+  {
     "chainId": "tron:0x2b6653dc",
     "name": "Tron",
     "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/gradient/Tron.svg",
@@ -299,7 +460,7 @@
   {
     "chainId": "bip122:000000000019d6689c085ae165831e93",
     "name": "Bitcoin",
-    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/chains/gradient/Bitcoin.svg",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/gradient/Bitcoin.svg",
     "addressPrefix": 0,
     "options": [
       "bitcoinBased",
@@ -329,7 +490,7 @@
         "priceId": "bitcoin",
         "staking": null,
         "type": "bitcoinNative",
-        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/tokens/colored/BTC.svg",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/tokens/colored/BTC.svg",
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": null
@@ -342,7 +503,7 @@
   {
     "chainId": "solana:mainnet",
     "name": "Solana",
-    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/chains/gradient/Solana.svg",
+    "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/chains/gradient/Solana.svg",
     "addressPrefix": 0,
     "options": [
       "solanaBased",
@@ -372,7 +533,7 @@
         "priceId": "solana",
         "staking": null,
         "type": "solanaNative",
-        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/pending/post-fix-release/icons/tokens/colored/SOL.svg",
+        "icon": "https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/icons/tokens/colored/SOL.svg",
         "buyProviders": {},
         "sellProviders": {},
         "typeExtras": null
