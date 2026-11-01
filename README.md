@@ -55,6 +55,20 @@ These configurations are fetched by Pezkuwi Wallet at runtime from GitHub raw UR
 https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/chains/{network}/chains.json
 ```
 
+## Signed config
+
+`signed/targets.json` gives the sha256 of every JSON file the wallet may fetch, signed with the targets
+key; `signed/root.json` names that key and the three root keys, two of which can replace it. The wallet
+carries the first root and refuses a file whose hash the signed list does not give, so a change to any
+served JSON file is re-signed in the same pull request:
+
+```
+python3 scripts/signed_config.py sign --key <targets seed>
+```
+
+Code Quality refuses a tree whose files do not match the signed list, and its weekly run fails a month
+before a signature expires.
+
 ## Contributing
 
 1. Fork this repository
