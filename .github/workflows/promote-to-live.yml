@@ -53,6 +53,8 @@ jobs:
       - name: Promote
         run: |
           SHA="${{ github.event.workflow_run.head_sha }}"
+          git fetch origin master
+          git rev-parse origin/master > "$RUNNER_TEMP/previous-master"
 
           # --force-with-lease, not --force: if master has moved since this job read it,
           # the push is refused rather than silently discarding whatever moved it.
@@ -63,3 +65,26 @@ jobs:
           echo "\`master\` → \`$SHA\`" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "Apps read this branch directly; the change is live as soon as their config refreshes." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Purge the changed files from jsDelivr
+        # When raw.githubusercontent.com is unreachable the wallet reads the same paths from
+        # jsDelivr, which keeps a branch file for up to 12 hours and expires each file on its
+        # own clock. A cached chains.json next to a fresh signed/targets.json (or the reverse)
+        # fails the wallet's hash check, and the wallet keeps its old config until both age
+        # out. Purging every changed file together makes the mirror serve the new set at once.
+        run: |
+          SHA="${{ github.event.workflow_run.head_sha }}"
+          PREVIOUS=$(cat "$RUNNER_TEMP/previous-master")
+          failed=0
+          for path in $(git diff --name-only "$PREVIOUS" "$SHA" -- '*.json'); do
+            url="https://purge.jsdelivr.net/gh/${{ github.repository }}@master/$path"
+            # Each CDN behind jsDelivr reports on its own; a throttled or failed one still
+            # serves the old copy.
+            if curl -sSf -m 30 --retry 3 "$url" | jq -e '[.paths[] | (.throttled | not) and ([.providers[]] | all)] | all' > /dev/null; then
+              echo "purged $path"
+            else
+              echo "::error::jsDelivr purge failed for $path"
+              failed=1
+            fi
+          done
+          exit $failed
