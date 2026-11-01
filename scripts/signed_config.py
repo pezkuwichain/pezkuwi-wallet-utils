@@ -34,8 +34,9 @@ REPO = Path(__file__).resolve().parent.parent
 ROOT_FILE = REPO / "signed" / "root.json"
 TARGETS_FILE = REPO / "signed" / "targets.json"
 
-# Everything the wallet may fetch from this repository is JSON outside these trees.
-UNSERVED = ("nova-base/", "tests/", "pezkuwi-overlay/", "docs/", "signed/")
+# Everything the wallet may fetch from this repository is JSON outside these trees; the wallet
+# refuses any other JSON file from here, so a tree is only left out when nothing reads it.
+UNSERVED = ("nova-base/", "pezkuwi-overlay/", "docs/", "signed/")
 
 BASE58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 DAY = 86400
@@ -77,6 +78,19 @@ def read_envelope(path: Path):
     env = json.loads(path.read_text())
     payload = base64.b64decode(env["signed"])
     return payload, json.loads(payload), env["signatures"]
+
+
+def root_file(version: int) -> Path:
+    """Root 1 is the one the APK carries; each later root is published beside it, for the wallet to follow."""
+    return ROOT_FILE if version == 1 else ROOT_FILE.with_name(f"root.{version}.json")
+
+
+def current_root() -> dict:
+    """The newest published root. Signatures on later roots are the wallet's to check, not this tool's."""
+    _, root, _ = read_envelope(ROOT_FILE)
+    while root_file(root["version"] + 1).exists():
+        _, root, _ = read_envelope(root_file(root["version"] + 1))
+    return root
 
 
 def served_files() -> dict:
@@ -121,11 +135,13 @@ def cmd_root(args):
         "root": {"keyids": sorted(root_ids), "threshold": args.root_threshold},
         "targets": {"keyids": [key_id(targets_public)], "threshold": 1},
     }
-    ROOT_FILE.parent.mkdir(exist_ok=True)
-    # The first root is trusted because the APK carries it; a later one needs root signatures, collected
-    # from the key holders' wallets and added to this file before it is published.
-    ROOT_FILE.write_text(envelope(canonical(payload), []))
-    print(f"wrote {ROOT_FILE.relative_to(REPO)} version {args.version}")
+    path = root_file(args.version)
+    path.parent.mkdir(exist_ok=True)
+    # The first root is trusted because the APK carries it; a later one needs the signatures of a threshold
+    # of the previous root keys and of its own, collected from the holders' wallets and added to this file
+    # before it is published.
+    path.write_text(envelope(canonical(payload), []))
+    print(f"wrote {path.relative_to(REPO)} version {args.version}")
 
 
 def cmd_sign(args):
@@ -133,7 +149,7 @@ def cmd_sign(args):
         bytes.fromhex(Path(args.key).read_text().strip())
     )
     public = private.public_key().public_bytes(Encoding.Raw, PublicFormat.Raw)
-    _, root, _ = read_envelope(ROOT_FILE)
+    root = current_root()
     if key_id(public) not in root["targets"]["keyids"]:
         sys.exit(f"key {key_id(public)} is not a targets key of root {root['version']}")
 
@@ -162,7 +178,7 @@ def cmd_sign(args):
 
 def cmd_check(args):
     errors = []
-    _, root, _ = read_envelope(ROOT_FILE)
+    root = current_root()
     payload, targets, signatures = read_envelope(TARGETS_FILE)
     now = int(time.time())
 
