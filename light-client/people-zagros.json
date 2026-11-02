@@ -1,0 +1,23 @@
+{
+  "bootNodes": [
+    "/dns/zagros-people-bootnode.pezkuwichain.io/tcp/443/wss/p2p/12D3KooWLnDS5p5bvMzfco2BR4arKRbtpqoZwRvLKgCdzgVpuEQG",
+    "/ip4/217.77.6.126/tcp/30535/p2p/12D3KooWLnDS5p5bvMzfco2BR4arKRbtpqoZwRvLKgCdzgVpuEQG",
+    "/ip4/164.68.110.49/tcp/30535/p2p/12D3KooW9rHfLv4za95C4fPGTUzNk531zRrjaXYJY3pijMEYd3xB"
+  ],
+  "chainType": "Live",
+  "codeSubstitutes": {},
+  "genesis": {
+    "stateRootHash": "0xcaffff9ce4cf02e84a963a8b2ff27834f4d2385a1dc3b01a23551da8515d6c98"
+  },
+  "id": "people-zagros",
+  "name": "Zagros People",
+  "para_id": 1004,
+  "properties": {
+    "ss58Format": 42,
+    "tokenDecimals": 12,
+    "tokenSymbol": "HEZ"
+  },
+  "protocolId": null,
+  "relay_chain": "zagros",
+  "telemetryEndpoints": null
+}
