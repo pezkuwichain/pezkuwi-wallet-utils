@@ -88,6 +88,11 @@ jobs:
       - name: Targets signed and matching every served file
         run: python3 scripts/signed_config.py check
 
+      # A wallet that never fell back to its light client has no saved state, so its first fallback
+      # starts from this checkpoint; refreshed specifications reach wallets through the signed config.
+      - name: Light client checkpoint not stale
+        run: python3 scripts/light_client_specs.py --relay-rpc https://zagros-rpc.pezkuwichain.io --check-age 60
+
   chain-integrity:
     name: Chain Config Integrity
     runs-on: ubuntu-latest
