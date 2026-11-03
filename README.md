@@ -66,6 +66,15 @@ served JSON file is re-signed in the same pull request:
 python3 scripts/signed_config.py sign --key <targets seed>
 ```
 
+The light client specifications in `light-client/` carry a relay chain checkpoint. Wallets fetch them through
+the signed config and keep a later checkpoint than their APK's, so refresh them before signing:
+
+```
+python3 scripts/light_client_specs.py --relay-rpc <zagros rpc> --people-rpc <people rpc> --people-spec <full People spec>
+```
+
+Code Quality fails once the checkpoint is more than 60 days old.
+
 Code Quality refuses a tree whose files do not match the signed list, and its weekly run fails a month
 before a signature expires.
 

@@ -12,6 +12,11 @@ signed/targets.json, never from peers. Every state root is checked against its c
 hash before anything is written.
 
   light_client_specs.py --relay-rpc URL --people-rpc URL --people-spec FILE
+  light_client_specs.py --relay-rpc URL --check-age DAYS
+
+The second form fails when the relay checkpoint in light-client/ is older than DAYS. A wallet that
+never fell back has no saved database, so its first fallback warp-syncs from this checkpoint; the
+weekly Code Quality run keeps it from going stale between signings.
 """
 
 import argparse
@@ -22,6 +27,8 @@ import urllib.request
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
+# Zagros relay block time, to turn a block distance into days.
+BLOCK_SECONDS = 6
 OUT = REPO / "light-client"
 
 # Secure WebSockets on 443 first: they look like any HTTPS WebSocket where plain libp2p TCP is
@@ -73,6 +80,32 @@ def genesis_state_root(url: str) -> str:
     return header["stateRoot"]
 
 
+def checkpoint_number(spec: dict) -> int:
+    """Block number of the checkpoint header: SCALE, a 32-byte parent hash then a compact number."""
+    header = bytes.fromhex(spec["lightSyncState"]["finalizedBlockHeader"][2:])
+    first = header[32]
+    mode = first & 0b11
+    if mode == 0b00:
+        return first >> 2
+    if mode == 0b01:
+        return int.from_bytes(header[32:34], "little") >> 2
+    if mode == 0b10:
+        return int.from_bytes(header[32:36], "little") >> 2
+    return int.from_bytes(header[33 : 33 + (first >> 2) + 4], "little")
+
+
+def check_age(relay_rpc: str, max_days: int) -> None:
+    spec = json.loads((OUT / "zagros.json").read_text())
+    checkpoint = checkpoint_number(spec)
+    head = int(rpc(relay_rpc, "chain_getHeader", [])["number"], 16)
+    days = (head - checkpoint) * BLOCK_SECONDS / 86400
+    print(f"relay checkpoint #{checkpoint}, head #{head}: {days:.1f} days old")
+    if days > max_days:
+        sys.exit(
+            f"the relay checkpoint is older than {max_days} days: run this script and re-sign"
+        )
+
+
 def write(name: str, spec: dict) -> None:
     path = OUT / name
     path.write_text(json.dumps(spec, indent=2) + "\n")
@@ -82,11 +115,17 @@ def write(name: str, spec: dict) -> None:
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--relay-rpc", required=True)
-    parser.add_argument("--people-rpc", required=True)
-    parser.add_argument(
-        "--people-spec", required=True, help="full People chain specification"
-    )
+    parser.add_argument("--people-rpc")
+    parser.add_argument("--people-spec", help="full People chain specification")
+    parser.add_argument("--check-age", type=int, metavar="DAYS")
     args = parser.parse_args()
+    if args.check_age is not None:
+        check_age(args.relay_rpc, args.check_age)
+        return
+    if not (args.people_rpc and args.people_spec):
+        parser.error(
+            "--people-rpc and --people-spec are required to write the specifications"
+        )
     OUT.mkdir(exist_ok=True)
 
     relay = rpc(args.relay_rpc, "sync_state_genSyncSpec", [True])
