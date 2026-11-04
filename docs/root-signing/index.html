@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ku">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guhertina mifteya kokê</title>
+<!--
+  Root signing page for the wallet's signed config. Open it in the Pezkuwi Wallet DApp browser.
+  It shows the drafted root (proposals/root.N.json), has the holder's wallet sign <Bytes>payload</Bytes>,
+  checks each signature the way the wallet will, and assembles signed/root.N.json once a threshold of the
+  previous root's keys and of the new root's keys have signed. Wallet 1.3.0 accepts sr25519 under the
+  "substrate" signing context only, so that is what counts toward the thresholds.
+-->
+<script src="vendor/bundle-pezkuwi-util.js"></script>
+<script src="vendor/bundle-pezkuwi-util-crypto.js"></script>
+<script src="vendor/bundle-polkadot-util.js"></script>
+<script src="vendor/bundle-polkadot-util-crypto.js"></script>
+<style>
+  :root { --bg: #08090E; --panel: rgba(153,158,199,0.10); --line: rgba(153,158,199,0.16); --text: rgba(255,255,255,0.88);
+          --muted: rgba(255,255,255,0.60); --accent: #009639; --ok: #2FC864; --warn: #EBC50A; --bad: #E53450; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, sans-serif; }
+  main { max-width: 560px; margin: 0 auto; padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 14px; }
+  h1 { margin: 0; font-size: 22px; }
+  p { margin: 0; color: var(--muted); }
+  .panel { background: var(--panel); border-radius: 12px; }
+  .row { display: flex; justify-content: space-between; gap: 12px; padding: 12px; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .row span:first-child { color: var(--muted); }
+  .mono { font-family: ui-monospace, monospace; word-break: break-all; }
+  .fp { font-size: 17px; font-weight: 700; letter-spacing: 1px; }
+  button { min-height: 48px; border-radius: 12px; border: 0; background: var(--accent); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+  button.secondary { background: rgba(153,158,199,0.16); color: var(--text); }
+  button:disabled { opacity: 0.45; cursor: default; }
+  textarea { width: 100%; min-height: 80px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--text); padding: 10px; font: 13px ui-monospace, monospace; }
+  .ok { color: var(--ok); } .warn { color: var(--warn); } .bad { color: var(--bad); }
+  .note { padding: 12px; border-radius: 12px; font-size: 14px; }
+  .note.warn { background: rgba(237,206,54,0.14); } .note.bad { background: rgba(229,52,80,0.14); } .note.ok { background: rgba(47,200,100,0.12); }
+  label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 13px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Guhertina mifteya kokê</h1>
+  <p id="summary">Tê barkirin…</p>
+  <div id="error" class="note bad" hidden></div>
+
+  <div class="panel" id="facts" hidden>
+    <div class="row"><span>Guherto</span><span id="version"></span></div>
+    <div class="row"><span>Sînor</span><span id="threshold"></span></div>
+    <div class="row"><span>Dema derbasbûnê</span><span id="expires"></span></div>
+  </div>
+
+  <div id="keysBlock" hidden>
+    <p>Mifteyên kokê yên nû (sr25519, hesabên cîzdanê)</p>
+    <div class="panel" id="newKeys"></div>
+  </div>
+
+  <div class="panel row" id="fpBlock" hidden><span>Şopa pêşniyarê</span><span class="mono fp" id="fingerprint"></span></div>
+  <p id="fpHint" hidden>Berî îmzekirinê vê şopê bi telefonê bi xwediyên din re bide ber hev.</p>
+
+  <button id="signButton" hidden>Bi cîzdanê îmze bike</button>
+  <div id="signResult" class="note" hidden></div>
+  <button id="shareButton" class="secondary" hidden>Koda îmzeya min kopî bike</button>
+
+  <div id="collect" hidden>
+    <p id="tally"></p>
+    <div class="panel" id="holders"></div>
+  </div>
+  <label id="pasteBlock" hidden>Koda îmzeyê ya xwediyekî din zêde bike
+    <textarea id="paste" placeholder="Kodê li vir bixe"></textarea>
+  </label>
+  <button id="addButton" class="secondary" hidden>Kodê zêde bike</button>
+  <button id="downloadButton" hidden disabled>root.json daxîne</button>
+</main>
+<script>
+(async () => {
+  const pz = window.pezkuwiUtilCrypto, pzu = window.pezkuwiUtil, pk = window.polkadotUtilCrypto;
+  const RAW = 'https://raw.githubusercontent.com/pezkuwichain/pezkuwi-wallet-utils/master/signed/';
+  const $ = (id) => document.getElementById(id);
+  const enc = new TextEncoder();
+  const show = (id, on = true) => { $(id).hidden = !on; };
+  const fail = (message) => { $('error').textContent = message; show('error'); $('summary').textContent = ''; };
+
+  const b64 = (u8) => btoa(String.fromCharCode(...u8));
+  const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+  const hex = (u8) => Array.from(u8, (b) => b.toString(16).padStart(2, '0')).join('');
+  const sha256 = async (u8) => new Uint8Array(await crypto.subtle.digest('SHA-256', u8));
+  const wrap = (payload) => pzu.u8aConcat(enc.encode('<Bytes>'), payload, enc.encode('</Bytes>'));
+
+  async function readEnvelope(text) {
+    const envelope = JSON.parse(text);
+    const payload = unb64(envelope.signed);
+    return { payload, root: JSON.parse(new TextDecoder().decode(payload)), signatures: envelope.signatures || [] };
+  }
+
+  try {
+    await pz.cryptoWaitReady();
+    await pk.cryptoWaitReady();
+
+    // The newest published root: root.json, then root.N.json while they exist.
+    let previous = await readEnvelope(await (await fetch(RAW + 'root.json', { cache: 'no-store' })).text());
+    for (;;) {
+      const next = await fetch(RAW + `root.${previous.root.version + 1}.json`, { cache: 'no-store' });
+      if (!next.ok) break;
+      previous = await readEnvelope(await next.text());
+    }
+    const version = previous.root.version + 1;
+    const response = await fetch(`proposals/root.${version}.json`, { cache: 'no-store' });
+    if (!response.ok) { $('summary').textContent = `Ji bo guhertoya ${version} pêşniyar tune.`; return; }
+    const proposalText = await response.text();
+    const proposal = await readEnvelope(proposalText);
+    if (proposal.root.type !== 'root' || proposal.root.version !== version) throw new Error('Pêşniyar ne koka paşîn e.');
+
+    const message = wrap(proposal.payload);
+    const fingerprint = hex(await sha256(proposal.payload)).slice(0, 12).toUpperCase().match(/.{4}/g).join(' · ');
+
+    // keyId -> {address, roles}
+    const holders = new Map();
+    const addHolder = (root, role) => {
+      for (const keyId of root.root.keyids) {
+        const key = root.keys[keyId];
+        if (key.scheme !== 'sr25519') continue;
+        const entry = holders.get(keyId) || { public: unb64(key.public), roles: new Set() };
+        entry.roles.add(role);
+        holders.set(keyId, entry);
+      }
+    };
+    addHolder(previous.root, 'previous');
+    addHolder(proposal.root, 'next');
+    for (const entry of holders.values()) entry.address = pz.encodeAddress(entry.public, 42);
+
+    const signatures = new Map();  // keyId -> {sig, context}
+    function classify(keyId, sig) {
+      const entry = holders.get(keyId);
+      if (!entry) return null;
+      if (pk.sr25519Verify(message, sig, entry.public)) return 'substrate';
+      if (pz.sr25519Verify(message, sig, entry.public)) return 'bizinikiwi';
+      return null;
+    }
+    for (const { keyid, sig } of proposal.signatures) {
+      const bytes = unb64(sig);
+      const context = classify(keyid, bytes);
+      if (context) signatures.set(keyid, { sig: bytes, context });
+    }
+
+    $('summary').textContent = `Pêşniyar: koka config-a îmzekirî ya cîzdanê. Ji ${proposal.root.root.keyids.length} xwediyên nû ${proposal.root.root.threshold} îmze, ji yên heyî ${previous.root.root.threshold} îmze pêwîst in.`;
+    $('version').textContent = `${previous.root.version} → ${version}`;
+    $('threshold').textContent = `${proposal.root.root.threshold} ji ${proposal.root.root.keyids.length}`;
+    $('expires').textContent = new Date(proposal.root.expires * 1000).toLocaleDateString('de-DE');
+    for (const keyId of proposal.root.root.keyids) {
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = '<span></span><span class="mono"></span>';
+      row.children[0].textContent = holders.get(keyId).address.slice(0, 6) + '…';
+      row.children[1].textContent = holders.get(keyId).address;
+      $('newKeys').appendChild(row);
+    }
+    $('fingerprint').textContent = fingerprint;
+    ['facts', 'keysBlock', 'fpBlock', 'fpHint', 'collect', 'pasteBlock', 'addButton', 'downloadButton'].forEach((id) => show(id));
+
+    function render() {
+      $('holders').replaceChildren();
+      const counts = { previous: 0, next: 0 };
+      for (const [keyId, entry] of holders) {
+        const signed = signatures.get(keyId);
+        if (signed && signed.context === 'substrate') entry.roles.forEach((role) => counts[role]++);
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.innerHTML = '<span class="mono"></span><span></span>';
+        const roles = [...entry.roles].map((r) => (r === 'previous' ? 'heyî' : 'nû')).join(' + ');
+        row.children[0].textContent = `${entry.address.slice(0, 6)}…${entry.address.slice(-4)} (${roles})`;
+        row.children[1].textContent = !signed ? 'Li bendê' : signed.context === 'substrate' ? 'Îmzekirî' : 'Çewt: bizinikiwi';
+        row.children[1].className = !signed ? '' : signed.context === 'substrate' ? 'ok' : 'bad';
+        $('holders').appendChild(row);
+      }
+      const need = { previous: previous.root.root.threshold, next: proposal.root.root.threshold };
+      $('tally').textContent = `Îmze: heyî ${counts.previous} ji ${need.previous} · nû ${counts.next} ji ${need.next}`;
+      $('downloadButton').disabled = !(counts.previous >= need.previous && counts.next >= need.next);
+    }
+    render();
+
+    $('downloadButton').onclick = () => {
+      const valid = [...signatures].filter(([, s]) => s.context === 'substrate').map(([keyid, s]) => ({ keyid, sig: b64(s.sig) }));
+      const envelope = JSON.parse(proposalText);
+      envelope.signatures = valid;
+      const blob = new Blob([JSON.stringify(envelope, null, 1) + '\n'], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `root.${version}.json`;
+      a.click();
+    };
+
+    $('addButton').onclick = () => {
+      const text = $('paste').value.trim();
+      try {
+        const { keyid, sig } = JSON.parse(atob(text));
+        const bytes = unb64(sig);
+        const context = classify(keyid, bytes);
+        if (!context) throw new Error('bad');
+        signatures.set(keyid, { sig: bytes, context });
+        $('paste').value = '';
+        render();
+      } catch (e) {
+        alert('Ev kod ji bo vê pêşniyarê ne derbasdar e.');
+      }
+    };
+
+    // The wallet's injected provider; the signing page asks for accounts only to find the holder's key.
+    const injected = window.injectedWeb3 && (injectedWeb3['pezkuwi-wallet'] || injectedWeb3['pezkuwi-js'] || injectedWeb3['polkadot-js']);
+    if (!injected) {
+      $('signResult').textContent = 'Ji bo îmzekirinê vê rûpelê di geroka DApp ya Pezkuwi Cîzdan de veke.';
+      $('signResult').className = 'note warn';
+      show('signResult');
+      return;
+    }
+    show('signButton');
+    $('signButton').onclick = async () => {
+      try {
+        const extension = await injected.enable('Pezkuwi root signing');
+        const accounts = await extension.accounts.get();
+        const mine = accounts.map((a) => ({ address: a.address, keyId: null, public: pz.decodeAddress(a.address) }));
+        for (const account of mine) account.keyId = hex(await sha256(account.public));
+        const holder = mine.find((a) => holders.has(a.keyId));
+        if (!holder) throw new Error('Di vê cîzdanê de hesabekî xwediyê kokê tune.');
+
+        const { signature } = await extension.signer.signRaw({ address: holder.address, data: pzu.u8aToHex(message), type: 'bytes' });
+        let sig = pzu.hexToU8a(signature);
+        if (sig.length === 65 && sig[0] === 1) sig = sig.slice(1);  // MultiSignature: 0x01 = sr25519
+        const context = classify(holder.keyId, sig);
+        signatures.set(holder.keyId, { sig, context });
+        render();
+
+        const box = $('signResult');
+        if (context === 'substrate') {
+          box.textContent = 'Îmze derbasdar e. Kodê kopî bike û ji xwediyê ku pelê berhev dike re bişîne.';
+          box.className = 'note ok';
+          const code = btoa(JSON.stringify({ keyid: holder.keyId, sig: b64(sig) }));
+          $('shareButton').onclick = () => navigator.clipboard.writeText(code).then(() => alert('Hate kopîkirin'), () => prompt('Kod', code));
+          show('shareButton');
+        } else {
+          box.textContent = context === 'bizinikiwi'
+            ? 'Cîzdan bi çarçoveya "bizinikiwi" îmze kir; cîzdanên 1.3.0 vê qebûl nakin. Ji pêşdebiran re bêje.'
+            : 'Îmze nehat piştrastkirin.';
+          box.className = 'note bad';
+        }
+        show('signResult');
+      } catch (e) {
+        $('signResult').textContent = e.message || String(e);
+        $('signResult').className = 'note bad';
+        show('signResult');
+      }
+    };
+  } catch (e) {
+    fail(e.message || String(e));
+  }
+})();
+</script>
+</body>
+</html>
