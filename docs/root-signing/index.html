@@ -216,16 +216,34 @@
       return;
     }
     show('signButton');
+    // The wallet answers DApp requests one at a time and waits without limit for each, so a request it never
+    // shows blocks every later one. Each step is named on the page, so a stalled wallet says where it stopped.
+    const step = (text) => {
+      $('signResult').textContent = text;
+      $('signResult').className = 'note';
+      show('signResult');
+    };
+    const waitFor = (promise, text) => {
+      step(text);
+      const stalled = setTimeout(() => {
+        $('signResult').textContent = text + ' Cîzdan bersiv nade: geroka DApp bi tevahî bigire, rûpelê dîsa veke û carekê bitikîne.';
+        $('signResult').className = 'note warn';
+      }, 45000);
+      return promise.finally(() => clearTimeout(stalled));
+    };
     $('signButton').onclick = async () => {
+      $('signButton').disabled = true;
       try {
-        const extension = await injected.enable('Pezkuwi root signing');
-        const accounts = await extension.accounts.get();
+        const extension = await waitFor(injected.enable('Pezkuwi root signing'), 'Bi cîzdanê ve tê girêdan…');
+        const accounts = await waitFor(extension.accounts.get(), 'Hesab têne xwendin…');
         const mine = accounts.map((a) => ({ address: a.address, keyId: null, public: pz.decodeAddress(a.address) }));
         for (const account of mine) account.keyId = hex(await sha256(account.public));
         const holder = mine.find((a) => holders.has(a.keyId));
         if (!holder) throw new Error('Di vê cîzdanê de hesabekî xwediyê kokê tune.');
 
-        const { signature } = await extension.signer.signRaw({ address: holder.address, data: pzu.u8aToHex(message), type: 'bytes' });
+        const { signature } = await waitFor(
+          extension.signer.signRaw({ address: holder.address, data: pzu.u8aToHex(message), type: 'bytes' }),
+          'Li benda îmzeyê ye: di cîzdanê de peyamê piştrast bike…');
         let sig = pzu.hexToU8a(signature);
         if (sig.length === 65 && sig[0] === 1) sig = sig.slice(1);  // MultiSignature: 0x01 = sr25519
         const context = classify(holder.keyId, sig);
@@ -250,6 +268,8 @@
         $('signResult').textContent = e.message || String(e);
         $('signResult').className = 'note bad';
         show('signResult');
+      } finally {
+        $('signButton').disabled = false;
       }
     };
   } catch (e) {
