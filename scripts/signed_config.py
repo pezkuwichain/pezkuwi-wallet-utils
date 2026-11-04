@@ -9,7 +9,7 @@ Every metadata file is an envelope {"signed": base64(payload), "signatures": [{"
 hex sha256 of the 32-byte public key. An ed25519 key signs the payload bytes. An sr25519 key is a person's
 wallet account and signs through the wallet's message signing, which wraps the bytes as <Bytes>payload</Bytes>.
 
-  signed_config.py root    --version N --expires-days D --root-threshold T --root ADDR... --targets-pub FILE
+  signed_config.py root    --version N --expires-days D --root-threshold T --root ADDR... [--targets-pub FILE]
   signed_config.py sign    --key SEED_FILE [--expires-days D]
   signed_config.py check   [--min-days D]
 """
@@ -33,10 +33,14 @@ from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
 REPO = Path(__file__).resolve().parent.parent
 ROOT_FILE = REPO / "signed" / "root.json"
 TARGETS_FILE = REPO / "signed" / "targets.json"
+# A root after the first is drafted here, where the wallet never looks, and signed with the root signing page
+# beside it. Only a root with all its signatures moves to signed/: wallets that find a root they cannot verify
+# stop refreshing their config.
+PROPOSALS = REPO / "docs" / "root-signing" / "proposals"
 
 # Everything the wallet may fetch from this repository is JSON outside these trees; the wallet
 # refuses any other JSON file from here, so a tree is only left out when nothing reads it.
-UNSERVED = ("nova-base/", "pezkuwi-overlay/", "docs/", "signed/")
+UNSERVED = ("nova-base/", "pezkuwi-overlay/", "docs/", "signed/", "scripts/")
 
 BASE58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 DAY = 86400
@@ -117,7 +121,13 @@ def cmd_root(args):
             "public": base64.b64encode(public).decode(),
         }
         root_ids.append(key_id(public))
-    targets_public = base64.b64decode(Path(args.targets_pub).read_text().strip())
+    if args.targets_pub:
+        targets_public = base64.b64decode(Path(args.targets_pub).read_text().strip())
+    else:
+        # Rotating the root keys keeps the targets key unless a new one is given.
+        previous = current_root()
+        (targets_id,) = previous["targets"]["keyids"]
+        targets_public = base64.b64decode(previous["keys"][targets_id]["public"])
     if len(targets_public) != 32:
         sys.exit("targets public key must be 32 bytes")
     keys[key_id(targets_public)] = {
@@ -135,11 +145,15 @@ def cmd_root(args):
         "root": {"keyids": sorted(root_ids), "threshold": args.root_threshold},
         "targets": {"keyids": [key_id(targets_public)], "threshold": 1},
     }
-    path = root_file(args.version)
-    path.parent.mkdir(exist_ok=True)
     # The first root is trusted because the APK carries it; a later one needs the signatures of a threshold
-    # of the previous root keys and of its own, collected from the holders' wallets and added to this file
-    # before it is published.
+    # of the previous root keys and of its own, collected with the root signing page, before it is published.
+    if args.version == 1:
+        path = ROOT_FILE
+    else:
+        if args.version != current_root()["version"] + 1:
+            sys.exit(f"the next root is version {current_root()['version'] + 1}")
+        path = PROPOSALS / f"root.{args.version}.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(envelope(canonical(payload), []))
     print(f"wrote {path.relative_to(REPO)} version {args.version}")
 
@@ -241,7 +255,7 @@ def main():
     root.add_argument("--expires-days", type=int, required=True)
     root.add_argument("--root-threshold", type=int, required=True)
     root.add_argument("--root", nargs="+", required=True)
-    root.add_argument("--targets-pub", required=True)
+    root.add_argument("--targets-pub")
     root.set_defaults(run=cmd_root)
 
     sign = sub.add_parser("sign")

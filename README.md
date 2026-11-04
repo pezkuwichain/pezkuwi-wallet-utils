@@ -78,6 +78,22 @@ Code Quality fails once the checkpoint is more than 60 days old.
 Code Quality refuses a tree whose files do not match the signed list, and its weekly run fails a month
 before a signature expires.
 
+### Replacing the root keys
+
+A new root is drafted where the wallet never looks, then signed by the holders in their wallets:
+
+```
+python3 scripts/signed_config.py root --version N --expires-days 1825 --root-threshold 2 --root ADDR ADDR ADDR
+```
+
+This writes `docs/root-signing/proposals/root.N.json`, keeping the current targets key. Each holder of the
+current root and of the new one opens the root signing page (`docs/root-signing/`, served by GitHub Pages) in
+the Pezkuwi Wallet DApp browser, compares the fingerprint with the others by phone, signs, and sends the
+signature code to whoever collects them. Once two current and two new holders have signed, the page offers
+`root.N.json`; it goes to `signed/root.N.json` in a pull request. Code Quality checks every published root as
+installed wallets do (wallet 1.3.0 accepts sr25519 only under the `substrate` signing context) and fails
+before a root they would refuse reaches master: such a root stops their config refresh.
+
 ## Contributing
 
 1. Fork this repository

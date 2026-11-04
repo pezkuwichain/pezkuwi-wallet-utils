@@ -93,6 +93,18 @@ jobs:
       - name: Light client checkpoint not stale
         run: python3 scripts/light_client_specs.py --relay-rpc https://zagros-rpc.pezkuwichain.io --check-age 60
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # A wallet that finds a root it cannot verify stops refreshing its config, so every published
+      # signed/root.N.json is checked here exactly as installed wallets check it.
+      - name: Root chain verifies as installed wallets check it
+        run: |
+          npm ci --prefix scripts/root --ignore-scripts --no-audit --no-fund
+          node scripts/root/verify_root.mjs docs/root-signing/proposals/*.json
+
   chain-integrity:
     name: Chain Config Integrity
     runs-on: ubuntu-latest
