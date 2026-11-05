@@ -103,6 +103,7 @@ jobs:
       - name: Root chain verifies as installed wallets check it
         run: |
           npm ci --prefix scripts/root --ignore-scripts --no-audit --no-fund
+          shopt -s nullglob
           node scripts/root/verify_root.mjs docs/root-signing/proposals/*.json
 
   chain-integrity:
