@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ku">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lîsansên çavkaniya vekirî</title>
+<!--
+  Licences page the wallet opens from Settings > About. The wallet passes ?commit=<sha>, the commit
+  the installed build was made from (releases are not tagged). The page names the source of that
+  exact build, including the GPL-licensed light client fork, and lists the third-party notices the
+  build ships, read from the wallet repository at that commit.
+-->
+<style>
+  :root { --bg: #08090E; --panel: rgba(153,158,199,0.10); --line: rgba(153,158,199,0.16); --text: rgba(255,255,255,0.88);
+          --muted: rgba(255,255,255,0.60); --accent: #2FC864; --warn: #EBC50A; --bad: #E53450; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, sans-serif; }
+  main { max-width: 640px; margin: 0 auto; padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 14px; }
+  h1 { margin: 0; font-size: 22px; }
+  h2 { margin: 8px 0 0; font-size: 16px; }
+  p { margin: 0; color: var(--muted); }
+  a { color: var(--accent); }
+  .panel { background: var(--panel); border-radius: 12px; }
+  .src { padding: 10px 12px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; }
+  .src:last-child { border-bottom: 0; }
+  .src span { color: var(--muted); font-size: 13px; }
+  .mono { font-family: ui-monospace, monospace; font-size: 13px; word-break: break-all; }
+  details { border-bottom: 1px solid var(--line); }
+  details:last-child { border-bottom: 0; }
+  summary { padding: 12px; cursor: pointer; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td { padding: 5px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+  td:last-child { color: var(--muted); text-align: right; }
+  pre { margin: 0; padding: 12px; white-space: pre; overflow-x: auto; font: 12px/1.5 ui-monospace, monospace; color: var(--muted); }
+  .note { padding: 12px; border-radius: 12px; font-size: 14px; }
+  .note.warn { background: rgba(237,206,54,0.14); } .note.bad { background: rgba(229,52,80,0.14); }
+  .lang { align-self: flex-end; font-size: 13px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <a class="lang" id="langSwitch" href="#"></a>
+  <h1 data-t="title"></h1>
+  <p data-t="intro"></p>
+  <div id="commitNote" class="note warn" hidden data-t="noCommit"></div>
+
+  <h2 data-t="sourceTitle"></h2>
+  <div class="panel">
+    <div class="src"><span data-t="walletSource"></span><a class="mono" id="walletLink"></a></div>
+    <div class="src"><span data-t="lightSource"></span><a class="mono" id="smoldotLink"></a></div>
+  </div>
+  <p data-t="gpl"></p>
+
+  <h2 data-t="rustTitle"></h2>
+  <div id="rustError" class="note bad" hidden></div>
+  <div class="panel" id="rust"></div>
+  <p><a id="rustFull" data-t="rustFull"></a></p>
+
+  <h2 data-t="nativeTitle"></h2>
+  <div class="panel"><pre id="native"></pre></div>
+
+  <h2 data-t="androidTitle"></h2>
+  <p data-t="android"></p>
+</main>
+<script>
+'use strict';
+const REPO = 'pezkuwichain/pezkuwi-wallet-android';
+const TEXT = {
+  ku: {
+    title: 'Lîsansên çavkaniya vekirî',
+    intro: 'Pezkuwi Cîzdan çavkaniya vekirî ye (Apache-2.0). Pêkhateyên ku di vê guhertoya sepanê de ne û lîsansên wan li vir in.',
+    noCommit: 'Guhertoya sepanê ne diyar e; rûpel pêkhateyên herî dawî nîşan dide.',
+    sourceTitle: 'Koda çavkaniyê ya vê guhertoyê',
+    walletSource: 'Pezkuwi Cîzdan',
+    lightSource: 'Muwekîlê sivik (smoldot, çatala PezkuwiChain)',
+    gpl: 'smoldot bi GPL-3.0-or-later û îstîsnaya Classpath hatiye lîsanskirin. Metna lîsansê bi sepanê re tê (assets/licences/rust-crates.txt) û di depoya çatalê de jî heye.',
+    rustTitle: 'Pirtûkxaneyên Rust',
+    rustFull: 'Hemû agahdarî û metnên lîsansan',
+    nativeTitle: 'Pirtûkxaneyên xwecihî yên amade',
+    androidTitle: 'Pirtûkxaneyên Android',
+    android: 'Lîsteya pirtûkxaneyên Android û lîsansên wan di dema avakirinê de tê çêkirin û bi sepanê re tê (assets/licences/android-libraries.json). Ger pirtûkxaneyek bi lîsanseke nepejirandî were, avakirin radiweste.',
+    crates: 'pirtûkxane',
+    loadFailed: 'Lîste nehat barkirin',
+    other: 'English',
+  },
+  en: {
+    title: 'Open source licenses',
+    intro: 'Pezkuwi Wallet is open source (Apache-2.0). These are the components in this version of the app and their licences.',
+    noCommit: 'The app version is unknown; the page shows the latest components.',
+    sourceTitle: 'Source of this version',
+    walletSource: 'Pezkuwi Wallet',
+    lightSource: 'Light client (smoldot, PezkuwiChain fork)',
+    gpl: 'smoldot is licensed GPL-3.0-or-later with the Classpath exception. The licence text ships with the app (assets/licences/rust-crates.txt) and is in the fork repository.',
+    rustTitle: 'Rust libraries',
+    rustFull: 'All notices and licence texts',
+    nativeTitle: 'Prebuilt native libraries',
+    androidTitle: 'Android libraries',
+    android: 'The list of Android libraries and their licences is made at build time and ships with the app (assets/licences/android-libraries.json). The build stops if a library comes under a licence that is not allowed.',
+    crates: 'crates',
+    loadFailed: 'The list could not be loaded',
+    other: 'Kurmancî',
+  },
+};
+
+const params = new URLSearchParams(location.search);
+const lang = params.get('lang') === 'en' ? 'en' : 'ku';
+const t = TEXT[lang];
+document.documentElement.lang = lang;
+document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t[el.dataset.t]; });
+const other = new URLSearchParams(params);
+other.set('lang', lang === 'en' ? 'ku' : 'en');
+const langSwitch = document.getElementById('langSwitch');
+langSwitch.textContent = t.other;
+langSwitch.href = '?' + other.toString();
+
+// Only a full commit id names a build; anything else falls back to main and says so.
+const requested = params.get('commit') || '';
+const commit = /^[0-9a-f]{40}$/.test(requested) ? requested : null;
+const ref = commit || 'main';
+document.getElementById('commitNote').hidden = Boolean(commit);
+
+const raw = path => `https://raw.githubusercontent.com/${REPO}/${ref}/${path}`;
+function link(id, href, text) {
+  const a = document.getElementById(id);
+  a.href = href;
+  a.textContent = text;
+}
+link('walletLink', `https://github.com/${REPO}/tree/${ref}`, `github.com/${REPO}/tree/${commit ? commit.slice(0, 12) : 'main'}`);
+link('rustFull', raw('app/src/main/assets/licences/rust-crates.txt'), t.rustFull);
+
+async function text(path) {
+  const response = await fetch(raw(path));
+  if (!response.ok) throw new Error(`${path}: ${response.status}`);
+  return response.text();
+}
+
+async function lightClient() {
+  const manifest = await text('bindings/pezkuwi-light/rust/Cargo.toml');
+  const match = manifest.match(/^smoldot\s*=\s*\{[^}]*git\s*=\s*"https:\/\/github\.com\/([\w.-]+\/[\w.-]+)"[^}]*rev\s*=\s*"([0-9a-f]{40})"/m);
+  if (!match) throw new Error('smoldot revision not found');
+  link('smoldotLink', `https://github.com/${match[1]}/tree/${match[2]}`, `github.com/${match[1]}/tree/${match[2].slice(0, 12)}`);
+}
+
+// rust-crates.txt: a "libX.so: N crates (...)" heading per library, then entries of
+// "name version" followed by indented fields, up to the "Licence texts" section.
+function parseCrates(notices) {
+  const libraries = [];
+  let current = null, entry = null;
+  for (const line of notices.split('\n')) {
+    if (line === 'Licence texts') break;
+    const heading = line.match(/^(lib\S+\.so): (\d+) crates/);
+    if (heading) { current = { name: heading[1], crates: [] }; libraries.push(current); continue; }
+    if (!current) continue;
+    const head = line.match(/^(\S+) (\S+)$/);
+    if (head) { entry = { name: head[1], version: head[2], licence: '' }; current.crates.push(entry); continue; }
+    const licence = line.match(/^  licence: (.*)$/);
+    if (licence && entry) entry.licence = licence[1];
+  }
+  return libraries;
+}
+
+function renderCrates(libraries) {
+  const root = document.getElementById('rust');
+  for (const library of libraries) {
+    const details = document.createElement('details');
+    const summary = document.createElement('summary');
+    summary.textContent = `${library.name} · ${library.crates.length} ${t.crates}`;
+    details.append(summary);
+    const table = document.createElement('table');
+    for (const crate of library.crates) {
+      const row = table.insertRow();
+      row.insertCell().textContent = `${crate.name} ${crate.version}`;
+      row.insertCell().textContent = crate.licence;
+    }
+    details.append(table);
+    root.append(details);
+  }
+}
+
+function fail(id, error) {
+  const el = document.getElementById(id);
+  el.hidden = false;
+  el.textContent = `${t.loadFailed}: ${error.message}`;
+}
+
+lightClient().catch(error => { document.getElementById('smoldotLink').textContent = `${t.loadFailed}: ${error.message}`; });
+text('app/src/main/assets/licences/rust-crates.txt').then(parseCrates).then(renderCrates).catch(error => fail('rustError', error));
+text('app/src/main/assets/licences/native-libraries.txt')
+  .then(notices => { document.getElementById('native').textContent = notices; })
+  .catch(error => { document.getElementById('native').textContent = `${t.loadFailed}: ${error.message}`; });
+</script>
+</body>
+</html>
