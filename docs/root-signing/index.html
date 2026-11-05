@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Guhertina mifteya kokê</title>
 <!--
-  Root signing page for the wallet's signed config. Open it in the Pezkuwi Wallet DApp browser.
+  Root signing page for the wallet's signed config. The holder's wallet signs over WalletConnect (or the
+  DApp browser's injected provider where it works).
   It shows the drafted root (proposals/root.N.json), has the holder's wallet sign <Bytes>payload</Bytes>,
   checks each signature the way the wallet will, and assembles signed/root.N.json once a threshold of the
   previous root's keys and of the new root's keys have signed. Wallet 1.3.0 accepts sr25519 under the
@@ -15,6 +16,7 @@
 <script src="vendor/bundle-pezkuwi-util-crypto.js"></script>
 <script src="vendor/bundle-polkadot-util.js"></script>
 <script src="vendor/bundle-polkadot-util-crypto.js"></script>
+<script src="vendor/walletconnect.js"></script>
 <style>
   :root { --bg: #08090E; --panel: rgba(153,158,199,0.10); --line: rgba(153,158,199,0.16); --text: rgba(255,255,255,0.88);
           --muted: rgba(255,255,255,0.60); --accent: #009639; --ok: #2FC864; --warn: #EBC50A; --bad: #E53450; }
@@ -37,6 +39,7 @@
   .note { padding: 12px; border-radius: 12px; font-size: 14px; }
   .note.warn { background: rgba(237,206,54,0.14); } .note.bad { background: rgba(229,52,80,0.14); } .note.ok { background: rgba(47,200,100,0.12); }
   label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 13px; }
+  a.note { display: block; color: var(--ok); }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -60,7 +63,10 @@
   <div class="panel row" id="fpBlock" hidden><span>Şopa pêşniyarê</span><span class="mono fp" id="fingerprint"></span></div>
   <p id="fpHint" hidden>Berî îmzekirinê vê şopê bi telefonê bi xwediyên din re bide ber hev.</p>
 
-  <button id="signButton" hidden>Bi cîzdanê îmze bike</button>
+  <button id="wcButton" hidden>Bi Pezkuwi Cîzdan îmze bike (WalletConnect)</button>
+  <a id="wcOpen" class="note" hidden>Cîzdan venebû? Li vir bitikîne.</a>
+  <div id="wcQrBlock" class="panel" hidden><img id="wcQr" alt="Koda WalletConnect" style="display:block;margin:12px auto;max-width:100%;border-radius:8px"></div>
+  <button id="signButton" class="secondary" hidden>Bi geroka DApp îmze bike</button>
   <div id="signResult" class="note" hidden></div>
   <button id="shareButton" class="secondary" hidden>Koda îmzeya min kopî bike</button>
 
@@ -207,71 +213,109 @@
       }
     };
 
-    // The wallet's injected provider; the signing page asks for accounts only to find the holder's key.
-    const injected = window.injectedWeb3 && (injectedWeb3['pezkuwi-wallet'] || injectedWeb3['pezkuwi-js'] || injectedWeb3['polkadot-js']);
-    if (!injected) {
-      $('signResult').textContent = 'Ji bo îmzekirinê vê rûpelê di geroka DApp ya Pezkuwi Cîzdan de veke.';
-      $('signResult').className = 'note warn';
-      show('signResult');
-      return;
-    }
-    show('signButton');
-    // The wallet answers DApp requests one at a time and waits without limit for each, so a request it never
-    // shows blocks every later one. Each step is named on the page, so a stalled wallet says where it stopped.
-    const step = (text) => {
+    // The wallet answers each request only once its own screen is confirmed, and an unanswered one blocks the
+    // next, so each step is named on the page and a stall says where it stopped.
+    const step = (text, kind = '') => {
       $('signResult').textContent = text;
-      $('signResult').className = 'note';
+      $('signResult').className = 'note ' + kind;
       show('signResult');
     };
-    const waitFor = (promise, text) => {
+    const waitFor = (promise, text, stallHint) => {
       step(text);
-      const stalled = setTimeout(() => {
-        $('signResult').textContent = text + ' Cîzdan bersiv nade: geroka DApp bi tevahî bigire, rûpelê dîsa veke û carekê bitikîne.';
-        $('signResult').className = 'note warn';
-      }, 45000);
+      const stalled = setTimeout(() => step(text + ' ' + stallHint, 'warn'), 45000);
       return promise.finally(() => clearTimeout(stalled));
     };
-    $('signButton').onclick = async () => {
-      $('signButton').disabled = true;
-      try {
-        const extension = await waitFor(injected.enable('Pezkuwi root signing'), 'Bi cîzdanê ve tê girêdan…');
-        const accounts = await waitFor(extension.accounts.get(), 'Hesab têne xwendin…');
-        const mine = accounts.map((a) => ({ address: a.address, keyId: null, public: pz.decodeAddress(a.address) }));
-        for (const account of mine) account.keyId = hex(await sha256(account.public));
-        const holder = mine.find((a) => holders.has(a.keyId));
-        if (!holder) throw new Error('Di vê cîzdanê de hesabekî xwediyê kokê tune.');
+    async function findHolder(addresses) {
+      for (const address of addresses) {
+        const keyId = hex(await sha256(pz.decodeAddress(address)));
+        if (holders.has(keyId)) return { address, keyId };
+      }
+      throw new Error('Cîzdana hilbijartî ne xwediyê kokê ye. Di Pezkuwi Cîzdan de cîzdana xwediyê kokê hilbijêre û dîsa biceribîne.');
+    }
+    function accept(holder, signature) {
+      let sig = pzu.hexToU8a(signature);
+      if (sig.length === 65 && sig[0] === 1) sig = sig.slice(1);  // MultiSignature: 0x01 = sr25519
+      const context = classify(holder.keyId, sig);
+      signatures.set(holder.keyId, { sig, context });
+      render();
+      if (context === 'substrate') {
+        step('Îmze derbasdar e. Kodê kopî bike û ji xwediyê ku pelê berhev dike re bişîne.', 'ok');
+        const code = btoa(JSON.stringify({ keyid: holder.keyId, sig: b64(sig) }));
+        $('shareButton').onclick = () => navigator.clipboard.writeText(code).then(() => alert('Hate kopîkirin'), () => prompt('Kod', code));
+        show('shareButton');
+      } else {
+        step(context === 'bizinikiwi'
+          ? 'Cîzdan bi çarçoveya "bizinikiwi" îmze kir; cîzdanên 1.3.0 vê qebûl nakin. Ji pêşdebiran re bêje.'
+          : 'Îmze nehat piştrastkirin.', 'bad');
+      }
+    }
+    const guarded = (button, run) => async () => {
+      $(button).disabled = true;
+      try { await run(); } catch (e) { step(e.message || String(e), 'bad'); } finally { $(button).disabled = false; }
+    };
 
+    // WalletConnect: the route every installed wallet answers. On the phone the wallet is opened by its own link;
+    // elsewhere the wallet scans a code. Wallet 1.3.0 signs polkadot_signMessage under the "substrate" context
+    // (measured 11-05 over a real session), and a message already wrapped in <Bytes> is signed as given.
+    const WC_PROJECT_ID = '8292a793b7640e8364c378e331e76d04';
+    const RELAY_CHAIN = 'polkadot:1aa94987791a5544e9667ec249d2cef1';
+    const onPhone = /Android/i.test(navigator.userAgent);
+    let wc = null;
+    show('wcButton');
+    $('wcButton').onclick = guarded('wcButton', async () => {
+      step('WalletConnect tê amadekirin…');
+      wc = wc || await RootSigningWC.SignClient.init({
+        projectId: WC_PROJECT_ID,
+        metadata: { name: 'Pezkuwi root signing', description: 'Guhertina mifteya kokê', url: location.origin, icons: [] },
+      });
+      const { uri, approval } = await wc.connect({
+        optionalNamespaces: { polkadot: { chains: [RELAY_CHAIN], methods: ['polkadot_signMessage'], events: [] } },
+      });
+      const walletLink = 'pezkuwiwallet://wc?uri=' + encodeURIComponent(uri);
+      if (onPhone) {
+        $('wcOpen').href = walletLink;
+        show('wcOpen');
+        location.href = walletLink;
+      } else {
+        $('wcQr').src = await RootSigningWC.qrDataUrl(uri, { width: 280, margin: 2 });
+        show('wcQrBlock');
+      }
+      const session = await waitFor(approval(),
+        onPhone ? 'Di Pezkuwi Cîzdan de girêdanê bipejirîne…' : 'Kodê bi Pezkuwi Cîzdan bixwîne (Mîheng → WalletConnect) û girêdanê bipejirîne…',
+        'Cîzdan bersiv nade: rûpelê nû bike û dîsa biceribîne.');
+      show('wcOpen', false);
+      show('wcQrBlock', false);
+      const holder = await findHolder(session.namespaces.polkadot.accounts.map((a) => a.split(':').pop()));
+      const request = wc.request({
+        topic: session.topic, chainId: RELAY_CHAIN,
+        request: { method: 'polkadot_signMessage', params: { address: holder.address, message: pzu.u8aToHex(message) } },
+      });
+      if (onPhone) {
+        const redirect = session.peer.metadata.redirect;
+        location.href = (redirect && (redirect.native || redirect.universal)) || 'pezkuwiwallet://';
+      }
+      const { signature } = await waitFor(request, 'Li benda îmzeyê ye: di cîzdanê de peyamê piştrast bike…',
+        'Cîzdan bersiv nade: Pezkuwi Cîzdan veke, daxwazê bibîne an rûpelê nû bike û dîsa biceribîne.');
+      accept(holder, signature);
+      wc.disconnect({ topic: session.topic, reason: { code: 6000, message: 'Signed' } }).catch(() => {});
+    });
+
+    // The provider the wallet's DApp browser injects. Wallet 1.3.0 never delivers its requests (the bridge calls
+    // an interface name the app does not register), so it is offered only beside WalletConnect.
+    const injected = window.injectedWeb3 && (injectedWeb3['pezkuwi-wallet'] || injectedWeb3['pezkuwi-js'] || injectedWeb3['polkadot-js']);
+    if (injected) {
+      show('signButton');
+      const stall = 'Cîzdan bersiv nade: bişkoka WalletConnect bi kar bîne.';
+      $('signButton').onclick = guarded('signButton', async () => {
+        const extension = await waitFor(injected.enable('Pezkuwi root signing'), 'Bi cîzdanê ve tê girêdan…', stall);
+        const accounts = await waitFor(extension.accounts.get(), 'Hesab têne xwendin…', stall);
+        const holder = await findHolder(accounts.map((a) => a.address));
         const { signature } = await waitFor(
           extension.signer.signRaw({ address: holder.address, data: pzu.u8aToHex(message), type: 'bytes' }),
-          'Li benda îmzeyê ye: di cîzdanê de peyamê piştrast bike…');
-        let sig = pzu.hexToU8a(signature);
-        if (sig.length === 65 && sig[0] === 1) sig = sig.slice(1);  // MultiSignature: 0x01 = sr25519
-        const context = classify(holder.keyId, sig);
-        signatures.set(holder.keyId, { sig, context });
-        render();
-
-        const box = $('signResult');
-        if (context === 'substrate') {
-          box.textContent = 'Îmze derbasdar e. Kodê kopî bike û ji xwediyê ku pelê berhev dike re bişîne.';
-          box.className = 'note ok';
-          const code = btoa(JSON.stringify({ keyid: holder.keyId, sig: b64(sig) }));
-          $('shareButton').onclick = () => navigator.clipboard.writeText(code).then(() => alert('Hate kopîkirin'), () => prompt('Kod', code));
-          show('shareButton');
-        } else {
-          box.textContent = context === 'bizinikiwi'
-            ? 'Cîzdan bi çarçoveya "bizinikiwi" îmze kir; cîzdanên 1.3.0 vê qebûl nakin. Ji pêşdebiran re bêje.'
-            : 'Îmze nehat piştrastkirin.';
-          box.className = 'note bad';
-        }
-        show('signResult');
-      } catch (e) {
-        $('signResult').textContent = e.message || String(e);
-        $('signResult').className = 'note bad';
-        show('signResult');
-      } finally {
-        $('signButton').disabled = false;
-      }
-    };
+          'Li benda îmzeyê ye: di cîzdanê de peyamê piştrast bike…', stall);
+        accept(holder, signature);
+      });
+    }
   } catch (e) {
     fail(e.message || String(e));
   }
