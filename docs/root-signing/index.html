@@ -290,10 +290,8 @@
         topic: session.topic, chainId: RELAY_CHAIN,
         request: { method: 'polkadot_signMessage', params: { address: holder.address, message: pzu.u8aToHex(message) } },
       });
-      if (onPhone) {
-        const redirect = session.peer.metadata.redirect;
-        location.href = (redirect && (redirect.native || redirect.universal)) || 'pezkuwiwallet://';
-      }
+      // A fixed link: the redirect in the peer's metadata is whatever the connecting wallet claims.
+      if (onPhone) location.href = 'pezkuwiwallet://';
       const { signature } = await waitFor(request, 'Li benda îmzeyê ye: di cîzdanê de peyamê piştrast bike…',
         'Cîzdan bersiv nade: Pezkuwi Cîzdan veke, daxwazê bibîne an rûpelê nû bike û dîsa biceribîne.');
       accept(holder, signature);
